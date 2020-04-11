@@ -88,17 +88,31 @@ class SAPIController: NSObject {
          }
      }
     
-    
-    func getallBooksByClass(id : String ,payload: [String: Any], completion: @escaping (_ result: Any?, _ errorMessage: String?) -> Void) {
-         
-        RestService.get(path: .getbookdetails ) { (response, error) in
-             guard let response = response as? [String:Any] else {
-                            completion(nil,error?.localizedDescription)
-                            return
-                        }
-                        
-                        completion(response, nil)
-         }
-     }
+//
+//    func getlessionsByBook (id : String? ,payload: [String: Any], completion: @escaping (_ result: Any?, _ errorMessage: String?) -> Void) {
+//       //  ApiUrls(rawValue: "/API/lesson/getLessonDetails/\(id)"+id) ?? ApiUrls(rawValue: "/API/lesson/getLessonDetails/16/2")!
+//
+//        guard let location = id else {
+//
+//      print("I hope the weather is nice near you.")
+//      return
+//      }
+//
+//        guard let apiUrl = ApiUrls(rawValue: "/API/lesson/getLessonDetails/"+location)! else {
+//                  print("I hope the weather is nice near you.")
+//            return
+//
+//        }
+//
+//
+//        RestService.get(path: apiUrl) { (response, error) in
+//             guard let response = response as? [String:Any] else {
+//                            completion(nil,error?.localizedDescription)
+//                            return
+//                        }
+//
+//                        completion(response, nil)
+//         }
+//     }
     
 }

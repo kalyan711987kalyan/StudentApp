@@ -41,8 +41,8 @@ class LoginViewController: UIViewController {
            //self.passwordField.text = ""
         let loginPayload = ["email":username, "password":password]
         SAPIController.shared.loginAPI(payload: loginPayload) { (result, errorMessage) in
-            print("Login Response---- %@ /n %@", result! as Any,errorMessage as Any)
-            print("Login email---- %@ /n %@", result ,errorMessage)
+            print("Login Response---- %@ /n %@", result! as Any)
+            print("Login email---- %@ /n %@", result)
             guard let jsonArray = result as? [String: Any] else {
                   return
             }
@@ -54,6 +54,9 @@ class LoginViewController: UIViewController {
             SProgress.hide()
 
             if let error = errorMessage {
+                
+                self.showAlertWithTitleInView(title: "", message:error, buttonCancelTitle:"", buttonOkTitle: "OK"){ (index) in}
+
                 
             }else{
                 

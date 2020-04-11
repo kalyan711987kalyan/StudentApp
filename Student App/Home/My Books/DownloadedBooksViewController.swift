@@ -11,6 +11,7 @@ import UIKit
 @available(iOS 10.0, *)
 class DownloadedBooksViewController: UIViewController , UITableViewDataSource , UITableViewDelegate , downloadedCellDelegate{
     @IBAction func clearAllBoks(_ sender: Any) {
+        
         self.showAlertWithTitleInView(title: "Clear-Off All Books?", message:"This shall Clear-Off All Books from the App!", buttonCancelTitle:"No", buttonOkTitle: "Yes"){ (index) in
                    if index == 1{
                        
@@ -21,6 +22,7 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
                        
                    }
                }
+        
     }
     
     func didDeletePressButton(_ tag: Int) {
@@ -73,20 +75,44 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
     var responseObject = [[String : Any]]()
     var downloadedBooks = [downloadedBook]()
     var kid_id = String()
+    var didTappedAtBook = NSInteger()
 
     @IBOutlet weak var allBooksBTNOutlet: UIButton!
     @IBOutlet weak var showFloatingView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        showFloatingView.isHidden = true
+
         // Do any additional setup after loading the view.
-        guard let kidId = UserDefaults.standard.string(forKey: "selectedKid")
-            else { return print("No data") }
-        kid_id = kidId
-        getDataFromeCoreData(kid_id: kidId)
+        //self.showFloatingView.isHidden = true
+      
+
+
     }
+    override func viewDidAppear(_ animated: Bool) {
+          //SProgress.show()
+       
+
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        guard let kidId = UserDefaults.standard.string(forKey: "selectedKid")
+                                    else { return print("No data") }
+                                kid_id = kidId
+                     getDataFromeCoreData(kid_id: kidId)
+
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        //self.showFloatingView.isHidden = true
+        
+      //  SProgress.hide()
+        
+        self.showFloatingView.removeFromSuperview()
+    }
+
+    
+    
     func getDataFromeCoreData(kid_id : String){
         SProgress.show()
+
         self.downloadedBooks.removeAll()
         self.jsonBooksArray.removeAllObjects()
         self.responseObject.removeAll()
@@ -98,7 +124,12 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
             allBooksBTNOutlet.isHidden = true
             SProgress.hide()
 
-             self.showAlertWithTitleInView(title: "", message:"No Books !", buttonCancelTitle:"", buttonOkTitle: "OK"){ (index) in}
+             self.showAlertWithTitleInView(title: "", message:"No Books !", buttonCancelTitle:"", buttonOkTitle: "OK"){ (index)
+                in
+                self.dismiss(animated: true, completion: nil)
+
+            }
+            
             
         }else{
         allBooksBTNOutlet.isHidden = false
@@ -129,30 +160,21 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
                 let series = studentseries["series"] as! String
                 let studentbooktype = obj["studentbooktype"] as! [String : Any]
                 let bookType = studentbooktype["bookType"] as! String
-                //let subjectsObjs = obj["subjects"]
-                var subjectArray : NSMutableArray = []
+                //let subjectsObjs = obj["subjects"] subjectId
+                let subjectArray : NSMutableArray = []
                 
                 if let earthquakes = obj["subjects"] as? [[String:Any]] {
                     for earthquake in earthquakes {
                         let lat = earthquake["studentsubject"] as! [String : Any]
+                        let subjectId = earthquake["subjectId"] as! String
+
                         let subject = lat["subjectName"]!
                         // get other values
                         print(lat, subject)
-                        subjectArray.add(subject)
+                        let details = [subject , subjectId];
+                        subjectArray.add(details)
                     }
                 }
-//                else{
-//                    let subjects = obj["subjects"] as! [String : Any]
-//                    let studentsubject = subjects["studentsubject"] as! [String : Any]
-//                    let finalsubject = studentsubject["subjectName"] as! String
-//                    subjectArray.add(finalsubject)
-//                }
-//                for subjectsObj in subjectsObjs {
-//                    let student = subjectsObj["studentsubject"] as! [String : Any]
-//                    let subject = student["subjectName"] as! String
-//                    subjectArray.add(subject)
-//                }
-
                 print("subjects", subjectArray)
                 
                 self.downloadedBooks.append(downloadedBook(bookName: bookName, bookType: bookType, description: description, thumbnail: thumbnail, bookseries: series, className: className, subjects: subjectArray))
@@ -225,17 +247,63 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        self.showFloatingView.isHidden = false
+        didTappedAtBook = indexPath.row
+        let bookData = self.downloadedBooks[indexPath.row]
+        let subjects = bookData.subjects
+        if (subjects as AnyObject).count == 0 {
+            print("no subject")
+        }else{
+            print("subject are" , subjects)
+        }
+        var buttonY: CGFloat = 100  // our Starting Offset, could be 0
+        var buttonX: CGFloat = 50  // our Starting Offset, could be 0
+       
+        for (index, villain) in (subjects as! [NSArray]).enumerated() {
+            
+            let villainButton = UIButton(frame: CGRect(x: buttonX, y: buttonY, width: 75, height: 75))
+            buttonX = buttonX + villainButton.frame.size.width + 30  // we are going to space these UIButtons 50px apart
+            //buttonX = buttonX + 50  // we are going to space these UIButtons 50px apart
+            if index+1/3 == 1 {
+                buttonY = buttonY + villainButton.frame.size.height + 30
+                buttonX = 50
+            }
+            villainButton.layer.cornerRadius = 5  // get some fancy pantsy rounding
+            villainButton.backgroundColor = UIColor.red
+           let subject = villain[0]
+            villainButton.setTitle("\(subject)", for: UIControl.State.normal) // We are going to use the item name as the Button Title here.
+            villainButton.titleLabel?.lineBreakMode = .byWordWrapping
+            villainButton.titleLabel?.textAlignment = .center
+            villainButton.titleLabel?.text = "\(villain)"
+           // villainButton.addTarget(self, action: "villainButtonPressed:", for: UIControle  )
+            villainButton.addTarget(self, action: #selector(buttonAction) , for: .touchUpInside)
+            villainButton.tag = index
+            self.showFloatingView.addSubview(villainButton)  // myView in this case is the view you want these buttons added
+            
+            }
     }
+    
+    @objc func buttonAction(sender: UIButton!) {
+      if sender.titleLabel?.text != nil {
+                //print("You have chosen Villain: \(sender.titleLabel?.text)")
+        let bookData = self.downloadedBooks[didTappedAtBook]
+        let bookId = BookidArray[didTappedAtBook]
+        let subjectsname = bookData.subjects[sender!.tag] as! NSArray
+        print("You have chosen subjectsname: \(bookData)")
+        
+        let datatobepassed = [bookData.bookName!,bookData.bookseries!,bookData.className!,subjectsname[0],subjectsname[1] , bookId]
+        
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "LessionsViewController") as! LessionsViewController
+                      vc.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
+        vc.bookData = datatobepassed as! [String]
+        self.showFloatingView.isHidden = true
 
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+                  self.present(vc, animated: true, completion: nil)
+        
+        
+            } else {
+                print("Nowhere to go :/")
+            }
     }
-    */
 
 }

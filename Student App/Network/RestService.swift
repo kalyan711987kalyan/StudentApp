@@ -170,6 +170,7 @@ class RestService {
         }
     }
     
+    
     static func get(path: ApiUrls, parameters: Parameters? = [:], options: RestOptions? = nil, completionHandler : @escaping (Any?, Error? ) -> Void) -> DataRequest  {
         
         let request = Router.get(path: path, parameters: parameters!,options: options)

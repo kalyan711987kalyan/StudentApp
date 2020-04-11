@@ -10,8 +10,6 @@ import UIKit
 protocol downloadedCellDelegate : class {
     func didDeletePressButton(_ tag: Int)
     func didshowImagePressButton(_ tag: Int)
-
-
 }
 class DownloadedBookTableViewCell: UITableViewCell {
     var cellDelegate: downloadedCellDelegate?

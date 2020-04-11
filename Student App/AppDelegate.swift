@@ -221,6 +221,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
     }
     
+    
     func downloadBookToCoreData(withbookData : String  , kid_id : String , parent_id : String , book_id : String) -> Bool{
         print ("yes you are here");
         
@@ -246,13 +247,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 }
         }
         
+    
 
     func getAllRecordsforValue(valueof: String ,forattribute: String , forEntity : String) -> [NSManagedObject] {
         //var error: Error?
         let request = NSFetchRequest<NSFetchRequestResult>()
         request.entity = NSEntityDescription.entity(forEntityName: forEntity, in: managedObjectContext!)
-        let predicate = NSPredicate(format: "\(forattribute)=%@", valueof)
-        request.predicate = predicate
+        //let predicate = NSPredicate(format: "\(forattribute)==%@", valueof)
+        //request.predicate = predicate
         //var objectUpdate = NSManagedObject()
         var results = [NSManagedObject]()
         do {

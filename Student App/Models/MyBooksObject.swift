@@ -139,6 +139,7 @@ struct downloadBook {
 
     }
 }
+
 struct downloadedBook {
   var bookName : String!
   var bookType : String!
@@ -159,7 +160,24 @@ struct downloadedBook {
     }
 }
 
+struct lessonData {
+  var lessonName : String!
+  var learnings :Int!
+  var studentQuestionsAct : Int!
+    var studentsubject : NSDictionary
+  var studentvideo : NSArray
+    var studentQuestions : NSArray
 
+    
+    init(lessonName:String, learnings:Int, studentQuestionsAct:Int, studentsubject:NSDictionary , studentvideo: NSArray , studentQuestions : NSArray) {
+        self.lessonName = lessonName
+        self.learnings = learnings
+        self.studentQuestionsAct = studentQuestionsAct
+        self.studentsubject = studentsubject
+        self.studentvideo = studentvideo
+        self.studentQuestions = studentQuestions
+    }
+}
 
 /*
 struct bookObject {

@@ -34,7 +34,6 @@ class BooksListViewController: UIViewController , UITableViewDataSource , UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         self.floatingImageView.isHidden = true
-        print("selectedKid is ",selectedKid as Any)
         //get active kid and parent id
         guard let parentID = UserDefaults.standard.string(forKey: "parentEmail")
             else { return print("No data") }

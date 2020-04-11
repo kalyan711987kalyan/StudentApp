@@ -27,6 +27,8 @@
 		3039987E23FCDCC8007F3B72 /* ManageKidsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3039987D23FCDCC8007F3B72 /* ManageKidsViewController.swift */; };
 		3039988023FD0D94007F3B72 /* BookSeriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3039987F23FD0D94007F3B72 /* BookSeriesViewController.swift */; };
 		3039988223FD0F46007F3B72 /* bookseriesBg.png in Resources */ = {isa = PBXBuildFile; fileRef = 3039988123FD0F45007F3B72 /* bookseriesBg.png */; };
+		304DF8A3243EF3D300C9C0D4 /* LessionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304DF8A2243EF3D200C9C0D4 /* LessionsViewController.swift */; };
+		304DF8A5243EF3EE00C9C0D4 /* LessionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304DF8A4243EF3EE00C9C0D4 /* LessionsTableViewCell.swift */; };
 		3067E42923B0F83A0009A6FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3067E42823B0F83A0009A6FF /* AppDelegate.swift */; };
 		3067E42D23B0F83A0009A6FF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3067E42C23B0F83A0009A6FF /* LoginViewController.swift */; };
 		3067E43023B0F83A0009A6FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3067E42E23B0F83A0009A6FF /* Main.storyboard */; };
@@ -68,6 +70,21 @@
 		3072B383243D02F1005A912F /* DownloadedBooksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3072B382243D02F1005A912F /* DownloadedBooksViewController.swift */; };
 		3072B385243D0311005A912F /* DownloadedBookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3072B384243D0311005A912F /* DownloadedBookTableViewCell.swift */; };
 		3079A369240D59A20044130E /* StudentList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3079A367240D59A20044130E /* StudentList.xcdatamodeld */; };
+		30A8EC7E244236C3000036F2 /* 4.png in Resources */ = {isa = PBXBuildFile; fileRef = 30A8EC77244236C1000036F2 /* 4.png */; };
+		30A8EC7F244236C3000036F2 /* 6.png in Resources */ = {isa = PBXBuildFile; fileRef = 30A8EC78244236C1000036F2 /* 6.png */; };
+		30A8EC80244236C3000036F2 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 30A8EC79244236C1000036F2 /* 1.png */; };
+		30A8EC81244236C3000036F2 /* 5.png in Resources */ = {isa = PBXBuildFile; fileRef = 30A8EC7A244236C2000036F2 /* 5.png */; };
+		30A8EC82244236C3000036F2 /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 30A8EC7B244236C2000036F2 /* 2.png */; };
+		30A8EC83244236C3000036F2 /* bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 30A8EC7C244236C2000036F2 /* bg.jpg */; };
+		30A8EC84244236C3000036F2 /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = 30A8EC7D244236C3000036F2 /* 3.png */; };
+		30A8EC8A244236CD000036F2 /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = 30A8EC85244236CC000036F2 /* 3.png */; };
+		30A8EC8B244236CD000036F2 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 30A8EC86244236CC000036F2 /* 1.png */; };
+		30A8EC8C244236CD000036F2 /* 4.png in Resources */ = {isa = PBXBuildFile; fileRef = 30A8EC87244236CC000036F2 /* 4.png */; };
+		30A8EC8D244236CD000036F2 /* bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 30A8EC88244236CD000036F2 /* bg.jpg */; };
+		30A8EC8E244236CD000036F2 /* 5.png in Resources */ = {isa = PBXBuildFile; fileRef = 30A8EC89244236CD000036F2 /* 5.png */; };
+		30A8EC9024423D99000036F2 /* ActivitesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A8EC8F24423D99000036F2 /* ActivitesViewController.swift */; };
+		30A8EC9424424971000036F2 /* ActivitesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A8EC9324424971000036F2 /* ActivitesTableViewCell.swift */; };
+		30A8EC96244260AD000036F2 /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A8EC95244260AD000036F2 /* QuizViewController.swift */; };
 		30CCF5C4242785FC00F9DCB3 /* MyBookSeriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CCF5C3242785FC00F9DCB3 /* MyBookSeriesTableViewCell.swift */; };
 		30F6699524305E1800FDBF85 /* MyBooksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F6699424305E1800FDBF85 /* MyBooksViewController.swift */; };
 		30F669972430B05F00FDBF85 /* BooksListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F669962430B05F00FDBF85 /* BooksListViewController.swift */; };
@@ -103,6 +120,8 @@
 		3039987D23FCDCC8007F3B72 /* ManageKidsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageKidsViewController.swift; sourceTree = "<group>"; };
 		3039987F23FD0D94007F3B72 /* BookSeriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSeriesViewController.swift; sourceTree = "<group>"; };
 		3039988123FD0F45007F3B72 /* bookseriesBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bookseriesBg.png; sourceTree = "<group>"; };
+		304DF8A2243EF3D200C9C0D4 /* LessionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessionsViewController.swift; sourceTree = "<group>"; };
+		304DF8A4243EF3EE00C9C0D4 /* LessionsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessionsTableViewCell.swift; sourceTree = "<group>"; };
 		3067E42523B0F83A0009A6FF /* Student App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Student App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3067E42823B0F83A0009A6FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3067E42C23B0F83A0009A6FF /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -152,6 +171,21 @@
 		3072B384243D0311005A912F /* DownloadedBookTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadedBookTableViewCell.swift; sourceTree = "<group>"; };
 		3079A368240D59A20044130E /* StudentList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = StudentList.xcdatamodel; sourceTree = "<group>"; };
 		3092D71B23ED59F200F7C19F /* Student App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Student App.entitlements"; sourceTree = "<group>"; };
+		30A8EC77244236C1000036F2 /* 4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4.png; sourceTree = "<group>"; };
+		30A8EC78244236C1000036F2 /* 6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 6.png; sourceTree = "<group>"; };
+		30A8EC79244236C1000036F2 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
+		30A8EC7A244236C2000036F2 /* 5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 5.png; sourceTree = "<group>"; };
+		30A8EC7B244236C2000036F2 /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
+		30A8EC7C244236C2000036F2 /* bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg.jpg; sourceTree = "<group>"; };
+		30A8EC7D244236C3000036F2 /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
+		30A8EC85244236CC000036F2 /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 3.png; path = "../../../../../Downloads/pngs_After Corections/12/3.png"; sourceTree = "<group>"; };
+		30A8EC86244236CC000036F2 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 1.png; path = "../../../../../Downloads/pngs_After Corections/12/1.png"; sourceTree = "<group>"; };
+		30A8EC87244236CC000036F2 /* 4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 4.png; path = "../../../../../Downloads/pngs_After Corections/12/4.png"; sourceTree = "<group>"; };
+		30A8EC88244236CD000036F2 /* bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = bg.jpg; path = "../../../../../Downloads/pngs_After Corections/12/bg.jpg"; sourceTree = "<group>"; };
+		30A8EC89244236CD000036F2 /* 5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 5.png; path = "../../../../../Downloads/pngs_After Corections/12/5.png"; sourceTree = "<group>"; };
+		30A8EC8F24423D99000036F2 /* ActivitesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitesViewController.swift; sourceTree = "<group>"; };
+		30A8EC9324424971000036F2 /* ActivitesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitesTableViewCell.swift; sourceTree = "<group>"; };
+		30A8EC95244260AD000036F2 /* QuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewController.swift; sourceTree = "<group>"; };
 		30CCF5C3242785FC00F9DCB3 /* MyBookSeriesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBookSeriesTableViewCell.swift; sourceTree = "<group>"; };
 		30F6699424305E1800FDBF85 /* MyBooksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyBooksViewController.swift; sourceTree = "<group>"; };
 		30F669962430B05F00FDBF85 /* BooksListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooksListViewController.swift; sourceTree = "<group>"; };
@@ -279,11 +313,23 @@
 				3067E43D23B0F9AF0009A6FF /* loginlogo.png */,
 				3067E44123B0FA110009A6FF /* loginbg.png */,
 				3067E4BE23B11EE30009A6FF /* dashboardbg.png */,
+				30A8EC86244236CC000036F2 /* 1.png */,
+				30A8EC85244236CC000036F2 /* 3.png */,
+				30A8EC87244236CC000036F2 /* 4.png */,
+				30A8EC89244236CD000036F2 /* 5.png */,
+				30A8EC88244236CD000036F2 /* bg.jpg */,
 				3067E4C823B1BF3A0009A6FF /* newbookbanner.png */,
 				3067E59C23B222640009A6FF /* library.png */,
 				3067E5A023B226270009A6FF /* yellowbg.png */,
 				302E53FB2414C07300E32331 /* bin.png */,
 				302E53FA2414C06F00E32331 /* pen.png */,
+				30A8EC79244236C1000036F2 /* 1.png */,
+				30A8EC7B244236C2000036F2 /* 2.png */,
+				30A8EC7D244236C3000036F2 /* 3.png */,
+				30A8EC77244236C1000036F2 /* 4.png */,
+				30A8EC7A244236C2000036F2 /* 5.png */,
+				30A8EC78244236C1000036F2 /* 6.png */,
+				30A8EC7C244236C2000036F2 /* bg.jpg */,
 				3067E59D23B222640009A6FF /* mybook.png */,
 				3067E61423B70CDA0009A6FF /* learningHeader_bg.png */,
 				3067E66623C0B9F50009A6FF /* mybookbuttonBg.png */,
@@ -392,6 +438,11 @@
 			children = (
 				3072B382243D02F1005A912F /* DownloadedBooksViewController.swift */,
 				3072B384243D0311005A912F /* DownloadedBookTableViewCell.swift */,
+				304DF8A2243EF3D200C9C0D4 /* LessionsViewController.swift */,
+				304DF8A4243EF3EE00C9C0D4 /* LessionsTableViewCell.swift */,
+				30A8EC8F24423D99000036F2 /* ActivitesViewController.swift */,
+				30A8EC9324424971000036F2 /* ActivitesTableViewCell.swift */,
+				30A8EC95244260AD000036F2 /* QuizViewController.swift */,
 			);
 			path = "My Books";
 			sourceTree = "<group>";
@@ -473,13 +524,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30A8EC7E244236C3000036F2 /* 4.png in Resources */,
 				3067E44023B0F9B00009A6FF /* bg.png in Resources */,
 				3067E59F23B222640009A6FF /* mybook.png in Resources */,
 				3039980923FBF208007F3B72 /* SwitchKidTableViewCell.xib in Resources */,
 				306BD2D4243C189700B9F867 /* cancel.png in Resources */,
 				30FE910923CA047100352F40 /* shareicon.png in Resources */,
+				30A8EC7F244236C3000036F2 /* 6.png in Resources */,
 				30FE910123CA029A00352F40 /* menuBg.png in Resources */,
 				3067E59E23B222640009A6FF /* library.png in Resources */,
+				30A8EC82244236C3000036F2 /* 2.png in Resources */,
+				30A8EC83244236C3000036F2 /* bg.jpg in Resources */,
 				3067E66923C0C1400009A6FF /* classbg.jpg in Resources */,
 				30FE910D23CA12A300352F40 /* MenuTableViewCell.xib in Resources */,
 				3067E5A123B226270009A6FF /* yellowbg.png in Resources */,
@@ -490,21 +545,29 @@
 				30FE910523CA045500352F40 /* mailicon.png in Resources */,
 				3039980323FBC619007F3B72 /* GloriaHallelujah.ttf in Resources */,
 				3067E43F23B0F9B00009A6FF /* loginlogo.png in Resources */,
+				30A8EC84244236C3000036F2 /* 3.png in Resources */,
 				3067E60F23B6FFAE0009A6FF /* LearningActivitySectionView.xib in Resources */,
 				3039980B23FBF4A8007F3B72 /* close_whiteIcon.png in Resources */,
 				3067E4C923B1BF3A0009A6FF /* newbookbanner.png in Resources */,
 				3039988223FD0F46007F3B72 /* bookseriesBg.png in Resources */,
+				30A8EC8D244236CD000036F2 /* bg.jpg in Resources */,
 				3067E44223B0FA110009A6FF /* loginbg.png in Resources */,
 				302E53FC2414C07700E32331 /* pen.png in Resources */,
 				3067E66723C0B9F50009A6FF /* mybookbuttonBg.png in Resources */,
 				30FE910723CA046300352F40 /* passwordicon.png in Resources */,
 				3067E43023B0F83A0009A6FF /* Main.storyboard in Resources */,
 				3067E61523B70CDA0009A6FF /* learningHeader_bg.png in Resources */,
+				30A8EC8E244236CD000036F2 /* 5.png in Resources */,
 				30FE910323CA040B00352F40 /* callicon.png in Resources */,
 				3067E66D23C0C55D0009A6FF /* classbuttonBg.png in Resources */,
 				3067E4BF23B11EE30009A6FF /* dashboardbg.png in Resources */,
+				30A8EC8A244236CD000036F2 /* 3.png in Resources */,
+				30A8EC8C244236CD000036F2 /* 4.png in Resources */,
+				30A8EC8B244236CD000036F2 /* 1.png in Resources */,
 				302E53FD2414C07700E32331 /* bin.png in Resources */,
+				30A8EC81244236C3000036F2 /* 5.png in Resources */,
 				3067E61323B7037F0009A6FF /* LearningTableViewCell.xib in Resources */,
+				30A8EC80244236C3000036F2 /* 1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -563,7 +626,10 @@
 				3072B383243D02F1005A912F /* DownloadedBooksViewController.swift in Sources */,
 				3039988023FD0D94007F3B72 /* BookSeriesViewController.swift in Sources */,
 				3067E5BB23B344280009A6FF /* LearningActivityViewController.swift in Sources */,
+				30A8EC96244260AD000036F2 /* QuizViewController.swift in Sources */,
 				3067E5AB23B232AF0009A6FF /* MyBooksObject.swift in Sources */,
+				304DF8A3243EF3D300C9C0D4 /* LessionsViewController.swift in Sources */,
+				30A8EC9424424971000036F2 /* ActivitesTableViewCell.swift in Sources */,
 				3067E44923B0FCE20009A6FF /* VIewController+Util.swift in Sources */,
 				3039980123FBC4DE007F3B72 /* SProgress.swift in Sources */,
 				3039987E23FCDCC8007F3B72 /* ManageKidsViewController.swift in Sources */,
@@ -585,8 +651,10 @@
 				3072B385243D0311005A912F /* DownloadedBookTableViewCell.swift in Sources */,
 				302E53F72413EDDD00E32331 /* KidsData+CoreDataProperties.swift in Sources */,
 				3039980523FBF158007F3B72 /* SwitchKidsViewController.swift in Sources */,
+				304DF8A5243EF3EE00C9C0D4 /* LessionsTableViewCell.swift in Sources */,
 				3067E60D23B6FF850009A6FF /* LearningActivitySectionView.swift in Sources */,
 				30F6699524305E1800FDBF85 /* MyBooksViewController.swift in Sources */,
+				30A8EC9024423D99000036F2 /* ActivitesViewController.swift in Sources */,
 				30FE910C23CA12A300352F40 /* MenuTableViewCell.swift in Sources */,
 				3067E5B223B243980009A6FF /* TabbarViewController.swift in Sources */,
 				3067E4B923B114B00009A6FF /* DashboardViewController.swift in Sources */,

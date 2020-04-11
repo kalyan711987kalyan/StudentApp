@@ -10,6 +10,12 @@ import Foundation
 import Alamofire
 
 enum ApiUrls: String {
+    
+    func someTest(id : String) -> String{
+        
+        return "\(self)\(id)"
+    }
+    
     case login = "/API/LoginAPI/parentLogin"
     case getSeries = "/API/series/getSeriesDetails/smartkids"
     case getclassdetails = "/API/class/getClassDetailsBySeries/1"
@@ -24,6 +30,8 @@ enum ApiUrls: String {
     case addKids = "/API/studentReg/addkids"
     case changepassword = "/API/LoginAPI/forgotPassword?email=abcd@gmail.com"
 }
+
+
 
 enum APIEndPoints{
     case base

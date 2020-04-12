@@ -1227,13 +1227,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Explore More than Reading A Book ..!!" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D5l-Zw-LNH">
-                                <rect key="frame" x="30" y="163" width="315" height="32"/>
+                                <rect key="frame" x="30" y="163" width="315" height="19"/>
                                 <fontDescription key="fontDescription" name="GloriaHallelujah" family="Gloria Hallelujah" pointSize="16"/>
                                 <color key="textColor" red="0.9882352941176471" green="0.49803921568627452" blue="0.63137254901960782" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mhp-F2-tid">
-                                <rect key="frame" x="47" y="225" width="281" height="190"/>
+                                <rect key="frame" x="47" y="212" width="281" height="190"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I9p-d4-dM8">
                                         <rect key="frame" x="0.0" y="0.0" width="135" height="190"/>

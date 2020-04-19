@@ -221,7 +221,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
     }
     
-    
     func downloadBookToCoreData(withbookData : String  , kid_id : String , parent_id : String , book_id : String) -> Bool{
         print ("yes you are here");
         
@@ -246,7 +245,70 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                     return false
                 }
         }
+    
+    func addFavouriteToCoreData(withlessonData : NSArray  , kid_id : String , parent_id : String , lessonId : String ,lessionTitle : String , lstudentQuestions : NSArray ,lstudentsubject  : String , lstudentvideo : NSArray ) -> Bool{
+        print ("yes you are here");
+        print ("yes you withlessonData here",withlessonData); // array with strings
+        print ("yes you kid_id here",kid_id); // id string
+        print ("yes you parent_id here",parent_id); // id string
+        print ("yes you lessonId here",lessonId); // id string
+        print ("yes you lessionTitle here",lessionTitle); // title string
+        print ("yes you lstudentQuestions here",lstudentQuestions); // array of dic
+        print ("yes you lstudentsubject here",lstudentsubject); // single dic
+        print ("yes you lstudentvideo here",lstudentvideo); // array with single dic
+
         
+         
+          guard let userEntity = NSEntityDescription.entity(forEntityName: "Favourites", in: managedObjectContext!) else {
+                     return false
+
+                 }
+         let user = NSManagedObject(entity: userEntity, insertInto: managedObjectContext)
+                 // save new appointmnet
+                 user.setValue(parent_id, forKey: "parent_Id")
+                 user.setValue(lstudentvideo, forKey: "lstudentvideo")
+                 user.setValue(lstudentsubject, forKey: "lstudentsubject")
+                 user.setValue(lstudentQuestions, forKey: "lstudentQuestions")
+        user.setValue(lessonId, forKey: "lessonId")
+        user.setValue(lessionTitle, forKey: "lessionTitle")
+        user.setValue(withlessonData, forKey: "learningbookData")
+        user.setValue(kid_id, forKey: "kid_Id")
+
+
+           do{
+             try managedObjectContext!.save()
+            self.getAllRecordsforValue(valueof: lessonId, forattribute: "lessonId", forEntity: "Favourites")
+
+              return true
+            
+            
+                 } catch let error as NSError{
+                     
+                     print("COULD NOT SAVE , \(error) , \(error.userInfo)")
+                     return false
+                 }
+         }
+        
+    func getKidDataById(kid_id: String) -> [NSManagedObject] {
+        //var error: Error?
+        let request = NSFetchRequest<NSFetchRequestResult>()
+        request.entity = NSEntityDescription.entity(forEntityName: "KidsData", in: managedObjectContext!)
+        let predicate = NSPredicate(format: "kid_Id==%@", kid_id)
+        request.predicate = predicate
+        var objectUpdate = NSManagedObject()
+        var results = [NSManagedObject]()
+        do {
+            results = try managedObjectContext!.fetch(request) as! [NSManagedObject]
+
+            print(results)
+           // objectUpdate = results[0]
+
+        }catch let error {
+               print(error.localizedDescription)
+            }
+        return results
+
+    }
     
 
     func getAllRecordsforValue(valueof: String ,forattribute: String , forEntity : String) -> [NSManagedObject] {
@@ -260,6 +322,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         do {
             results = try managedObjectContext!.fetch(request) as! [NSManagedObject]
 
+            print(results)
            // objectUpdate = results[0]
 
         }catch let error {

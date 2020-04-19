@@ -10,6 +10,8 @@ import UIKit
 
 @available(iOS 10.0, *)
 class ActivitesViewController: UIViewController  , UITableViewDataSource , UITableViewDelegate , videoCellDelegate{
+    let appDelegate = UIApplication.shared.delegate as? AppDelegate
+
     func didDownloadPressButton(_ tag: Int) {
          self.showAlertWithTitleInView(title: "Download This Video?", message:"Download video shall be available in My Favs", buttonCancelTitle:"No", buttonOkTitle: "Yes"){ (index) in
                           if index == 1{
@@ -21,6 +23,7 @@ class ActivitesViewController: UIViewController  , UITableViewDataSource , UITab
     }
     
     
+    @IBOutlet weak var favouriteBtnOutlet: UIButton!
     @IBOutlet weak var mainTitleLb: UILabel!
     @IBOutlet weak var videoView: UIView!
     @IBOutlet weak var seriesNameLB: UILabel!
@@ -38,6 +41,10 @@ class ActivitesViewController: UIViewController  , UITableViewDataSource , UITab
     var lstudentvideo : NSArray = []
     var lstudentQuestions : NSArray = []
     var lessionTitle = String()
+    var lessionId = String()
+    var isFavorite = Bool()
+    var studentSubject = String()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -55,6 +62,14 @@ class ActivitesViewController: UIViewController  , UITableViewDataSource , UITab
         print("lstudentQuestions",lstudentQuestions)
         
         self.mainTitleLb?.text = "Lession: \(lessionTitle)"
+        
+        if isFavorite == true {
+            self.favouriteBtnOutlet.setImage(UIImage(named: "lovefill.png")! as UIImage, for: .normal)
+        }else{
+            self.favouriteBtnOutlet.setImage(UIImage(named: "love.png")! as UIImage, for: .normal)
+
+        }
+        
         
         self.viddeosTableView.reloadData()
     }
@@ -82,8 +97,6 @@ class ActivitesViewController: UIViewController  , UITableViewDataSource , UITab
             
         }
         return cell
-        
-        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -112,6 +125,56 @@ class ActivitesViewController: UIViewController  , UITableViewDataSource , UITab
     
     
     @IBAction func favouriteBtnAction(_ sender: Any) {
+        
+    guard let parentID = UserDefaults.standard.string(forKey: "parentEmail")
+            else { return print("No data") }
+        guard let kidId = UserDefaults.standard.string(forKey: "selectedKid")
+            else { return print("No data") }
+        
+        
+        var msg = String()
+        var title = String()
+        var flag = Int()
+        
+        if isFavorite == true {
+            flag = 0
+            title = "Remove as Favourite?"
+            msg = "This lesson shall be removed to my Favs!"
+        }else{
+            flag = 1
+            title = "Add to my Favs?"
+            msg = "This lesson shall be added to my Favs!"
+        }
+        
+        
+        self.showAlertWithTitleInView(title: title, message: msg, buttonCancelTitle:"No", buttonOkTitle: "Yes"){ (index) in
+            
+            
+
+            if index == 1{
+                
+                //vc.learningbookData = bookData
+//                let lessionTitle = lessonData.lessonName!
+//                let lstudentsubject = lessonData.studentsubject
+//                let lstudentvideo = lessonData.studentvideo
+//                let lstudentQuestions = lessonData.studentQuestions
+                var isSuccess : Bool = true
+                
+                if flag == 1 {
+                    isSuccess = self.appDelegate!.addFavouriteToCoreData(withlessonData: self.learningbookData as NSArray, kid_id: kidId, parent_id: parentID, lessonId: self.lessionId, lessionTitle: self.lessionTitle, lstudentQuestions: self.lstudentQuestions, lstudentsubject: self.studentSubject , lstudentvideo: self.lstudentvideo)
+                    self.favouriteBtnOutlet.setImage(UIImage(named: "lovefill.png")! as UIImage, for: .normal)
+
+                }else{
+                    isSuccess = self.appDelegate!.deleteRecordforValue(valueof: self.lessionId, forattribute: "lessonId", forEntity: "Favourites")
+
+                    self.favouriteBtnOutlet.setImage(UIImage(named: "love.png")! as UIImage, for: .normal)
+
+                }
+            }else{
+                
+            }
+        }
+    
     }
     @IBAction func quiZBtnAction(_ sender: Any) {
         
@@ -119,8 +182,6 @@ class ActivitesViewController: UIViewController  , UITableViewDataSource , UITab
                       vc.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
         vc.allQuizQuestions = lstudentQuestions
                   self.present(vc, animated: true, completion: nil)
-
-        
     }
     /*
      // MARK: - Navigation

@@ -6,6 +6,16 @@
         <attribute name="kid_Id" optional="YES" attributeType="String"/>
         <attribute name="parent_Id" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="Favourites" representedClassName="Favourites" syncable="YES">
+        <attribute name="kid_Id" optional="YES" attributeType="String"/>
+        <attribute name="learningbookData" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer"/>
+        <attribute name="lessionTitle" optional="YES" attributeType="String"/>
+        <attribute name="lessonId" optional="YES" attributeType="String"/>
+        <attribute name="lstudentQuestions" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer"/>
+        <attribute name="lstudentsubject" optional="YES" attributeType="String"/>
+        <attribute name="lstudentvideo" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer"/>
+        <attribute name="parent_Id" optional="YES" attributeType="String"/>
+    </entity>
     <entity name="KidsData" representedClassName="KidsData" syncable="YES">
         <attribute name="kid_Id" optional="YES" attributeType="String"/>
         <attribute name="kidClass" optional="YES" attributeType="String"/>
@@ -25,6 +35,7 @@
     </entity>
     <elements>
         <element name="DownloadedBooks" positionX="-54" positionY="63" width="128" height="103"/>
+        <element name="Favourites" positionX="-54" positionY="63" width="128" height="163"/>
         <element name="KidsData" positionX="-54" positionY="54" width="128" height="118"/>
         <element name="StudentTable" positionX="-54" positionY="-9" width="128" height="163"/>
     </elements>

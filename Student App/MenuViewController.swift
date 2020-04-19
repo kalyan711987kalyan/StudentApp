@@ -8,7 +8,9 @@
 
 import UIKit
 
+@available(iOS 10.0, *)
 class MenuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    let appDelegate = UIApplication.shared.delegate as? AppDelegate
 
     @IBOutlet var menuTableView: UITableView!
     @IBOutlet var nameLabel: UILabel!
@@ -21,7 +23,26 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         // Do any additional setup after loading the view.
         
         self.setUpTableView()
+        
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        guard let kidId = UserDefaults.standard.string(forKey: "selectedKid")
+                                    else { return print("No data") }
+        
+        let results = self.appDelegate!.getKidDataById(kid_id: kidId)
+        
+        for result in results {
+            
+            self.nameLabel.text = result.value(forKey: "kidName") as? String
+            self.schoolNameLabel.text = result.value(forKey: "kidSchool") as? String
+            self.emailLabel.text = result.value(forKey: "parent_Id") as? String
+
+        }
+
+    }
+
     
     func setUpTableView() {
 

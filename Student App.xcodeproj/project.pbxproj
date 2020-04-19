@@ -69,6 +69,12 @@
 		3072B381243CF978005A912F /* DownloadedBooks+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3072B37F243CF978005A912F /* DownloadedBooks+CoreDataProperties.swift */; };
 		3072B383243D02F1005A912F /* DownloadedBooksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3072B382243D02F1005A912F /* DownloadedBooksViewController.swift */; };
 		3072B385243D0311005A912F /* DownloadedBookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3072B384243D0311005A912F /* DownloadedBookTableViewCell.swift */; };
+		30774C892446E04000D07A3F /* Favourites+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30774C872446E03F00D07A3F /* Favourites+CoreDataClass.swift */; };
+		30774C8A2446E04000D07A3F /* Favourites+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30774C882446E03F00D07A3F /* Favourites+CoreDataProperties.swift */; };
+		30774CE92447833400D07A3F /* lovefill.png in Resources */ = {isa = PBXBuildFile; fileRef = 30774CE72447833300D07A3F /* lovefill.png */; };
+		30774CEA2447833400D07A3F /* love.png in Resources */ = {isa = PBXBuildFile; fileRef = 30774CE82447833300D07A3F /* love.png */; };
+		30774CEC2448150200D07A3F /* FavouritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30774CEB2448150200D07A3F /* FavouritesViewController.swift */; };
+		30774D6424495BF300D07A3F /* FavourtesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30774D6324495BF300D07A3F /* FavourtesTableViewCell.swift */; };
 		3079A369240D59A20044130E /* StudentList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3079A367240D59A20044130E /* StudentList.xcdatamodeld */; };
 		30A8EC7E244236C3000036F2 /* 4.png in Resources */ = {isa = PBXBuildFile; fileRef = 30A8EC77244236C1000036F2 /* 4.png */; };
 		30A8EC7F244236C3000036F2 /* 6.png in Resources */ = {isa = PBXBuildFile; fileRef = 30A8EC78244236C1000036F2 /* 6.png */; };
@@ -169,6 +175,12 @@
 		3072B37F243CF978005A912F /* DownloadedBooks+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DownloadedBooks+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		3072B382243D02F1005A912F /* DownloadedBooksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadedBooksViewController.swift; sourceTree = "<group>"; };
 		3072B384243D0311005A912F /* DownloadedBookTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadedBookTableViewCell.swift; sourceTree = "<group>"; };
+		30774C872446E03F00D07A3F /* Favourites+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Favourites+CoreDataClass.swift"; sourceTree = "<group>"; };
+		30774C882446E03F00D07A3F /* Favourites+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Favourites+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		30774CE72447833300D07A3F /* lovefill.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lovefill.png; sourceTree = "<group>"; };
+		30774CE82447833300D07A3F /* love.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = love.png; sourceTree = "<group>"; };
+		30774CEB2448150200D07A3F /* FavouritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesViewController.swift; sourceTree = "<group>"; };
+		30774D6324495BF300D07A3F /* FavourtesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavourtesTableViewCell.swift; sourceTree = "<group>"; };
 		3079A368240D59A20044130E /* StudentList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = StudentList.xcdatamodel; sourceTree = "<group>"; };
 		3092D71B23ED59F200F7C19F /* Student App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Student App.entitlements"; sourceTree = "<group>"; };
 		30A8EC77244236C1000036F2 /* 4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4.png; sourceTree = "<group>"; };
@@ -270,6 +282,8 @@
 		3067E42723B0F83A0009A6FF /* Student App */ = {
 			isa = PBXGroup;
 			children = (
+				30774C872446E03F00D07A3F /* Favourites+CoreDataClass.swift */,
+				30774C882446E03F00D07A3F /* Favourites+CoreDataProperties.swift */,
 				3072B37E243CF978005A912F /* DownloadedBooks+CoreDataClass.swift */,
 				3072B37F243CF978005A912F /* DownloadedBooks+CoreDataProperties.swift */,
 				302E53F42413EDDD00E32331 /* KidsData+CoreDataClass.swift */,
@@ -317,6 +331,8 @@
 				30A8EC85244236CC000036F2 /* 3.png */,
 				30A8EC87244236CC000036F2 /* 4.png */,
 				30A8EC89244236CD000036F2 /* 5.png */,
+				30774CE72447833300D07A3F /* lovefill.png */,
+				30774CE82447833300D07A3F /* love.png */,
 				30A8EC88244236CD000036F2 /* bg.jpg */,
 				3067E4C823B1BF3A0009A6FF /* newbookbanner.png */,
 				3067E59C23B222640009A6FF /* library.png */,
@@ -443,6 +459,8 @@
 				30A8EC8F24423D99000036F2 /* ActivitesViewController.swift */,
 				30A8EC9324424971000036F2 /* ActivitesTableViewCell.swift */,
 				30A8EC95244260AD000036F2 /* QuizViewController.swift */,
+				30774CEB2448150200D07A3F /* FavouritesViewController.swift */,
+				30774D6324495BF300D07A3F /* FavourtesTableViewCell.swift */,
 			);
 			path = "My Books";
 			sourceTree = "<group>";
@@ -557,6 +575,7 @@
 				30FE910723CA046300352F40 /* passwordicon.png in Resources */,
 				3067E43023B0F83A0009A6FF /* Main.storyboard in Resources */,
 				3067E61523B70CDA0009A6FF /* learningHeader_bg.png in Resources */,
+				30774CE92447833400D07A3F /* lovefill.png in Resources */,
 				30A8EC8E244236CD000036F2 /* 5.png in Resources */,
 				30FE910323CA040B00352F40 /* callicon.png in Resources */,
 				3067E66D23C0C55D0009A6FF /* classbuttonBg.png in Resources */,
@@ -564,6 +583,7 @@
 				30A8EC8A244236CD000036F2 /* 3.png in Resources */,
 				30A8EC8C244236CD000036F2 /* 4.png in Resources */,
 				30A8EC8B244236CD000036F2 /* 1.png in Resources */,
+				30774CEA2447833400D07A3F /* love.png in Resources */,
 				302E53FD2414C07700E32331 /* bin.png in Resources */,
 				30A8EC81244236C3000036F2 /* 5.png in Resources */,
 				3067E61323B7037F0009A6FF /* LearningTableViewCell.xib in Resources */,
@@ -620,6 +640,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30774CEC2448150200D07A3F /* FavouritesViewController.swift in Sources */,
 				30F669992430B0C200FDBF85 /* BooksListTableViewCell.swift in Sources */,
 				3067E5A823B2325B0009A6FF /* MyBooksViewModel.swift in Sources */,
 				3067E5AE23B233D10009A6FF /* MyBooksTableViewCell.swift in Sources */,
@@ -650,12 +671,14 @@
 				3072B381243CF978005A912F /* DownloadedBooks+CoreDataProperties.swift in Sources */,
 				3072B385243D0311005A912F /* DownloadedBookTableViewCell.swift in Sources */,
 				302E53F72413EDDD00E32331 /* KidsData+CoreDataProperties.swift in Sources */,
+				30774C8A2446E04000D07A3F /* Favourites+CoreDataProperties.swift in Sources */,
 				3039980523FBF158007F3B72 /* SwitchKidsViewController.swift in Sources */,
 				304DF8A5243EF3EE00C9C0D4 /* LessionsTableViewCell.swift in Sources */,
 				3067E60D23B6FF850009A6FF /* LearningActivitySectionView.swift in Sources */,
 				30F6699524305E1800FDBF85 /* MyBooksViewController.swift in Sources */,
 				30A8EC9024423D99000036F2 /* ActivitesViewController.swift in Sources */,
 				30FE910C23CA12A300352F40 /* MenuTableViewCell.swift in Sources */,
+				30774D6424495BF300D07A3F /* FavourtesTableViewCell.swift in Sources */,
 				3067E5B223B243980009A6FF /* TabbarViewController.swift in Sources */,
 				3067E4B923B114B00009A6FF /* DashboardViewController.swift in Sources */,
 				3067E44823B0FCE20009A6FF /* View+Util.swift in Sources */,
@@ -663,6 +686,7 @@
 				3072B380243CF978005A912F /* DownloadedBooks+CoreDataClass.swift in Sources */,
 				30FE910F23CA1A8F00352F40 /* SubjectViewController.swift in Sources */,
 				3067E61223B7037F0009A6FF /* LearningTableViewCell.swift in Sources */,
+				30774C892446E04000D07A3F /* Favourites+CoreDataClass.swift in Sources */,
 				303997FE23FBB363007F3B72 /* SAPIController.swift in Sources */,
 				3067E42923B0F83A0009A6FF /* AppDelegate.swift in Sources */,
 			);

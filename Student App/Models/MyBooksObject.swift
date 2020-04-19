@@ -167,15 +167,39 @@ struct lessonData {
     var studentsubject : NSDictionary
   var studentvideo : NSArray
     var studentQuestions : NSArray
+    var lessonId : String
 
     
-    init(lessonName:String, learnings:Int, studentQuestionsAct:Int, studentsubject:NSDictionary , studentvideo: NSArray , studentQuestions : NSArray) {
+    init(lessonName:String, learnings:Int, studentQuestionsAct:Int, studentsubject:NSDictionary , studentvideo: NSArray , studentQuestions : NSArray , lessonId : String) {
         self.lessonName = lessonName
         self.learnings = learnings
         self.studentQuestionsAct = studentQuestionsAct
         self.studentsubject = studentsubject
         self.studentvideo = studentvideo
         self.studentQuestions = studentQuestions
+        self.lessonId = lessonId
+
+    }
+}
+
+struct MyFavoritesData {
+  var kid_Id : String!
+  var learningbookData : NSArray
+  var lessionTitle : String!
+    var lessonId : String!
+  var lstudentQuestions : NSArray
+    var lstudentsubject : NSDictionary
+    var lstudentvideo : NSArray
+    
+    init(kid_Id:String, learningbookData:NSArray, lessionTitle:String, lessonId:String , lstudentQuestions: NSArray , lstudentsubject : NSDictionary , lstudentvideo : NSArray) {
+        self.kid_Id = kid_Id
+        self.learningbookData = learningbookData
+        self.lessionTitle = lessionTitle
+        self.lessonId = lessonId
+        self.lstudentQuestions = lstudentQuestions
+        self.lstudentsubject = lstudentsubject
+        self.lstudentvideo = lstudentvideo
+
     }
 }
 

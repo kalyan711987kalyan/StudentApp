@@ -94,6 +94,7 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
 
     }
     override func viewWillAppear(_ animated: Bool) {
+        self.showFloatingView.isHidden = true
         guard let kidId = UserDefaults.standard.string(forKey: "selectedKid")
                                     else { return print("No data") }
                                 kid_id = kidId
@@ -284,6 +285,8 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
     }
     
     @objc func buttonAction(sender: UIButton!) {
+        self.showFloatingView.isHidden = true
+
       if sender.titleLabel?.text != nil {
                 //print("You have chosen Villain: \(sender.titleLabel?.text)")
         let bookData = self.downloadedBooks[didTappedAtBook]
@@ -296,7 +299,6 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "LessionsViewController") as! LessionsViewController
                       vc.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
         vc.bookData = datatobepassed as! [String]
-        self.showFloatingView.isHidden = true
 
                   self.present(vc, animated: true, completion: nil)
         

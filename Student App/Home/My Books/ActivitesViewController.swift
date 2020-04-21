@@ -10,18 +10,51 @@ import UIKit
 
 @available(iOS 10.0, *)
 class ActivitesViewController: UIViewController  , UITableViewDataSource , UITableViewDelegate , videoCellDelegate{
+    
     let appDelegate = UIApplication.shared.delegate as? AppDelegate
 
     func didDownloadPressButton(_ tag: Int) {
          self.showAlertWithTitleInView(title: "Download This Video?", message:"Download video shall be available in My Favs", buttonCancelTitle:"No", buttonOkTitle: "Yes"){ (index) in
                           if index == 1{
-                              
-                       
-                              
+                        
+                            SProgress.show()
+                            
+                            print("lstudentvideo",self.lstudentvideo[tag])
+                            let object = self.lstudentvideo[tag] as! [String : String]
+                            let videoImageUrl = object["videoUrl"]!
+                            let videoName = object["videoName"]!
+                            let id = object["id"]!
+                            let lessonId = object["lessonId"]!
+                            let videoSize = object["videoSize"]!
+                            let videoUrl = object["videoUrl"]!
+
+                            let filePath = self.appDelegate!.documentsPathForFileName(name: "\(videoName).mp4")
+
+                                   if let url = URL(string: videoImageUrl),
+                                   let urlData = NSData(contentsOf: url) {
+                                       urlData.write(toFile: filePath, atomically: true)
+                                     //Save in core data with any extra parameter
+                                  let isSuccess = self.appDelegate!.addVideoFavoriteToCoreData(withFilePath: filePath, id: id, lessonId: lessonId, videoName: videoName, videoSize: videoSize, videoUrl: videoUrl, videoNameFormated: "\(videoName).mp4")
+                                     //  self.appDelegate!.addVideoFavoriteToCoreData(withbookData: "12", videoData: filePath)
+                                    
+                                    if isSuccess == true {
+                                        SProgress.hide()
+
+                                        self.showAlertWithTitleInView(title: "Success!", message:"Video downloaded successfully.", buttonCancelTitle:"", buttonOkTitle: "OK"){ (index) in
+                                        }
+                                    }else{
+                                        SProgress.hide()
+
+                                        self.showAlertWithTitleInView(title: "Failed", message:"Failed to download.", buttonCancelTitle:"", buttonOkTitle: "OK"){ (index) in
+
+                                    }
+                                        self.getAlreadyDownloadVideo()
+                                   }
+                            
                           }
                       }
     }
-    
+    }
     
     @IBOutlet weak var favouriteBtnOutlet: UIButton!
     @IBOutlet weak var mainTitleLb: UILabel!
@@ -44,6 +77,7 @@ class ActivitesViewController: UIViewController  , UITableViewDataSource , UITab
     var lessionId = String()
     var isFavorite = Bool()
     var studentSubject = String()
+    var downloadedVideosId = NSMutableArray()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,10 +104,25 @@ class ActivitesViewController: UIViewController  , UITableViewDataSource , UITab
 
         }
         
-        
-        self.viddeosTableView.reloadData()
+        self.getAlreadyDownloadVideo()
     }
     
+    
+    func getAlreadyDownloadVideo(){
+        
+      let results = self.appDelegate!.getAllRecordsforValue(valueof: "", forattribute: "", forEntity: "DownloadedVideos")
+        
+        for result in results {
+                   let vidId = result.value(forKey: "id") as? String
+                   self.downloadedVideosId.add(vidId!)
+               }
+        self.viddeosTableView.reloadData()
+
+    }
+    
+    @IBAction func backBtnAction(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.lstudentvideo.count
@@ -90,11 +139,21 @@ class ActivitesViewController: UIViewController  , UITableViewDataSource , UITab
         if self.lstudentvideo.count > 0 {
             let videoData = self.lstudentvideo[indexPath.row] as! [String : Any]
             //let value = videoData["videoName"]!
+            cell.videoDelegate = self
+            cell.downloadBtn?.tag = indexPath.row
+            let videoId = videoData["id"]!
+
+            if self.downloadedVideosId.contains(videoId) {
+                         //do something
+                cell.downloadBtn?.isHidden = true
+            }else{
+                cell.downloadBtn?.isHidden = false
+            }
+            
+            
             let dataValue = videoData["videoSize"]!
-            
-            cell.videoTitleBtn?.setTitle(videoData["videoName"]! as? String, for: UIControl.State.normal) // We are going to use the item name as the Button Title here.
+            cell.videolessonTitleLB?.text = videoData["videoName"]! as! String
             cell.dataCellLb?.text = "\(dataValue) MB"
-            
         }
         return cell
     }
@@ -165,6 +224,7 @@ class ActivitesViewController: UIViewController  , UITableViewDataSource , UITab
                     self.favouriteBtnOutlet.setImage(UIImage(named: "lovefill.png")! as UIImage, for: .normal)
 
                 }else{
+                    
                     isSuccess = self.appDelegate!.deleteRecordforValue(valueof: self.lessionId, forattribute: "lessonId", forEntity: "Favourites")
 
                     self.favouriteBtnOutlet.setImage(UIImage(named: "love.png")! as UIImage, for: .normal)

@@ -111,6 +111,7 @@ class LessionsViewController: UIViewController , UITableViewDataSource , UITable
             else { return print("No data") }
         kid_id = kidId
         //coredata
+        FavouriteslessonId.removeAllObjects()
         let  results = self.appDelegate!.getAllRecordsforValue(valueof: kid_id!, forattribute: "kid_Id", forEntity: "Favourites")
         for result in results {
             let lessonId = result.value(forKey: "lessonId") as? String
@@ -124,6 +125,9 @@ class LessionsViewController: UIViewController , UITableViewDataSource , UITable
     }
     // With Alamofire
     func loadLessonDetails( classToPass : String ) {
+        self.lessonIdArray.removeAllObjects()
+        self.subjectData.removeAllObjects()
+        self.lessonDataArray.removeAll()
         SProgress.show()
         let baseURLString = APIEndPoints.base.urlString
         

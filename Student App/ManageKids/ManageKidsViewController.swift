@@ -10,7 +10,60 @@ import UIKit
 import CoreData
 
 @available(iOS 10.0, *)
-class ManageKidsViewController: UIViewController , UITableViewDelegate , UITableViewDataSource  {
+class ManageKidsViewController: UIViewController , UITableViewDelegate , UITableViewDataSource  , manageKidCellDelegate {
+   
+    func editKidPressButton(_ tag: Int) {
+        
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "AddKidViewController") as! AddKidViewController
+                      vc.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
+        
+        vc.kid_id = self.kidId[tag]
+        vc.kidName = self.kidNameList[tag]
+        vc.kidSchool = self.kidSchoolList[tag]
+        vc.kidClass = self.kidClassList[tag]
+        vc.mode = "edit"
+
+        self.present(vc, animated: true, completion: nil)
+        
+        
+        
+        
+        
+        
+
+    }
+    
+    func deleteKidPressButton(_ tag: Int) {
+            
+            let payLoad = [ "mode":"delete", "id":"40"]
+            
+            SAPIController.shared.addKidAPI(payload: payLoad) { (result, errorMessage) in
+                print("Login Response---- %@ /n %@", result,errorMessage)
+                SProgress.hide()
+                
+                if let error = errorMessage {
+                    
+                    print("signup error message---- %@ /n %@", error)
+                    
+                }else{
+                    
+                    
+                    
+                   
+
+                    self.showAlertWithTitleInView(title: "Success!", message: "Do You want to Delete Kid?", buttonCancelTitle: "", buttonOkTitle: "OK"){
+                        (index) in
+                        self.appDelegate!.deleteRecordforValue(valueof: self.kidId[tag], forattribute: "kid_Id", forEntity: "KidsData")
+                        
+                        self.getAllKidsData()
+
+                    }
+                    return
+                    
+                }
+            }
+    }
+    
     
     let cellReuseIdentifier = "surveyListTableviewCell"
     
@@ -36,13 +89,28 @@ class ManageKidsViewController: UIViewController , UITableViewDelegate , UITable
     var kidNameList: [String] = []
     var kidClassList: [String] = []
     var kidSchoolList: [String] = []
-    
+    var kidId: [String] = []
+
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
+        
+        kidsDataTableView.delegate = self
+        kidsDataTableView.dataSource = self
+
+        // Do any additional setup after loading the view.
+    }
+    
+    
+    func getAllKidsData(){
+        kidNameList.removeAll()
+        kidClassList.removeAll()
+        kidSchoolList.removeAll()
+        kidId.removeAll()
+
         guard let parentID = UserDefaults.standard.string(forKey: "parentEmail")
             else { return print("No data") }
         let results = self.appDelegate!.getAllRecordsforValue(valueof: parentID, forattribute: "parent_Id" , forEntity : "KidsData")
@@ -50,24 +118,28 @@ class ManageKidsViewController: UIViewController , UITableViewDelegate , UITable
             let formNameIs = result.value(forKey: "kidName") as? String
             let className = result.value(forKey: "kidClass") as? String
             let kidSchool = result.value(forKey: "kidSchool") as? String
-            
-            
+            let kid_Id = result.value(forKey: "kid_Id") as? String
+
             kidNameList.append(formNameIs!)
             kidClassList.append(className!)
             kidSchoolList.append(kidSchool!)
-            kidsDataTableView.delegate = self
-            kidsDataTableView.dataSource = self
-            kidsDataTableView.reloadData()
-            
+            kidId.append(kid_Id!)
             //print(formNameIs!)
         }
-        // Do any additional setup after loading the view.
+        kidsDataTableView.reloadData()
+
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
         createFloatingButton()
-        
+        getAllKidsData()
+
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        floatingButton?.removeFromSuperview()
+
     }
     private func createFloatingButton() {
         floatingButton = UIButton(type: .custom)
@@ -150,11 +222,21 @@ class ManageKidsViewController: UIViewController , UITableViewDelegate , UITable
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "KidsListTableViewCell", for: indexPath) as! KidsListTableViewCell
-        cell.kidNameValueLB.text = self.kidNameList[indexPath.row]
-        cell.kidClassValueLB.text = self.kidClassList[indexPath.row];
         
-        cell.kidSchoolValueLB.text = self.kidSchoolList[indexPath.row];
+        let parentID = UserDefaults.standard.string(forKey: "parentId")
         
+        if parentID == "null" {
+            cell.editCellOutlet?.isHidden = true
+            cell.deleteCellOutlet?.isHidden = true
+        }
+
+        cell.kidNameValueLB?.text = self.kidNameList[indexPath.row]
+        cell.kidClassValueLB?.text = self.kidClassList[indexPath.row];
+        cell.kidSchoolValueLB?.text = self.kidSchoolList[indexPath.row];
+        cell.cellDelegate = self
+        cell.editCellOutlet?.tag = indexPath.row
+        cell.deleteCellOutlet?.tag = indexPath.row
+
         // cell.surveyListcellDelegate = self
         return cell
         

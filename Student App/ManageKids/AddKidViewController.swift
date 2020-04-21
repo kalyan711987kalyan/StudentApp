@@ -15,12 +15,25 @@ class AddKidViewController: UIViewController  , UITextFieldDelegate {
    // @IBOutlet weak var kidClassTF: UITextField!
     @IBOutlet weak var kidSchoolTF: UITextField!
     @IBOutlet weak var classBtnOutlet: UIButton!
+    
+    var kid_id = ""
+    var kidName = String()
+    var kidSchool = String()
+    var kidClass = String()
+    var mode = String()
+
     let appDelegate = UIApplication.shared.delegate as? AppDelegate
 
     override func viewDidLoad() {
         super.viewDidLoad()
        // kidClassTF.delegate = self
         // Do any additional setup after loading the view.
+        
+        self.kidNameTF.text = kidName
+        self.kidSchoolTF.text = kidSchool
+        self.classBtnOutlet.setTitle(kidClass, for: .normal)
+    
+        
     }
     @IBAction func classBTNAction(_ sender: Any) {
         let classNameArray = [" Nursery", " LKG", " UKG", " I", " II", " III", " IV", " V", " VI", " VII"," VIII"," IX"," X"]
@@ -82,22 +95,67 @@ class AddKidViewController: UIViewController  , UITextFieldDelegate {
         }
         
         
-        
-        let kid_id = randomString(kidname: kidName,kidclass: kidclass,kidschool: schoolName)
+        if kid_id == "" {
+         kid_id = randomString(kidname: kidName,kidclass: kidclass,kidschool: schoolName)
+        }
         
         var kidDataDic = NSMutableDictionary()
-        kidDataDic = ["kidName":kidName,"kidclass":kidclass,"kidschool":schoolName , "kid_id" :kid_id]
         
-        self.insertKidToCoredata(kid_id: kid_id,dataDic: kidDataDic)
+       
+         guard let parentID = UserDefaults.standard.string(forKey: "parentId")
+                    
+                    else { return print("No data") }
+        if self.mode == "edit" {
+            mode = "edit"
+        }else{
+            mode = "new"
+
+        }
         
+        
+        
+        let payLoad = [ "mode":mode, "parentId": parentID, "className": kidclass, "school": schoolName,"studentName": kidName]
+
+        kidDataDic = ["parentId": parentID, "kidclass": kidclass, "kidschool": schoolName,"kidName": kidName , "kid_id" : self.kid_id]
+
+        if parentID == "null"  {
+            
+            self.insertKidToCoredata(kid_id: self.kid_id,dataDic: kidDataDic)
+            
+        }else{
+
+            SAPIController.shared.addKidAPI(payload: payLoad) { (result, errorMessage) in
+                print("Login Response---- %@ /n %@", result,errorMessage)
+                
+                SProgress.hide()
+                
+                if let error = errorMessage {
+                    
+                    print("signup error message---- %@ /n %@", error)
+                    
+                }else{
+                    
+                    //if self.mode == "new" {
+                    self.insertKidToCoredata(kid_id: self.kid_id ,dataDic: kidDataDic)
+                    //}
+                    
+
+                    self.showAlertWithTitleInView(title: "Success!", message: "Added New Kid!", buttonCancelTitle: "", buttonOkTitle: "OK"){
+                        (index) in
+                        
+                    }
+                    return
+                    
+                }
+            }
+        }
+    
     }
     
     func insertKidToCoredata(kid_id: String , dataDic : NSMutableDictionary){
         
-        guard let parentID = UserDefaults.standard.string(forKey: "parentEmail")
-            else { return print("No data") }
         
-        self.appDelegate!.insertNewRecord(withData : dataDic , userId : parentID , inentity : "KidsData")
+        self.appDelegate!.insertNewRecord(withData : dataDic , userId : kid_id , inentity : "KidsData")
         //appDelegate!.insertNewRecordofControlNumber(withValue :dataDic,  atcontrolNumber : parentID , forKey: "praposalFormAT")
      
         let results = self.appDelegate!.getAllRecordsforValue(valueof: kid_id, forattribute: "kid_Id" , forEntity : "KidsData")

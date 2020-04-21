@@ -6,6 +6,15 @@
         <attribute name="kid_Id" optional="YES" attributeType="String"/>
         <attribute name="parent_Id" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="DownloadedVideos" representedClassName="DownloadedVideos" syncable="YES">
+        <attribute name="filePath" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="lessonId" optional="YES" attributeType="String"/>
+        <attribute name="videoName" optional="YES" attributeType="String"/>
+        <attribute name="videoNameFormated" optional="YES" attributeType="String"/>
+        <attribute name="videoSize" optional="YES" attributeType="String"/>
+        <attribute name="videoUrl" optional="YES" attributeType="String"/>
+    </entity>
     <entity name="Favourites" representedClassName="Favourites" syncable="YES">
         <attribute name="kid_Id" optional="YES" attributeType="String"/>
         <attribute name="learningbookData" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer"/>
@@ -38,5 +47,6 @@
         <element name="Favourites" positionX="-54" positionY="63" width="128" height="163"/>
         <element name="KidsData" positionX="-54" positionY="54" width="128" height="118"/>
         <element name="StudentTable" positionX="-54" positionY="-9" width="128" height="163"/>
+        <element name="DownloadedVideos" positionX="-54" positionY="90" width="128" height="148"/>
     </elements>
 </model>

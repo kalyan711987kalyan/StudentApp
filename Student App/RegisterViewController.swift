@@ -8,7 +8,10 @@
 
 import UIKit
 
+@available(iOS 10.0, *)
 class RegisterViewController: UIViewController {
+    let appDelegate = UIApplication.shared.delegate as? AppDelegate
+
     @IBOutlet weak var parentNameTF: UITextField!
     @IBOutlet weak var contactNumberTF: UITextField!
     @IBOutlet weak var emailTF: UITextField!
@@ -20,24 +23,65 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var stateTF: UITextField!
     @IBOutlet weak var cityTF: UITextField!
     @IBOutlet weak var pinTF: UITextField!
-    
-    
+    var kidsData: [[String:String]] = [[ : ]]
+
+    @IBOutlet weak var selectCls: UIButton!
+    @IBAction func selectClassBTN(_ sender: Any) {
+        let classNameArray = [" Nursery", " LKG", " UKG", " I", " II", " III", " IV", " V", " VI", " VII"," VIII"," IX"," X"]
+                      self.showPopoverActionSheet(listArray: classNameArray ,tag: 1 ,title: "Select Class" )
+
+    }
+    func showPopoverActionSheet (listArray : Array<String>, tag : Int , title : String){
+             let alertController = UIAlertController(title: nil, message: title, preferredStyle: .actionSheet)
+             for item in listArray{
+                 let superbutton = UIAlertAction(title: "\(item)" , style: .default, handler: { (action) in
+                     print("\(item)")
+                   self.selectCls.setTitle(item, for: .normal)
+                   //self.kidClassTF.text = item
+                 })
+                 alertController.addAction(superbutton)
+             }
+
+             self.present(alertController, animated: true, completion: nil)
+         }
     @IBOutlet var keyboardHeightLayoutConstraint: NSLayoutConstraint?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.parentNameTF.text = "ande"
+        self.parentNameTF.text = "lucky"
         self.contactNumberTF.text = "1234567890"
-        self.emailTF.text = "ande.gopimahesh@gmail.com"
+        self.emailTF.text = "lucky.gopimahesh@gmail.com"
         self.passwordTF.text = "123456"
         self.confirmPasswordTF.text = "123456"
         self.kidnameTF.text = "kid 1"
         self.schoolNameTF.text = "ande"
-        self.classNameTF.text = "class"
+      //  self.classNameTF.text = "class"
         self.stateTF.text = "telanagana"
         self.cityTF.text = "hyd"
-        self.pinTF.text = "123456"
+        //self.pinTF.text = "123456"
+        
+        //add corner radiuso
+        self.addcornerRadious(textfiled: parentNameTF)
+       self.addcornerRadious(textfiled: contactNumberTF)
+        self.addcornerRadious(textfiled: emailTF)
+       self.addcornerRadious(textfiled: passwordTF)
+        self.addcornerRadious(textfiled: confirmPasswordTF)
+        self.addcornerRadious(textfiled: kidnameTF)
+        self.addcornerRadious(textfiled: schoolNameTF)
+        //self.addcornerRadious(textfiled: classNameTF)
+        self.addcornerRadious(textfiled: stateTF)
+        self.addcornerRadious(textfiled: cityTF)
+       // self.addcornerRadious(textfiled: stateTF)
 
+            self.parentNameTF.setLeftPaddingPoints(10)
+        self.contactNumberTF.setLeftPaddingPoints(10)
+        self.emailTF.setLeftPaddingPoints(10)
+        self.passwordTF.setLeftPaddingPoints(10)
+        self.confirmPasswordTF.setLeftPaddingPoints(10)
+        self.kidnameTF.setLeftPaddingPoints(10)
+        self.schoolNameTF.setLeftPaddingPoints(10)
+        self.stateTF.setLeftPaddingPoints(10)
+        self.cityTF.setLeftPaddingPoints(10)
 
         // Do any additional setup after loading the view.
         
@@ -46,7 +90,21 @@ class RegisterViewController: UIViewController {
                                                selector: #selector(self.keyboardNotification(notification:)),
                                                name: UIResponder.keyboardWillChangeFrameNotification,
                                                object: nil)
+        
+        selectCls.layer.cornerRadius = 15.0
+        selectCls.layer.borderWidth = 2.0
+        selectCls.layer.borderColor = UIColor.black.cgColor
+
     }
+    
+    func addcornerRadious(textfiled : UITextField){
+        textfiled.layer.cornerRadius = 15.0
+        textfiled.layer.borderWidth = 2.0
+        textfiled.layer.borderColor = UIColor.black.cgColor
+    }
+    
+    
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -130,7 +188,7 @@ class RegisterViewController: UIViewController {
             self.showAlertWithTitleInView(title: "", message:"Please enter Kid Name.", buttonCancelTitle:"", buttonOkTitle: "OK"){ (index) in}
             return
         }
-        guard let classname = classNameTF.text, classname.trimWhiteSpaces().count > 0 else {
+        guard let classname = self.selectCls.titleLabel!.text, classname.trimWhiteSpaces().count > 0 else {
             self.showAlertWithTitleInView(title: "", message:"Please enter Class Name.", buttonCancelTitle:"", buttonOkTitle: "OK"){ (index) in}
             
             return
@@ -150,23 +208,31 @@ class RegisterViewController: UIViewController {
             
             return
         }
-        guard let pin = pinTF.text, pin.trimWhiteSpaces().count > 0 else {
-            // alert for enter password
-            self.showAlertWithTitleInView(title: "", message:"Please enter Pin.", buttonCancelTitle:"", buttonOkTitle: "OK"){ (index) in}
-            return
-        }
+//        guard let pin = pinTF.text, pin.trimWhiteSpaces().count > 0 else {
+//            // alert for enter password
+//            self.showAlertWithTitleInView(title: "", message:"Please enter Pin.", buttonCancelTitle:"", buttonOkTitle: "OK"){ (index) in}
+//            return
+//        }
         
         SProgress.show()
+       let results = self.appDelegate!.getAllRecordsforValue(valueof: "", forattribute: "", forEntity: "KidsData")
         
+        if results.count > 0{
+            for result in results {
+                
+                let populatedDictionary = ["kidClass": result.value(forKey: "kidClass") as? String ,"school": result.value(forKey: "kidSchool") as? String, "studentName": result.value(forKey: "kidName") as? String]
+                
+                self.kidsData.append(populatedDictionary as! [String : String])
+            }
+        }else{
+            self.kidsData = [["className":classname , "school" : schoolname , "studentName" : kidname]];
+
+        }
         
-        let kidsData = [["className":classname , "school" : schoolname , "studentName" : kidname]];
-        
-        let registrationPayload = ["parentName":parentName, "email":email , "mobile":contactnumber , "city":city, "state":state , "pincode":pin , "password":confirmpassword , "kidsData": kidsData] as [String : Any];
+        let registrationPayload = ["parentName":parentName, "email":email , "mobile":contactnumber , "city":city, "state":state , "pincode":"000000" , "password":confirmpassword , "kids": kidsData] as [String : Any];
         
         print("RegistrationregistrationPayload ",registrationPayload)
 
-        
-        
         SAPIController.shared.registrationAPI(payload: registrationPayload) { (result, errorMessage) in
             print("Login Response---- %@ /n %@", result,errorMessage)
             SProgress.hide()
@@ -194,4 +260,20 @@ class RegisterViewController: UIViewController {
         return emailPred.evaluate(with: email)
     }
     
+    @IBAction func addKids(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "AddKidViewController") as! AddKidViewController
+        vc.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
+
+        self.present(vc, animated: true, completion: nil)
+
+    }
+    @IBAction func showKids(_ sender: Any) {
+        
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ManageKidsViewController") as! ManageKidsViewController
+        vc.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
+
+        self.present(vc, animated: true, completion: nil)
+
+        
+    }
 }

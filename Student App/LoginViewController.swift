@@ -13,15 +13,39 @@ class LoginViewController: UIViewController {
     @IBOutlet var userNameField: UITextField!
     @IBOutlet var passwordField: UITextField!
 
+    @IBOutlet weak var versionLB: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+       
+        let flag = UserDefaults.standard.bool(forKey: "LoginFlag")
+                     
+        if flag == true {
+      //  self.performSegue(withIdentifier: SSegueKeys.login2dashboardKey, sender: nil)
+
+        }
         
         self.slideMenuController()?.removeLeftGestures()
         self.userNameField.text = "ande.gopimahesh@gmail.com"
         self.passwordField.text = "123456"
+        
+        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+
+        self.versionLB.text = "V \(appVersion ?? "")"
+        
+       
     }
 
+    @IBAction func forgetPwdBtn(_ sender: Any) {
+        
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ForgetPasswordViewController") as! ForgetPasswordViewController
+                      vc.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
+
+                  self.present(vc, animated: true, completion: nil)
+
+        
+    }
+    
     @IBAction func loginButtonAction() {
            
            guard let username = userNameField.text, username.trimWhiteSpaces().count > 0 else {
@@ -40,18 +64,27 @@ class LoginViewController: UIViewController {
            //self.userNameField.text = ""
            //self.passwordField.text = ""
         let loginPayload = ["email":username, "password":password]
+        
         SAPIController.shared.loginAPI(payload: loginPayload) { (result, errorMessage) in
            // print("Login Response---- %@ /n %@", result! as Any)
            // print("Login email---- %@ /n %@", result)
+            
+            SProgress.hide()
+
             guard let jsonArray = result as? [String: Any] else {
                   return
             }
             //print(jsonArray)
             //Now get title value
             guard let parentEmail = jsonArray["email"] as? String else { return }
+            guard let parentId = jsonArray["id"] as? String else { return }
+
             print(parentEmail)
-            UserDefaults.standard.set(parentEmail, forKey: "parentEmail") //Bool
-            SProgress.hide()
+            UserDefaults.standard.set(parentEmail, forKey: "parentEmail") //string
+            UserDefaults.standard.set(parentId, forKey: "parentId") //string
+            UserDefaults.standard.set(true, forKey: "LoginFlag") //Bool
+
+
 
             if let error = errorMessage {
                 
@@ -59,6 +92,8 @@ class LoginViewController: UIViewController {
 
                 
             }else{
+                
+                
                 
                 self.performSegue(withIdentifier: SSegueKeys.login2dashboardKey, sender: result)
             }

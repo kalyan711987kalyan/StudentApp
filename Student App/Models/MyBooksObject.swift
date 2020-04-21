@@ -37,6 +37,30 @@ struct KidObject {
     }
 }
 
+struct downloadedVideo {
+
+    var id: String!
+    var videoName: String!
+    var filePath: String!
+    var lessonId: String!
+    var videoNameFormated: String!
+    var videoSize: String!
+    var videoUrl: String!
+
+    
+    init(id:String, videoName:String, filePath:String, lessonId:String, videoNameFormated:String ,videoSize: String ,videoUrl : String ) {
+         self.id = id
+               self.videoName = videoName
+               self.filePath = filePath
+               self.lessonId = lessonId
+               self.videoNameFormated = videoNameFormated
+        self.videoSize = videoSize
+        self.videoUrl = videoUrl
+
+
+    }
+}
+
 struct ParentObject {
 
     var parentName: String!

@@ -17,6 +17,17 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet var schoolNameLabel: UILabel!
     @IBOutlet var emailLabel: UILabel!
     
+    @IBOutlet weak var versionLb: UILabel!
+    @IBAction func logoutBtnAction(_ sender: Any) {
+        
+        
+        UserDefaults.standard.set(true, forKey: "LoginFlag") //Bool
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+        vc.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
+        self.present(vc, animated: true, completion: nil)
+    
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -24,20 +35,28 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         self.setUpTableView()
         
+        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+
+        self.versionLb.text = "V \(appVersion ?? "")"
+
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         
         guard let kidId = UserDefaults.standard.string(forKey: "selectedKid")
                                     else { return print("No data") }
+        guard let parentEmail = UserDefaults.standard.string(forKey: "parentEmail")
+                                    else { return print("No data") }
+
         
+        self.emailLabel.text = parentEmail
         let results = self.appDelegate!.getKidDataById(kid_id: kidId)
         
         for result in results {
             
             self.nameLabel.text = result.value(forKey: "kidName") as? String
             self.schoolNameLabel.text = result.value(forKey: "kidSchool") as? String
-            self.emailLabel.text = result.value(forKey: "parent_Id") as? String
 
         }
 

@@ -17,13 +17,20 @@ class DashboardViewController: UIViewController,  SlideMenuControllerDelegate, U
     
     let appDelegate = UIApplication.shared.delegate as? AppDelegate
 
+    @IBOutlet weak var imageScrollView: UIScrollView!
+    @IBOutlet weak var kidNameTitleLB: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
 
     @IBOutlet var titleLabel: UILabel!
     
+    //var timer = Timer()
+    var timer:Timer?
+
+    
     var selectedKid: KidObject?
     var kidsList: [KidObject] = []
     var parentObject: ParentObject?
+    var bannerImage : [String] = []
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -35,8 +42,9 @@ class DashboardViewController: UIViewController,  SlideMenuControllerDelegate, U
         UserDefaults.standard.set(selectedKid?.id, forKey: "selectedKid") //Bool
         //Store kid and parent data to coredata
         storeUserDataToCoredata(parentData: self.parentObject!, kidsData: kidsList)
-        
         getBannerDetails()
+        self.kidNameTitleLB.text = "Hi, \(self.selectedKid?.studentName! ?? "")"
+
         //SlideMenuOptions.contentViewScale = 0.50
     }
     
@@ -46,11 +54,10 @@ class DashboardViewController: UIViewController,  SlideMenuControllerDelegate, U
         
         for kid in kidsData {
                     var kidDataDic = NSMutableDictionary()
-            kidDataDic = ["kidName":kid.studentName!,"kidclass":kid.className!,"kidschool":kid.school! , "kid_id" :kid.id!]
+            kidDataDic = ["kidName":kid.studentName!,"kidclass":kid.className!,"kidschool":kid.school! , "kid_id" :kid.id! , "parentId" : parentObject?.id! as Any]
             self.appDelegate!.insertNewRecord(withData : kidDataDic , userId : kid.id , inentity : "KidsData")
         }
     }
-    
     
     @IBAction func myBooksButton_Action() {
         
@@ -62,6 +69,7 @@ class DashboardViewController: UIViewController,  SlideMenuControllerDelegate, U
         //self.performSegue(withIdentifier: SSegueKeys.home2mybooksKey, sender: nil)
     }
     
+    
     @IBAction func switchKidButton_Action() {
         
         if let modalViewController = self.storyboard!.instantiateViewController(withIdentifier: "SwitchKidsViewController") as? SwitchKidsViewController {
@@ -72,6 +80,8 @@ class DashboardViewController: UIViewController,  SlideMenuControllerDelegate, U
             
             modalViewController.completion = { kidDict in
                 self.selectedKid = kidDict
+                self.kidNameTitleLB.text = "Hi, \(self.selectedKid?.studentName! ?? "")"
+
                 UserDefaults.standard.set(self.selectedKid?.id, forKey: "selectedKid") //Bool
             }
             
@@ -89,6 +99,10 @@ class DashboardViewController: UIViewController,  SlideMenuControllerDelegate, U
 
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        self.timer!.invalidate()
+    }
+    
     @IBAction func openMenuButton_Action(){
         
         self.slideMenuController()?.openLeft()
@@ -96,12 +110,30 @@ class DashboardViewController: UIViewController,  SlideMenuControllerDelegate, U
     
     func getBannerDetails() {
         
+        SProgress.show()
+        
         SAPIController.shared.getBannerDetailsAPI(payload: [:]) { (result, errorMessage) in
                    print("getBannerDetailsAPI Response---- %@ /n %@", result,errorMessage)
-                   SProgress.hide()
+            
+            
+            if let response = result as? [String:Any] {
+               // var booksData: [BooksZone] = []
+                
+                let booksObj = response["banner"] as? [[String:Any]]
+                
+                booksObj?.forEach({ (obj) in
+                    self.bannerImage.append(obj["bannerUrl"] as! String)
+                   // self.booksUrlArray.append(obj["logo"] as! String)
+            
+                })
+            }
+            
+            self.showImagesOnSlider()
 
                    if let error = errorMessage {
-                       
+                    SProgress.hide()
+                    self.showAlertWithTitleInView(title: "", message:error, buttonCancelTitle:"", buttonOkTitle: "OK"){ (index) in}
+
                    }else{
                        
 
@@ -109,6 +141,58 @@ class DashboardViewController: UIViewController,  SlideMenuControllerDelegate, U
                
         }
     }
+    
+    func showImagesOnSlider(){
+
+           for i in 0..<bannerImage.count {
+
+        let imageView = UIImageView()
+            
+            let url : NSString = bannerImage[i] as NSString
+            let urlStr : NSString = url.addingPercentEscapes(using: String.Encoding.utf8.rawValue)! as NSString
+            let searchURL : NSURL = NSURL(string: urlStr as String)!
+            let data = try? Data(contentsOf: searchURL as URL)
+            
+         //   cell.thumbnailImageView?.image =
+        imageView.image = UIImage(data: data!)
+        let xPosition = self.view.frame.width * CGFloat(i)
+        imageView.frame = CGRect(x: xPosition, y: 0, width:
+        self.imageScrollView.frame.width + 50, height: self.imageScrollView.frame.height)
+        imageScrollView.contentSize.width = imageScrollView.frame.width * CGFloat(i + 1)
+        imageScrollView.addSubview(imageView)
+
+         }
+        
+        SProgress.hide()
+
+
+        self.imageScrollView.delegate = self
+        scheduledTimerWithTimeInterval()
+        SProgress.hide()
+    }
+    @objc func animateScrollView() {
+        let scrollWidth = imageScrollView.bounds.width
+        let currentXOffset = imageScrollView.contentOffset.x
+
+        let lastXPos = currentXOffset + scrollWidth
+        if lastXPos != imageScrollView.contentSize.width {
+            print("Scroll")
+            imageScrollView.setContentOffset(CGPoint(x: lastXPos, y: 0), animated: true)
+        }
+        else {
+            print("Scroll to start")
+            imageScrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+        }
+    }
+    
+  func scheduledTimerWithTimeInterval(){
+        // Scheduling timer to Call the function "updateCounting" with the interval of 1 seconds
+        timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.animateScrollView), userInfo: nil, repeats: true)
+    }
+    
+    
+    
+    
     
     private func updateSelectedKidInfromation(){
         

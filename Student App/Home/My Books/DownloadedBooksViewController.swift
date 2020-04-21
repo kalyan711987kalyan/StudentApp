@@ -8,8 +8,11 @@
 
 
 import UIKit
+
 @available(iOS 10.0, *)
+
 class DownloadedBooksViewController: UIViewController , UITableViewDataSource , UITableViewDelegate , downloadedCellDelegate{
+    
     @IBAction func clearAllBoks(_ sender: Any) {
         
         self.showAlertWithTitleInView(title: "Clear-Off All Books?", message:"This shall Clear-Off All Books from the App!", buttonCancelTitle:"No", buttonOkTitle: "Yes"){ (index) in
@@ -82,37 +85,31 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-        //self.showFloatingView.isHidden = true
-      
 
 
     }
     override func viewDidAppear(_ animated: Bool) {
-          //SProgress.show()
-       
+       self.showFloatingView.isHidden = true
+        SProgress.show()
+
+              guard let kidId = UserDefaults.standard.string(forKey: "selectedKid")
+                                          else { return print("No data") }
+                                      kid_id = kidId
+                           getDataFromeCoreData(kid_id: kidId)
 
     }
     override func viewWillAppear(_ animated: Bool) {
-        self.showFloatingView.isHidden = true
-        guard let kidId = UserDefaults.standard.string(forKey: "selectedKid")
-                                    else { return print("No data") }
-                                kid_id = kidId
-                     getDataFromeCoreData(kid_id: kidId)
+       
 
     }
     override func viewWillDisappear(_ animated: Bool) {
-        //self.showFloatingView.isHidden = true
-        
-      //  SProgress.hide()
-        
-        self.showFloatingView.removeFromSuperview()
+       self.showFloatingView.isHidden = true
+
     }
 
     
     
     func getDataFromeCoreData(kid_id : String){
-        SProgress.show()
 
         self.downloadedBooks.removeAll()
         self.jsonBooksArray.removeAllObjects()
@@ -238,8 +235,10 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
                   let url : NSString = thumbnailURl as NSString
                   let urlStr : NSString = url.addingPercentEscapes(using: String.Encoding.utf8.rawValue)! as NSString
                   let searchURL : NSURL = NSURL(string: urlStr as String)!
+            DispatchQueue.main.async {
                   let data = try? Data(contentsOf: searchURL as URL)
                   cell.thumbnailImageView?.image = UIImage(data: data!)// Error here
+            }
                   
               }
         return cell

@@ -37,6 +37,18 @@ class SAPIController: NSObject {
           }
       }
     
+    func addKidAPI(payload: [String: Any], completion: @escaping (_ result: Any?, _ errorMessage: String?) -> Void) {
+        
+        RestService.post(path: .addKids, payload: payload) { (response, error) in
+            guard let response = response as? [String:Any] else {
+                completion(nil,error?.localizedDescription)
+                return
+            }
+            
+            completion(response, nil)
+        }
+    }
+    
     
     func getBookSeriesAPI(payload: [String: Any], completion: @escaping (_ result: Any?, _ errorMessage: String?) -> Void) {
         
@@ -75,6 +87,7 @@ class SAPIController: NSObject {
                         completion(response, nil)
          }
      }
+    
     
     func getClassBySeries(payload: [String: Any], completion: @escaping (_ result: Any?, _ errorMessage: String?) -> Void) {
          

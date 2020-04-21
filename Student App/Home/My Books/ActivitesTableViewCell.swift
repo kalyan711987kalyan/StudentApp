@@ -11,10 +11,10 @@ protocol videoCellDelegate : class {
     func didDownloadPressButton(_ tag: Int)
 }
 class ActivitesTableViewCell: UITableViewCell {
+    @IBOutlet weak var videolessonTitleLB: UILabel!
     var videoDelegate: videoCellDelegate?
 
     @IBOutlet weak var dataCellLb: UILabel!
-    @IBOutlet weak var videoTitleBtn: UIButton!
     @IBOutlet weak var downloadBtn: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,7 +30,5 @@ class ActivitesTableViewCell: UITableViewCell {
         videoDelegate?.didDownloadPressButton((sender as AnyObject).tag)
 
     }
-    
-    @IBAction func videTiteBtnAction(_ sender: Any) {
-    }
+   
 }

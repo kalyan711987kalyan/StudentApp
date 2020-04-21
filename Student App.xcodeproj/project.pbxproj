@@ -86,21 +86,12 @@
 		30A8EC82244236C3000036F2 /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 30A8EC7B244236C2000036F2 /* 2.png */; };
 		30A8EC83244236C3000036F2 /* bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 30A8EC7C244236C2000036F2 /* bg.jpg */; };
 		30A8EC84244236C3000036F2 /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = 30A8EC7D244236C3000036F2 /* 3.png */; };
-		30A8EC8A244236CD000036F2 /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = 30A8EC85244236CC000036F2 /* 3.png */; };
-		30A8EC8B244236CD000036F2 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 30A8EC86244236CC000036F2 /* 1.png */; };
-		30A8EC8D244236CD000036F2 /* bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 30A8EC88244236CD000036F2 /* bg.jpg */; };
-		30A8EC8E244236CD000036F2 /* 5.png in Resources */ = {isa = PBXBuildFile; fileRef = 30A8EC89244236CD000036F2 /* 5.png */; };
 		30A8EC9024423D99000036F2 /* ActivitesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A8EC8F24423D99000036F2 /* ActivitesViewController.swift */; };
 		30A8EC9424424971000036F2 /* ActivitesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A8EC9324424971000036F2 /* ActivitesTableViewCell.swift */; };
 		30A8EC96244260AD000036F2 /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A8EC95244260AD000036F2 /* QuizViewController.swift */; };
 		30ABFD3C244DC30E00C2C327 /* ForgetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30ABFD3B244DC30E00C2C327 /* ForgetPasswordViewController.swift */; };
 		30C9759D244DD3C400921064 /* WhatsApp.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 30C9759C244DD3C400921064 /* WhatsApp.jpeg */; };
 		30C975A1244E172700921064 /* Learning_Yard_Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 30C975A0244E172400921064 /* Learning_Yard_Logo.png */; };
-		30C975A8244E194D00921064 /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 30C975A2244E193900921064 /* 2.png */; };
-		30C975AA244E194D00921064 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 30C975A4244E194000921064 /* 1.png */; };
-		30C975AB244E194D00921064 /* 5.png in Resources */ = {isa = PBXBuildFile; fileRef = 30C975A5244E194300921064 /* 5.png */; };
-		30C975AC244E194D00921064 /* bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 30C975A6244E194600921064 /* bg.jpg */; };
-		30C975AD244E194D00921064 /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = 30C975A7244E194A00921064 /* 3.png */; };
 		30C975AF244E1B4D00921064 /* VideosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C975AE244E1B4D00921064 /* VideosTableViewCell.swift */; };
 		30C975B1244EA3F700921064 /* down.png in Resources */ = {isa = PBXBuildFile; fileRef = 30C975B0244EA3F700921064 /* down.png */; };
 		30CCF5C4242785FC00F9DCB3 /* MyBookSeriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CCF5C3242785FC00F9DCB3 /* MyBookSeriesTableViewCell.swift */; };
@@ -115,6 +106,8 @@
 		30FE910C23CA12A300352F40 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FE910A23CA12A300352F40 /* MenuTableViewCell.swift */; };
 		30FE910D23CA12A300352F40 /* MenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30FE910B23CA12A300352F40 /* MenuTableViewCell.xib */; };
 		30FE910F23CA1A8F00352F40 /* SubjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FE910E23CA1A8F00352F40 /* SubjectViewController.swift */; };
+		AD636E86244F5A3C005A774D /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD636E85244F5A3C005A774D /* WelcomeViewController.swift */; };
+		AD636E88244F5A5D005A774D /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD636E87244F5A5D005A774D /* ChangePasswordViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -205,21 +198,12 @@
 		30A8EC7B244236C2000036F2 /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
 		30A8EC7C244236C2000036F2 /* bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg.jpg; sourceTree = "<group>"; };
 		30A8EC7D244236C3000036F2 /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
-		30A8EC85244236CC000036F2 /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 3.png; path = "../../../../../Downloads/pngs_After Corections/12/3.png"; sourceTree = "<group>"; };
-		30A8EC86244236CC000036F2 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 1.png; path = "../../../../../Downloads/pngs_After Corections/12/1.png"; sourceTree = "<group>"; };
-		30A8EC88244236CD000036F2 /* bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = bg.jpg; path = "../../../../../Downloads/pngs_After Corections/12/bg.jpg"; sourceTree = "<group>"; };
-		30A8EC89244236CD000036F2 /* 5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 5.png; path = "../../../../../Downloads/pngs_After Corections/12/5.png"; sourceTree = "<group>"; };
 		30A8EC8F24423D99000036F2 /* ActivitesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitesViewController.swift; sourceTree = "<group>"; };
 		30A8EC9324424971000036F2 /* ActivitesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitesTableViewCell.swift; sourceTree = "<group>"; };
 		30A8EC95244260AD000036F2 /* QuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewController.swift; sourceTree = "<group>"; };
 		30ABFD3B244DC30E00C2C327 /* ForgetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordViewController.swift; sourceTree = "<group>"; };
 		30C9759C244DD3C400921064 /* WhatsApp.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = WhatsApp.jpeg; sourceTree = "<group>"; };
 		30C975A0244E172400921064 /* Learning_Yard_Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Learning_Yard_Logo.png; sourceTree = "<group>"; };
-		30C975A2244E193900921064 /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 2.png; path = ../../../../../Downloads/pngs/8/2.png; sourceTree = "<group>"; };
-		30C975A4244E194000921064 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 1.png; path = ../../../../../Downloads/pngs/8/1.png; sourceTree = "<group>"; };
-		30C975A5244E194300921064 /* 5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 5.png; path = ../../../../../Downloads/pngs/8/5.png; sourceTree = "<group>"; };
-		30C975A6244E194600921064 /* bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = bg.jpg; path = ../../../../../Downloads/pngs/8/bg.jpg; sourceTree = "<group>"; };
-		30C975A7244E194A00921064 /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 3.png; path = ../../../../../Downloads/pngs/8/3.png; sourceTree = "<group>"; };
 		30C975AE244E1B4D00921064 /* VideosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosTableViewCell.swift; sourceTree = "<group>"; };
 		30C975B0244EA3F700921064 /* down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = down.png; sourceTree = "<group>"; };
 		30CCF5C3242785FC00F9DCB3 /* MyBookSeriesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBookSeriesTableViewCell.swift; sourceTree = "<group>"; };
@@ -235,6 +219,8 @@
 		30FE910B23CA12A300352F40 /* MenuTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuTableViewCell.xib; sourceTree = "<group>"; };
 		30FE910E23CA1A8F00352F40 /* SubjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectViewController.swift; sourceTree = "<group>"; };
 		94A66F069D13C1ED9D4A4689 /* Pods_Student_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Student_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD636E85244F5A3C005A774D /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		AD636E87244F5A5D005A774D /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		D93BD48C1DFF4A2FA428C7DF /* Pods-Student App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Student App.debug.xcconfig"; path = "Target Support Files/Pods-Student App/Pods-Student App.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -327,6 +313,7 @@
 				3067E5B023B2436C0009A6FF /* Tabbar */,
 				3067E5A423B230800009A6FF /* Home */,
 				3067E4BA23B1179D0009A6FF /* MenuViewController.swift */,
+				AD636E87244F5A5D005A774D /* ChangePasswordViewController.swift */,
 				30FE910A23CA12A300352F40 /* MenuTableViewCell.swift */,
 				30FE910B23CA12A300352F40 /* MenuTableViewCell.xib */,
 				30FE910E23CA1A8F00352F40 /* SubjectViewController.swift */,
@@ -352,19 +339,10 @@
 				3067E43D23B0F9AF0009A6FF /* loginlogo.png */,
 				3067E44123B0FA110009A6FF /* loginbg.png */,
 				30C975A0244E172400921064 /* Learning_Yard_Logo.png */,
-				30C975A4244E194000921064 /* 1.png */,
-				30C975A2244E193900921064 /* 2.png */,
-				30C975A7244E194A00921064 /* 3.png */,
-				30C975A5244E194300921064 /* 5.png */,
-				30C975A6244E194600921064 /* bg.jpg */,
 				308D63D6244F43C7000B54FD /* Learning Yard Logo.png */,
 				3067E4BE23B11EE30009A6FF /* dashboardbg.png */,
-				30A8EC86244236CC000036F2 /* 1.png */,
-				30A8EC85244236CC000036F2 /* 3.png */,
-				30A8EC89244236CD000036F2 /* 5.png */,
 				30774CE72447833300D07A3F /* lovefill.png */,
 				30774CE82447833300D07A3F /* love.png */,
-				30A8EC88244236CD000036F2 /* bg.jpg */,
 				30C975B0244EA3F700921064 /* down.png */,
 				3067E4C823B1BF3A0009A6FF /* newbookbanner.png */,
 				30C9759C244DD3C400921064 /* WhatsApp.jpeg */,
@@ -430,6 +408,7 @@
 				3067E5AC23B233D10009A6FF /* MyBooksTableViewCell.swift */,
 				3067E5AD23B233D10009A6FF /* MyBooksTableViewCell.xib */,
 				3067E5A723B2325B0009A6FF /* MyBooksViewModel.swift */,
+				AD636E85244F5A3C005A774D /* WelcomeViewController.swift */,
 				308D63D0244F0DEA000B54FD /* SearchViewController.swift */,
 				308D63D2244F0F97000B54FD /* SearchTableViewCell.swift */,
 			);
@@ -597,7 +576,6 @@
 				30C975B1244EA3F700921064 /* down.png in Resources */,
 				3067E43223B0F83D0009A6FF /* Assets.xcassets in Resources */,
 				302E53ED24138E5500E32331 /* plus.png in Resources */,
-				30C975AA244E194D00921064 /* 1.png in Resources */,
 				3067E5AF23B233D10009A6FF /* MyBooksTableViewCell.xib in Resources */,
 				30C975A1244E172700921064 /* Learning_Yard_Logo.png in Resources */,
 				30FE910523CA045500352F40 /* mailicon.png in Resources */,
@@ -609,24 +587,16 @@
 				3039980B23FBF4A8007F3B72 /* close_whiteIcon.png in Resources */,
 				3067E4C923B1BF3A0009A6FF /* newbookbanner.png in Resources */,
 				3039988223FD0F46007F3B72 /* bookseriesBg.png in Resources */,
-				30A8EC8D244236CD000036F2 /* bg.jpg in Resources */,
 				3067E44223B0FA110009A6FF /* loginbg.png in Resources */,
-				30C975A8244E194D00921064 /* 2.png in Resources */,
-				30C975AC244E194D00921064 /* bg.jpg in Resources */,
 				302E53FC2414C07700E32331 /* pen.png in Resources */,
 				3067E66723C0B9F50009A6FF /* mybookbuttonBg.png in Resources */,
 				30FE910723CA046300352F40 /* passwordicon.png in Resources */,
 				3067E43023B0F83A0009A6FF /* Main.storyboard in Resources */,
-				30C975AB244E194D00921064 /* 5.png in Resources */,
-				30C975AD244E194D00921064 /* 3.png in Resources */,
 				3067E61523B70CDA0009A6FF /* learningHeader_bg.png in Resources */,
 				30774CE92447833400D07A3F /* lovefill.png in Resources */,
-				30A8EC8E244236CD000036F2 /* 5.png in Resources */,
 				30FE910323CA040B00352F40 /* callicon.png in Resources */,
 				3067E66D23C0C55D0009A6FF /* classbuttonBg.png in Resources */,
 				3067E4BF23B11EE30009A6FF /* dashboardbg.png in Resources */,
-				30A8EC8A244236CD000036F2 /* 3.png in Resources */,
-				30A8EC8B244236CD000036F2 /* 1.png in Resources */,
 				30774CEA2447833400D07A3F /* love.png in Resources */,
 				302E53FD2414C07700E32331 /* bin.png in Resources */,
 				30A8EC81244236C3000036F2 /* 5.png in Resources */,
@@ -711,11 +681,13 @@
 				302E53F92414B2F800E32331 /* KidsListTableViewCell.swift in Sources */,
 				303997FB23FBACEA007F3B72 /* RestService.swift in Sources */,
 				3067E42D23B0F83A0009A6FF /* LoginViewController.swift in Sources */,
+				AD636E86244F5A3C005A774D /* WelcomeViewController.swift in Sources */,
 				303997FA23FBACEA007F3B72 /* Router.swift in Sources */,
 				3067E5B823B3302D0009A6FF /* RegisterViewController.swift in Sources */,
 				3072B381243CF978005A912F /* DownloadedBooks+CoreDataProperties.swift in Sources */,
 				3072B385243D0311005A912F /* DownloadedBookTableViewCell.swift in Sources */,
 				302E53F72413EDDD00E32331 /* KidsData+CoreDataProperties.swift in Sources */,
+				AD636E88244F5A5D005A774D /* ChangePasswordViewController.swift in Sources */,
 				30774C8A2446E04000D07A3F /* Favourites+CoreDataProperties.swift in Sources */,
 				30ABFD3C244DC30E00C2C327 /* ForgetPasswordViewController.swift in Sources */,
 				308D63D1244F0DEA000B54FD /* SearchViewController.swift in Sources */,

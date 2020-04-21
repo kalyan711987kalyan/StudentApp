@@ -45,6 +45,18 @@ class DashboardViewController: UIViewController,  SlideMenuControllerDelegate, U
         getBannerDetails()
         self.kidNameTitleLB.text = "Hi, \(self.selectedKid?.studentName! ?? "")"
 
+        if let modalViewController = self.storyboard!.instantiateViewController(withIdentifier: "WelcomeViewController") as? WelcomeViewController {
+                   modalViewController.howtouseLink = "https://www.youtube.com/watch?v=CUXuyfFVQEA"
+            modalViewController.websiteLink = UserDefaults.standard.value(forKey: "supportwebsite") as? String ?? "http://www.google.com"
+                   modalViewController.view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+                   modalViewController.modalPresentationStyle = .overCurrentContext
+                   present(modalViewController, animated: true, completion: nil)
+                   modalViewController.completion = {
+                       print("Dailogclosed")
+                    self.switchKidButton_Action()
+            }
+                   
+        }
         //SlideMenuOptions.contentViewScale = 0.50
     }
     
@@ -100,7 +112,9 @@ class DashboardViewController: UIViewController,  SlideMenuControllerDelegate, U
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        self.timer!.invalidate()
+        if let timer =  self.timer {
+            self.timer!.invalidate()
+        }
     }
     
     @IBAction func openMenuButton_Action(){
@@ -115,7 +129,7 @@ class DashboardViewController: UIViewController,  SlideMenuControllerDelegate, U
         SAPIController.shared.getBannerDetailsAPI(payload: [:]) { (result, errorMessage) in
                    print("getBannerDetailsAPI Response---- %@ /n %@", result,errorMessage)
             
-            
+            self.getContactDetails()
             if let response = result as? [String:Any] {
                // var booksData: [BooksZone] = []
                 
@@ -139,6 +153,25 @@ class DashboardViewController: UIViewController,  SlideMenuControllerDelegate, U
 
             }
                
+        }
+    }
+    
+    func getContactDetails()  {
+        SAPIController.shared.getSupportDetails(payload: [:]) { (result, errorMessage) in
+            
+            if let response = result as? [String:Any] {
+                           
+                if let email = response["email"] as? String{
+                    UserDefaults.standard.set(email, forKey: "supportemail") //string
+                }
+                if let mobile = response["primaryMobile"] as? String {
+                    UserDefaults.standard.set(mobile, forKey: "supportmobile")
+
+                }
+                if let website = response["website"] as? String {
+                    UserDefaults.standard.set(website, forKey: "supportwebsite")
+                }
+            }
         }
     }
     

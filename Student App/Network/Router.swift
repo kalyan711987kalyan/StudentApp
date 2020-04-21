@@ -28,7 +28,7 @@ enum ApiUrls: String {
     case verifyOTP = "/API/LoginAPI/verifyOTP"
     case register = "/API/studentReg/register"
     case addKids = "/API/studentReg/addkids"
-    case changepassword = "/API/LoginAPI/forgotPassword?email=abcd@gmail.com"
+    case changepassword = "/API/LoginAPI/changePasswordSmartKids"
 }
 
 

@@ -101,6 +101,31 @@ class SAPIController: NSObject {
          }
      }
     
+    func getSupportDetails(payload: [String: Any], completion: @escaping (_ result: Any?, _ errorMessage: String?) -> Void) {
+        
+        RestService.get(path: .getcontactDetails) { (response, error) in
+            guard let response = response as? [String:Any] else {
+                           completion(nil,error?.localizedDescription)
+                           return
+                       }
+                       
+                       completion(response, nil)
+        }
+    }
+    
+    func changePasswordAPI(payload: [String: Any], completion: @escaping (_ result: Any?, _ errorMessage: String?) -> Void) {
+        
+        RestService.post(path: .changepassword, payload: payload) { (response, error) in
+            guard let response = response as? [String:Any] else {
+                completion(nil,error?.localizedDescription)
+                return
+            }
+            
+            completion(response, nil)
+        }
+    }
+    
+    
 //
 //    func getlessionsByBook (id : String? ,payload: [String: Any], completion: @escaping (_ result: Any?, _ errorMessage: String?) -> Void) {
 //       //  ApiUrls(rawValue: "/API/lesson/getLessonDetails/\(id)"+id) ?? ApiUrls(rawValue: "/API/lesson/getLessonDetails/16/2")!

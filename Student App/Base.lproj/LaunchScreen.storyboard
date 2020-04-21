@@ -1,7 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -11,15 +13,45 @@
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="iBN-1Q-Ur5">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loginlogo.png" translatesAutoresizingMaskIntoConstraints="NO" id="bRE-Vk-Ld7">
+                                <rect key="frame" x="0.0" y="5" width="414" height="896"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Learning Yard Logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="N8e-Uc-97H">
+                                <rect key="frame" x="87" y="168" width="240" height="239"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="N8e-Uc-97H" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="092-cu-jyU"/>
+                            <constraint firstItem="bRE-Vk-Ld7" firstAttribute="height" secondItem="Ze5-6b-2t3" secondAttribute="height" id="Cxf-fa-3ut"/>
+                            <constraint firstItem="bRE-Vk-Ld7" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" id="Kmu-Tz-ZJ2"/>
+                            <constraint firstItem="bRE-Vk-Ld7" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="SBH-Z0-SVu"/>
+                            <constraint firstItem="iBN-1Q-Ur5" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="bxV-Q2-opA"/>
+                            <constraint firstItem="bRE-Vk-Ld7" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="dNk-dy-tOM"/>
+                            <constraint firstItem="N8e-Uc-97H" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.57971" id="g2s-tP-yWz"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="iBN-1Q-Ur5" secondAttribute="bottom" id="i4m-5a-qMk"/>
+                            <constraint firstItem="N8e-Uc-97H" firstAttribute="height" secondItem="Ze5-6b-2t3" secondAttribute="height" multiplier="0.266741" id="p2Z-Rk-JOR"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="iBN-1Q-Ur5" secondAttribute="trailing" id="tWY-0H-iIa"/>
+                            <constraint firstItem="N8e-Uc-97H" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="124" id="tlM-cH-Prw"/>
+                            <constraint firstItem="iBN-1Q-Ur5" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="yYY-NC-4HI"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52.173913043478265" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Learning Yard Logo.png" width="235.44000244140625" height="212.39999389648438"/>
+        <image name="bg.png" width="720" height="1280"/>
+        <image name="loginlogo.png" width="720" height="1280"/>
+    </resources>
 </document>

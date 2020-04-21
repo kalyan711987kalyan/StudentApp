@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import MessageUI
 
 @available(iOS 10.0, *)
-class MenuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MenuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate {
     let appDelegate = UIApplication.shared.delegate as? AppDelegate
 
     @IBOutlet var menuTableView: UITableView!
@@ -124,6 +125,22 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
             } else {
                 // Fallback on earlier versions
             }
+        }else if indexPath.row == 2 {
+            
+            let next = self.storyboard?.instantiateViewController(withIdentifier: "ChangePasswordViewController") as! ChangePasswordViewController
+            next.modalPresentationStyle = .fullScreen
+            self.present(next, animated: true, completion: nil)
+        }else if indexPath.row == 0 {
+            let supportmobile = UserDefaults.standard.value(forKey: "supportmobile") as? String ?? ""
+
+            dialNumber(number: supportmobile)
+        }else if indexPath.row == 1 {
+            self.sendEmail()
+        }else if indexPath.row == 3 {
+            
+            let items = [URL(string: "https://play.google.com/store/apps/details?id=com.mindiotics.arsmartkids&hl=en_IN")!]
+            let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
+            present(ac, animated: true)
         }
         
 
@@ -137,7 +154,37 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
 //        }
           //self.performSegue(withIdentifier: "menutomanageKid", sender:nil)
       }
+    
+    func sendEmail() {
+        let supportemail = UserDefaults.standard.value(forKey: "supportemail") as? String ?? ""
+        if MFMailComposeViewController.canSendMail(), supportemail.count > 0 {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            mail.setToRecipients([supportemail])
+            mail.setMessageBody("<p></p>", isHTML: true)
+            present(mail, animated: true)
+        } else {
+            // show failure alert
+        }
+    }
 
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
+    }
+
+    func dialNumber(number : String) {
+
+     if let url = URL(string: "tel://\(number)"),
+       UIApplication.shared.canOpenURL(url) {
+          if #available(iOS 10, *) {
+            UIApplication.shared.open(url, options: [:], completionHandler:nil)
+           } else {
+               UIApplication.shared.openURL(url)
+           }
+       } else {
+                // add error message here
+       }
+    }
     /*
     // MARK: - Navigation
 

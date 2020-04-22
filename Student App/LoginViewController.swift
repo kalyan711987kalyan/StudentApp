@@ -74,9 +74,11 @@ class LoginViewController: UIViewController {
             guard let jsonArray = result as? [String: Any] else {
                   return
             }
-            //print(jsonArray)
+            print(jsonArray)
             //Now get title value
-            guard let parentEmail = jsonArray["email"] as? String else { return }
+            guard let parentEmail = jsonArray["email"] as? String else {
+                 self.showAlertWithTitleInView(title: "", message:jsonArray["reason"] as? String ?? "Login failed" , buttonCancelTitle:"", buttonOkTitle: "OK"){ (index) in}
+                return }
             guard let parentId = jsonArray["id"] as? String else { return }
 
             print(parentEmail)

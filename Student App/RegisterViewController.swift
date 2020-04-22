@@ -236,19 +236,27 @@ class RegisterViewController: UIViewController {
         SAPIController.shared.registrationAPI(payload: registrationPayload) { (result, errorMessage) in
             print("Login Response---- %@ /n %@", result,errorMessage)
             SProgress.hide()
-            
+            guard let jsonArray = result as? [String: Any] else {
+                             return
+                       }
             if let error = errorMessage {
-                
+                self.showAlertWithTitleInView(title: "", message:error, buttonCancelTitle:"", buttonOkTitle: "OK"){ (index) in}
+
                 print("signup error message---- %@ /n %@", error)
                 
-            }else{
+            }else if (jsonArray["status"] as? String ?? "") == "00" {
                 
                 self.showAlertWithTitleInView(title: "Congrats!", message: "Your account is created! Please Login. ", buttonCancelTitle: "", buttonOkTitle: "OK"){
                     (index) in
                     
                 }
-                return
                 
+            }else{
+               let error =  jsonArray["reason"] as? String ?? "Signup failed."
+                self.showAlertWithTitleInView(title: "", message: error, buttonCancelTitle: "", buttonOkTitle: "OK"){
+                    (index) in
+                    
+                }
             }
         }
     }

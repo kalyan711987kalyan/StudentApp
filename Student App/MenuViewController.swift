@@ -23,9 +23,10 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         
         UserDefaults.standard.set(true, forKey: "LoginFlag") //Bool
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-        vc.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
-        self.present(vc, animated: true, completion: nil)
+        appDelegate?.showDashboard()
+//        let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+//        vc.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
+//        appDelegate?.window?.rootViewController = vc
     
         
     }

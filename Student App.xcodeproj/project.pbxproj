@@ -108,6 +108,8 @@
 		30FE910F23CA1A8F00352F40 /* SubjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FE910E23CA1A8F00352F40 /* SubjectViewController.swift */; };
 		AD636E86244F5A3C005A774D /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD636E85244F5A3C005A774D /* WelcomeViewController.swift */; };
 		AD636E88244F5A5D005A774D /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD636E87244F5A5D005A774D /* ChangePasswordViewController.swift */; };
+		AD636E8E244FF70A005A774D /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD636E8C244FF70A005A774D /* TPKeyboardAvoidingScrollView.m */; };
+		AD636E8F244FF70A005A774D /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AD636E8D244FF70A005A774D /* UIScrollView+TPKeyboardAvoidingAdditions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -145,11 +147,6 @@
 		3067E44123B0FA110009A6FF /* loginbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loginbg.png; sourceTree = "<group>"; };
 		3067E44623B0FCE20009A6FF /* View+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+Util.swift"; sourceTree = "<group>"; };
 		3067E44723B0FCE20009A6FF /* VIewController+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VIewController+Util.swift"; sourceTree = "<group>"; };
-		3067E44B23B0FCE70009A6FF /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
-		3067E44C23B0FCE70009A6FF /* RetailerPayment-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RetailerPayment-Bridging-Header.h"; sourceTree = "<group>"; };
-		3067E44D23B0FCE70009A6FF /* UIScrollView+TPKeyboardAvoidingAdditions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TPKeyboardAvoidingAdditions.m"; sourceTree = "<group>"; };
-		3067E44E23B0FCE70009A6FF /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
-		3067E44F23B0FCE70009A6FF /* UIScrollView+TPKeyboardAvoidingAdditions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+TPKeyboardAvoidingAdditions.h"; sourceTree = "<group>"; };
 		3067E4B823B114B00009A6FF /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		3067E4BA23B1179D0009A6FF /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		3067E4BC23B11E280009A6FF /* SConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SConstant.swift; sourceTree = "<group>"; };
@@ -221,6 +218,11 @@
 		94A66F069D13C1ED9D4A4689 /* Pods_Student_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Student_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD636E85244F5A3C005A774D /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		AD636E87244F5A5D005A774D /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
+		AD636E89244FF709005A774D /* Student App-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Student App-Bridging-Header.h"; sourceTree = "<group>"; };
+		AD636E8A244FF70A005A774D /* UIScrollView+TPKeyboardAvoidingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+TPKeyboardAvoidingAdditions.h"; sourceTree = "<group>"; };
+		AD636E8B244FF70A005A774D /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
+		AD636E8C244FF70A005A774D /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
+		AD636E8D244FF70A005A774D /* UIScrollView+TPKeyboardAvoidingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TPKeyboardAvoidingAdditions.m"; sourceTree = "<group>"; };
 		D93BD48C1DFF4A2FA428C7DF /* Pods-Student App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Student App.debug.xcconfig"; path = "Target Support Files/Pods-Student App/Pods-Student App.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -386,11 +388,11 @@
 		3067E44A23B0FCE70009A6FF /* TPKeyboardAvoiding */ = {
 			isa = PBXGroup;
 			children = (
-				3067E44B23B0FCE70009A6FF /* TPKeyboardAvoidingScrollView.h */,
-				3067E44C23B0FCE70009A6FF /* RetailerPayment-Bridging-Header.h */,
-				3067E44D23B0FCE70009A6FF /* UIScrollView+TPKeyboardAvoidingAdditions.m */,
-				3067E44E23B0FCE70009A6FF /* TPKeyboardAvoidingScrollView.m */,
-				3067E44F23B0FCE70009A6FF /* UIScrollView+TPKeyboardAvoidingAdditions.h */,
+				AD636E8B244FF70A005A774D /* TPKeyboardAvoidingScrollView.h */,
+				AD636E8C244FF70A005A774D /* TPKeyboardAvoidingScrollView.m */,
+				AD636E8A244FF70A005A774D /* UIScrollView+TPKeyboardAvoidingAdditions.h */,
+				AD636E8D244FF70A005A774D /* UIScrollView+TPKeyboardAvoidingAdditions.m */,
+				AD636E89244FF709005A774D /* Student App-Bridging-Header.h */,
 			);
 			path = TPKeyboardAvoiding;
 			sourceTree = "<group>";
@@ -531,6 +533,7 @@
 				TargetAttributes = {
 					3067E42423B0F83A0009A6FF = {
 						CreatedOnToolsVersion = 11.3;
+						LastSwiftMigration = 1130;
 					};
 				};
 			};
@@ -700,9 +703,11 @@
 				30774D6424495BF300D07A3F /* FavourtesTableViewCell.swift in Sources */,
 				3067E5B223B243980009A6FF /* TabbarViewController.swift in Sources */,
 				308D63D3244F0F97000B54FD /* SearchTableViewCell.swift in Sources */,
+				AD636E8F244FF70A005A774D /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				3067E4B923B114B00009A6FF /* DashboardViewController.swift in Sources */,
 				3067E44823B0FCE20009A6FF /* View+Util.swift in Sources */,
 				3067E66B23C0C2DF0009A6FF /* ClassViewController.swift in Sources */,
+				AD636E8E244FF70A005A774D /* TPKeyboardAvoidingScrollView.m in Sources */,
 				3072B380243CF978005A912F /* DownloadedBooks+CoreDataClass.swift in Sources */,
 				30FE910F23CA1A8F00352F40 /* SubjectViewController.swift in Sources */,
 				3067E61223B7037F0009A6FF /* LearningTableViewCell.swift in Sources */,
@@ -853,10 +858,11 @@
 			baseConfigurationReference = D93BD48C1DFF4A2FA428C7DF /* Pods-Student App.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Student App/Student App.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = HWDZG48F5Q;
+				DEVELOPMENT_TEAM = AX37B2LU22;
 				INFOPLIST_FILE = "Student App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -864,9 +870,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.techv.coaapp1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.smartkidsstudents;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Student App/Extensions/TPKeyboardAvoiding/Student App-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -877,10 +885,11 @@
 			baseConfigurationReference = 1459B0F99D64939F5CF2B0B4 /* Pods-Student App.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Student App/Student App.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = HWDZG48F5Q;
+				DEVELOPMENT_TEAM = AX37B2LU22;
 				INFOPLIST_FILE = "Student App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -888,9 +897,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.techv.coaapp1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.smartkidsstudents;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Student App/Extensions/TPKeyboardAvoiding/Student App-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

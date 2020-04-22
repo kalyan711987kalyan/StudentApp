@@ -223,7 +223,7 @@ extension UITabBar {
         }
         var sizeThatFits = super.sizeThatFits(size)
         if #available(iOS 11.0, *) {
-            sizeThatFits.height = window.safeAreaInsets.bottom + 60
+            sizeThatFits.height = window.safeAreaInsets.bottom + 90
         } else {
             // Fallback on earlier versions
         }

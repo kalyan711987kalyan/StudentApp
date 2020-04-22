@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import AVKit
 @available(iOS 10.0, *)
 class ActivitesViewController: UIViewController  , UITableViewDataSource , UITableViewDelegate , videoCellDelegate{
     
@@ -162,9 +162,18 @@ class ActivitesViewController: UIViewController  , UITableViewDataSource , UITab
         
         let videoData = self.lstudentvideo[indexPath.row] as! [String : Any]
         //let value = videoData["videoName"]!
-        let dataValue = videoData["youtubeUrl"]! as! String
-        let fullNameArr = dataValue.components(separatedBy: "/")
-        playInYoutube(youtubeId: fullNameArr[3])
+        //let dataValue = videoData["youtubeUrl"]! as! String
+       // let fullNameArr = dataValue.components(separatedBy: "/")
+       // playInYoutube(youtubeId: fullNameArr[3])
+        if let url = URL(string: videoData["youtubeUrl"] as? String ?? "") {
+            let player = AVPlayer(url: url)
+            let playerViewController = AVPlayerViewController()
+            playerViewController.player = player
+            self.present(playerViewController, animated: true) {
+                playerViewController.player!.play()
+            }
+        }
+        
         
     }
     func playInYoutube(youtubeId: String) {

@@ -1690,6 +1690,7 @@
                                             </button>
                                             <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mst-OJ-IXt">
                                                 <rect key="frame" x="118.5" y="0.0" width="98" height="81.5"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="35"/>
                                                 <state key="normal">
                                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 </state>
@@ -2198,7 +2199,7 @@
                                 <fontDescription key="fontDescription" name="GloriaHallelujah" family="Gloria Hallelujah" pointSize="17"/>
                                 <state key="normal" title="Logout"/>
                                 <connections>
-                                    <action selector="logoutBtnAction:" destination="O5Q-KW-gCr" eventType="touchUpOutside" id="vri-Db-uZ6"/>
+                                    <action selector="logoutBtnAction:" destination="O5Q-KW-gCr" eventType="touchUpInside" id="cwL-sd-znk"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zsn-5D-11a">

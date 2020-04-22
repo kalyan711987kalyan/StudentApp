@@ -224,6 +224,8 @@ class RegisterViewController: UIViewController {
                 
                 self.kidsData.append(populatedDictionary as! [String : String])
             }
+            let dict = ["className":classname , "school" : schoolname , "studentName" : kidname] as! [String:String]
+            self.kidsData.append(dict)
         }else{
             self.kidsData = [["className":classname , "school" : schoolname , "studentName" : kidname]];
 
@@ -245,7 +247,8 @@ class RegisterViewController: UIViewController {
                 print("signup error message---- %@ /n %@", error)
                 
             }else if (jsonArray["status"] as? String ?? "") == "00" {
-                
+                self.appDelegate!.deleteAllDataOfEntity(forEntity: "KidsData")
+
                 self.showAlertWithTitleInView(title: "Congrats!", message: "Your account is created! Please Login. ", buttonCancelTitle: "", buttonOkTitle: "OK"){
                     (index) in
                     

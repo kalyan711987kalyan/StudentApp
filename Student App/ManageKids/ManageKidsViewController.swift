@@ -119,11 +119,13 @@ class ManageKidsViewController: UIViewController , UITableViewDelegate , UITable
             let className = result.value(forKey: "kidClass") as? String
             let kidSchool = result.value(forKey: "kidSchool") as? String
             let kid_Id = result.value(forKey: "kid_Id") as? String
-
-            kidNameList.append(formNameIs!)
-            kidClassList.append(className!)
-            kidSchoolList.append(kidSchool!)
-            kidId.append(kid_Id!)
+            if formNameIs != nil && kidSchool != nil && className != nil && kid_Id != nil{
+                kidNameList.append(formNameIs!)
+                           kidClassList.append(className!)
+                           kidSchoolList.append(kidSchool!)
+                           kidId.append(kid_Id!)
+            }
+           
             //print(formNameIs!)
         }
         kidsDataTableView.reloadData()

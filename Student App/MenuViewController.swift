@@ -21,7 +21,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var versionLb: UILabel!
     @IBAction func logoutBtnAction(_ sender: Any) {
         
-        
+        self.appDelegate!.deleteAllDataOfEntity(forEntity: "KidsData")
         UserDefaults.standard.set(true, forKey: "LoginFlag") //Bool
         appDelegate?.showDashboard()
 //        let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController

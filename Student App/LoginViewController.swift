@@ -8,10 +8,12 @@
 
 import UIKit
 
+@available(iOS 10.0, *)
 class LoginViewController: UIViewController {
 
     @IBOutlet var userNameField: UITextField!
     @IBOutlet var passwordField: UITextField!
+    let appDelegate = UIApplication.shared.delegate as? AppDelegate
 
     @IBOutlet weak var versionLB: UILabel!
     override func viewDidLoad() {
@@ -108,10 +110,14 @@ class LoginViewController: UIViewController {
        
         if let response = sender as? [String:Any] {
             var kidsData: [KidObject] = []
-            let kidsObj = response["kidsData"] as? [[String:Any]]
-            kidsObj?.forEach({ (obj) in
-                kidsData.append(KidObject(data: obj))
-            })
+            if let kidsObj = response["kidsData"] as? [[String:Any]]{
+                kidsObj.forEach({ (obj) in
+                    kidsData.append(KidObject(data: obj))
+                })
+            }else if let kidsObj = response["kidsData"] as? [String:Any] {
+                kidsData.append(KidObject(data: kidsObj))
+            }
+            
            let parentData =  ParentObject(data: response)
             
             if #available(iOS 10.0, *) {

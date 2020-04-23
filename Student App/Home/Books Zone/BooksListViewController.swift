@@ -27,6 +27,7 @@ class BooksListViewController: UIViewController , UITableViewDataSource , UITabl
     var bookIdArray = NSMutableArray()
     typealias JSONDictionary = [String : Any]
     let appDelegate = UIApplication.shared.delegate as? AppDelegate
+    var downloadedBookidArray = NSMutableArray()
 
 
     
@@ -70,6 +71,7 @@ class BooksListViewController: UIViewController , UITableViewDataSource , UITabl
         }
         
         // Do any additional setup after loading the view.
+        getListOfBooksDownloaded()
         fetchAllRooms(classToPass : classToPass)
     }
     
@@ -145,6 +147,23 @@ class BooksListViewController: UIViewController , UITableViewDataSource , UITabl
         }
     }
     
+    func getListOfBooksDownloaded(){
+        downloadedBookidArray.removeAllObjects()
+        let  results = self.appDelegate!.getAllRecordsforValue(valueof: kid_id, forattribute: "kid_Id", forEntity: "DownloadedBooks")
+        
+        if results.count > 0{
+       for result in results {
+        let bookId = result.value(forKey: "book_id") as? String
+        self.downloadedBookidArray.add(bookId as Any)
+            }
+        }
+        self.bookslistTableview.reloadData()
+
+    }
+    
+    
+    
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.downloadBookArray.count //customerList.count
     }
@@ -159,7 +178,16 @@ class BooksListViewController: UIViewController , UITableViewDataSource , UITabl
             cell.cellDelegate = self
             cell.imageBTN?.tag = indexPath.row
             cell.downloadBtnAction?.tag = indexPath.row
+            
             let bookData = self.downloadBookArray[indexPath.row]
+            let downloadeBookId = self.bookIdArray[indexPath.row]
+            if self.downloadedBookidArray.contains(downloadeBookId) {
+                         //do something
+                cell.downloadBtnAction?.isHidden = true
+            }else{
+                cell.downloadBtnAction?.isHidden = false
+            }
+
             let thumbnailURl = bookData.thumbnail!
             let bookname = bookData.bookName!
             let booktype = bookData.bookType!
@@ -243,7 +271,8 @@ class BooksListViewController: UIViewController , UITableViewDataSource , UITabl
             self.present(vc, animated: true, completion: nil)
                         }
                     }
-                    
+                    self.getListOfBooksDownloaded()
+
                     
                 }else{
                     SProgress.hide()
@@ -268,3 +297,4 @@ class BooksListViewController: UIViewController , UITableViewDataSource , UITabl
          */
         
 }
+

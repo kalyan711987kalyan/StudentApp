@@ -246,11 +246,16 @@ class ActivitesViewController: UIViewController  , UITableViewDataSource , UITab
     
     }
     @IBAction func quiZBtnAction(_ sender: Any) {
-        
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "QuizViewController") as! QuizViewController
-                      vc.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
-        vc.allQuizQuestions = lstudentQuestions
-                  self.present(vc, animated: true, completion: nil)
+        if lstudentQuestions.count > 0 {
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "QuizViewController") as! QuizViewController
+                                 vc.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
+                   vc.allQuizQuestions = lstudentQuestions
+            self.present(vc, animated: true, completion: nil)
+        }else{
+            self.showAlertWithTitleInView(title:"", message: "No quiz available", buttonCancelTitle:"", buttonOkTitle: "OK"){ (index) in
+            }
+        }
+       
     }
     /*
      // MARK: - Navigation

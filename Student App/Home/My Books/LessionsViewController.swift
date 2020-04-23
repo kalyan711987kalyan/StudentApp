@@ -8,6 +8,7 @@
 
 import UIKit
 import  Alamofire
+
 @available(iOS 10.0, *)
 class LessionsViewController: UIViewController , UITableViewDataSource , UITableViewDelegate ,addFavouriteCellDelegate {
     let appDelegate = UIApplication.shared.delegate as? AppDelegate
@@ -165,7 +166,7 @@ class LessionsViewController: UIViewController , UITableViewDataSource , UITable
                         let lessonId = obj["lessonId"] as! String
                         self.lessonIdArray.add(lessonId)
                         
-                        let activitse = obj["studentQuestions"] as! NSArray
+                        let activitse = obj["studentQuestions"] as? NSArray ?? []
                         var stydentArray : NSMutableArray = []
                         
                         
@@ -173,14 +174,14 @@ class LessionsViewController: UIViewController , UITableViewDataSource , UITable
                             stydentArray.add(imagesArray)
                         }else{
                             
-                            let nsArray = obj["studentvideo"] as! NSArray
+                            let nsArray = obj["studentvideo"] as? NSArray ?? []
                             stydentArray.addObjects(from: nsArray as! [Any])
                             
                         }
                         
-                        let activities = obj["studentQuestions"] as! NSArray
+                        let activities = obj["studentQuestions"] as? NSArray ?? []
                         
-                        let studentsubject = obj["studentsubject"] as! NSDictionary
+                        let studentsubject = obj["studentsubject"] as? NSDictionary ?? [:]
                         
                         let dict: JSONDictionary = obj["studentsubject"] as! LessionsViewController.JSONDictionary
                         let dictAsString = self.asString(jsonDictionary: dict)

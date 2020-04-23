@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class QuizViewController: UIViewController {
     var allQuizQuestions : NSArray = []
@@ -25,7 +26,8 @@ class QuizViewController: UIViewController {
     var selectedIndex : Int = 0
     var questionPageIndex : Int = 0
     var pageData = [String:Any]()
-    
+    let synthesizer = AVSpeechSynthesizer()
+
     @IBOutlet var ButtonCollection: [UIButton]!
     @IBAction func optionA(_ sender: UIButton) {
         ButtonCollection.forEach({$0.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)})
@@ -82,7 +84,8 @@ class QuizViewController: UIViewController {
             nextBtnOutet.isHidden = false
             //questionPageIndex += 1
             // showDataByPage()
-            
+            self.playTextToSpeech(text: "Correct answer")
+
             
             
         }else{
@@ -91,7 +94,8 @@ class QuizViewController: UIViewController {
                 in
                 
             }
-            
+            self.playTextToSpeech(text: "Wrong answer")
+
         }
     }
     @IBAction func showNextQuestion(_ sender: Any) {
@@ -117,6 +121,18 @@ class QuizViewController: UIViewController {
         }
     }
     
+    @IBAction func playTextToAudio() {
+        pageData = allQuizQuestions[questionPageIndex] as! [String : Any]
+        let qust = pageData["question"] as? String ?? ""
+        self.playTextToSpeech(text: qust)
+    }
+    
+    func playTextToSpeech(text: String) {
+        
+        let utterance = AVSpeechUtterance(string: text)
+               
+        synthesizer.speak(utterance)
+    }
     func showDataByPage(){
         pageData.removeAll()
         ButtonCollection.forEach({$0.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)})

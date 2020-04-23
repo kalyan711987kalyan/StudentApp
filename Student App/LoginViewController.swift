@@ -23,7 +23,9 @@ class LoginViewController: UIViewController {
         let flag = UserDefaults.standard.bool(forKey: "LoginFlag")
                      
         if flag == true {
-      //  self.performSegue(withIdentifier: SSegueKeys.login2dashboardKey, sender: nil)
+            if let response =  UserDefaults.standard.value(forKey: "parentData") as? [String:Any] {
+                self.performSegue(withIdentifier: SSegueKeys.login2dashboardKey, sender: response)
+            }
 
         }
         
@@ -98,7 +100,8 @@ class LoginViewController: UIViewController {
             }else{
                 
                 
-                
+                UserDefaults.standard.set(result, forKey: "parentData")
+
                 self.performSegue(withIdentifier: SSegueKeys.login2dashboardKey, sender: result)
             }
         }
@@ -119,7 +122,7 @@ class LoginViewController: UIViewController {
             }
             
            let parentData =  ParentObject(data: response)
-            
+
             if #available(iOS 10.0, *) {
                 if let tab = segue.destination as? UITabBarController, let nav = tab.viewControllers?.first as? UINavigationController, let vc = nav.viewControllers.first as? DashboardViewController
                 {

@@ -41,7 +41,21 @@ class DashboardViewController: UIViewController,  SlideMenuControllerDelegate, U
 
         UserDefaults.standard.set(selectedKid?.id, forKey: "selectedKid") //Bool
         //Store kid and parent data to coredata
-        storeUserDataToCoredata(parentData: self.parentObject!, kidsData: kidsList)
+        if let response =  UserDefaults.standard.value(forKey: "parentData") as? [String:Any] {
+            
+            var kidsData: [KidObject] = []
+             if let kidsObj = response["kidsData"] as? [[String:Any]]{
+                 kidsObj.forEach({ (obj) in
+                     kidsData.append(KidObject(data: obj))
+                 })
+             }else if let kidsObj = response["kidsData"] as? [String:Any] {
+                 kidsData.append(KidObject(data: kidsObj))
+             }
+             kidsList = kidsData
+            self.parentObject =  ParentObject(data: response)
+            storeUserDataToCoredata(parentData: self.parentObject!, kidsData: kidsList)
+
+        }
         getBannerDetails()
         self.kidNameTitleLB.text = "Hi, \(self.selectedKid?.studentName! ?? "")"
 

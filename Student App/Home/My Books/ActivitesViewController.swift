@@ -165,7 +165,7 @@ class ActivitesViewController: UIViewController  , UITableViewDataSource , UITab
         //let dataValue = videoData["youtubeUrl"]! as! String
        // let fullNameArr = dataValue.components(separatedBy: "/")
        // playInYoutube(youtubeId: fullNameArr[3])
-        if let url = URL(string: videoData["youtubeUrl"] as? String ?? "") {
+        if let url = URL(string: videoData["videoUrl"] as? String ?? "") {
             let player = AVPlayer(url: url)
             let playerViewController = AVPlayerViewController()
             playerViewController.player = player

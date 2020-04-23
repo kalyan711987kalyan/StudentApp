@@ -82,6 +82,7 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
 
     @IBOutlet weak var allBooksBTNOutlet: UIButton!
     @IBOutlet weak var showFloatingView: UIView!
+    @IBOutlet var popupView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -90,6 +91,8 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
     }
     override func viewDidAppear(_ animated: Bool) {
        self.showFloatingView.isHidden = true
+        self.popupView.isHidden = true
+
         SProgress.show()
 
               guard let kidId = UserDefaults.standard.string(forKey: "selectedKid")
@@ -104,6 +107,7 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
     }
     override func viewWillDisappear(_ animated: Bool) {
        self.showFloatingView.isHidden = true
+        self.popupView.isHidden = true
 
     }
 
@@ -187,6 +191,10 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
         self.showFloatingView.isHidden = true
 
     }
+    @IBAction func hidepopView(_ sender: Any) {
+        self.popupView.isHidden = true
+
+    }
     func asString(dataString : String) -> [String : Any] {
        let data = dataString.data(using: .utf8)!
         do {
@@ -247,7 +255,7 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        self.showFloatingView.isHidden = false
+        self.popupView.isHidden = false
         didTappedAtBook = indexPath.row
         let bookData = self.downloadedBooks[indexPath.row]
         let subjects = bookData.subjects
@@ -257,19 +265,22 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
             print("subject are" , subjects)
         }
         var buttonY: CGFloat = 100  // our Starting Offset, could be 0
-        var buttonX: CGFloat = 50  // our Starting Offset, could be 0
-       
+        var buttonX: CGFloat = 20  // our Starting Offset, could be 0
+        let colorsArray = [UIColor.orange, UIColor.brown, UIColor.blue, UIColor(red: 234.0/255.0, green: 85.0/255.0, blue: 80.0/255.0, alpha: 1.0), UIColor(red: 193.0/255.0, green: 16.0/255.0, blue: 29.0/255.0, alpha: 1.0)]
         for (index, villain) in (subjects as! [NSArray]).enumerated() {
             
             let villainButton = UIButton(frame: CGRect(x: buttonX, y: buttonY, width: 75, height: 75))
             buttonX = buttonX + villainButton.frame.size.width + 30  // we are going to space these UIButtons 50px apart
             //buttonX = buttonX + 50  // we are going to space these UIButtons 50px apart
-            if index+1/3 == 1 {
+            if index+1/3 == 1  ||  buttonX + 75 > self.popupView.frame.width{
                 buttonY = buttonY + villainButton.frame.size.height + 30
-                buttonX = 50
+                buttonX = 20
             }
+             
             villainButton.layer.cornerRadius = 5  // get some fancy pantsy rounding
-            villainButton.backgroundColor = UIColor.red
+            if let winner = colorsArray.randomElement() {
+                villainButton.backgroundColor = winner
+            }
            let subject = villain[0]
             villainButton.setTitle("\(subject)", for: UIControl.State.normal) // We are going to use the item name as the Button Title here.
             villainButton.titleLabel?.lineBreakMode = .byWordWrapping
@@ -278,7 +289,7 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
            // villainButton.addTarget(self, action: "villainButtonPressed:", for: UIControle  )
             villainButton.addTarget(self, action: #selector(buttonAction) , for: .touchUpInside)
             villainButton.tag = index
-            self.showFloatingView.addSubview(villainButton)  // myView in this case is the view you want these buttons added
+            self.popupView.addSubview(villainButton)  // myView in this case is the view you want these buttons added
             
             }
     }

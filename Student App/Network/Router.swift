@@ -18,11 +18,7 @@ enum ApiUrls: String {
     
     case login = "/API/LoginAPI/parentLogin"
     case getSeries = "/API/series/getSeriesDetails/smartkids"
-    case getclassdetails = "/API/class/getClassDetailsBySeries/1"
     case getbookdetails = "/API/book/getBookDetails"
-    case getsubjectdetails = "/API/subject/getSubjectDetails/16"
-    case getlessiondetails = "/API/lesson/getLessonDetails/16/2"
-    case getcontentbylession = "/API/content/getContentByLessonId/10"
     case getbaneers = "/API/banner/getBanners"
     case getcontactDetails = "/API/contactus/details"
     case verifyOTP = "/API/LoginAPI/verifyOTP"

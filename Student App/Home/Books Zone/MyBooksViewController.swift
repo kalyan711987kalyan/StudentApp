@@ -103,6 +103,7 @@ class MyBooksViewController: UIViewController, UITableViewDelegate, UITableViewD
         let currentLastItem = self.bookseriesList[indexPath.row]
         let series = currentLastItem.series
         vc.seriesName = series!
+        vc.seriesId = currentLastItem.id
         self.present(vc, animated: true, completion: nil)
 
         

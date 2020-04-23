@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Alamofire
 class ClassViewController: UIViewController   {
     
     var classesList : [classBySeriesObjcet] = [classBySeriesObjcet]()
@@ -26,7 +26,7 @@ class ClassViewController: UIViewController   {
     @IBOutlet weak var ningthBtnOutlet: UIButton!
     @IBOutlet weak var tenthBtnOutlet: UIButton!
     var buttons = [UIButton]()
-
+    var seriesId:String = ""
 
     override func viewDidLoad() {
         buttons = [nurseryBtnOutlet,lkgBtnOutlet , ukgBtnOutlet,firstBtnOutlet,secondBtnOutlet,thirdBtnOutlet,fourthBtnOutlet,fifthBtnOutlet,sixthBtnOutlet,seventhBtnOutlet,eigthBtnOutlet,ningthBtnOutlet,tenthBtnOutlet]
@@ -39,40 +39,50 @@ class ClassViewController: UIViewController   {
     }
     
     func getallClassBySeries(){
-        SProgress.show()
-
-        SAPIController.shared.getClassBySeries(payload: [:]) { (result, errorMessage) in
-            print("getSeriesOfBooks Response---- %@ /n %@", result,errorMessage)
-            SProgress.hide()
-
-            if let response = result as? [String:Any] {
-                
-                let booksObj = response["studentClass"] as? [[String:Any]]
-                
-                for (index, obj) in booksObj!.enumerated() {
-                    self.classesList.append(classBySeriesObjcet(data: obj))
-                    print("index",index)
-                    let className = obj["className"] as! String
-
-                    self.buttons[index].setBackgroundImage(UIImage(named: "classbuttonBg.png"), for: UIControl.State.normal)
-                        self.buttons[index].setTitle(className,for: .normal)
-                                self.buttons[index].tintColor = UIColor.black
-                  
-
-                }
+        
+        
+        
+            SProgress.show()
+            let baseURLString = APIEndPoints.base.urlString
+            
+            guard let url = URL(string: baseURLString+"/API/class/getClassDetailsBySeries/"+seriesId) else {
+                //completion(nil)
+                return
             }
-            
-            print("seriesofBook", self.classesList)
-            
-            
-            if let error = errorMessage {
-                
-            }else{
-                
-                
+        print(url)
+            Alamofire.request(url,
+                              method: .get,
+                              parameters: [:])
+                .validate()
+                .responseJSON { response in
+                   SProgress.hide()
+                    print(response.result.value)
+
+                    if let responseDict = response.result.value as? [String:Any] {
+                                   
+                        if let booksObj = responseDict["studentClass"] as? [[String:Any]] {
+                            for (index, obj) in booksObj.enumerated() {
+                                self.classesList.append(classBySeriesObjcet(data: obj))
+                                print("index",index)
+                                let className = obj["className"] as! String
+
+                                self.buttons[index].setBackgroundImage(UIImage(named: "classbuttonBg.png"), for: UIControl.State.normal)
+                                    self.buttons[index].setTitle(className,for: .normal)
+                                            self.buttons[index].tintColor = UIColor.black
+                              
+
+                            }
+                            
+                        }else{
+                            self.showAlertWithTitleInView(title: "", message:"Coming soon!", buttonCancelTitle:"", buttonOkTitle: "OK"){ (index) in}
+                            self.dismiss(animated: false, completion: nil)
+                        }
+                    
+                                   
+                               }
+                    
             }
-            
-        }
+        
         
     }
     

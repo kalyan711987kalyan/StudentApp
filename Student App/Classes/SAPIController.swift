@@ -89,18 +89,6 @@ class SAPIController: NSObject {
      }
     
     
-    func getClassBySeries(payload: [String: Any], completion: @escaping (_ result: Any?, _ errorMessage: String?) -> Void) {
-         
-         RestService.get(path: .getclassdetails) { (response, error) in
-             guard let response = response as? [String:Any] else {
-                            completion(nil,error?.localizedDescription)
-                            return
-                        }
-                        
-                        completion(response, nil)
-         }
-     }
-    
     func getSupportDetails(payload: [String: Any], completion: @escaping (_ result: Any?, _ errorMessage: String?) -> Void) {
         
         RestService.get(path: .getcontactDetails) { (response, error) in

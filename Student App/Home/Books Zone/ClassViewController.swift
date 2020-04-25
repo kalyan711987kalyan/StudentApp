@@ -74,7 +74,7 @@ class ClassViewController: UIViewController   {
                             }
                             
                         }else{
-                            self.showAlertWithTitleInView(title: "", message:"Coming soon!", buttonCancelTitle:"", buttonOkTitle: "OK"){ (index) in}
+                            self.showAlertWithTitleInView(title: "", message:"No books available in this series", buttonCancelTitle:"", buttonOkTitle: "OK"){ (index) in}
                             self.dismiss(animated: false, completion: nil)
                         }
                     

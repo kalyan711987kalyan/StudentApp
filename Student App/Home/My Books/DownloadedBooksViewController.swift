@@ -126,7 +126,7 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
             allBooksBTNOutlet.isHidden = true
             SProgress.hide()
 
-             self.showAlertWithTitleInView(title: "", message:"No Books !", buttonCancelTitle:"", buttonOkTitle: "OK"){ (index)
+             self.showAlertWithTitleInView(title: "", message:"No My Books!. Please download from BookZone  ", buttonCancelTitle:"", buttonOkTitle: "OK"){ (index)
                 in
                 self.dismiss(animated: true, completion: nil)
 

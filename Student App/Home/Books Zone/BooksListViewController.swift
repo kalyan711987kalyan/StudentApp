@@ -90,7 +90,7 @@ class BooksListViewController: UIViewController , UITableViewDataSource , UITabl
         let baseURLString = APIEndPoints.base.urlString
         
         guard let url = URL(string: baseURLString+"/API/book/getBookDetails/"+classToPass) else {
-            //completion(nil)
+            SProgress.hide()
             return
         }
         Alamofire.request(url,
@@ -99,20 +99,20 @@ class BooksListViewController: UIViewController , UITableViewDataSource , UITabl
             .validate()
             .responseJSON { response in
                 guard response.result.isSuccess else {
-                    //print("Error while fetching remote rooms: \(String(describing: response.result.error)")
-                    //completion(nil)
+                    self.showAlertWithTitleInView(title: "", message:"Request failed. Please try again", buttonCancelTitle:"", buttonOkTitle: "OK"){ (index) in}
+                    SProgress.hide()
                     return
                 }
                 
                 guard let value = response.result.value as? [String: Any],
-                    let rows = value["book"] as? [[String: Any]] else {
+                    let _ = value["book"] as? [[String: Any]] else {
                         SProgress.hide()
                         self.showAlertWithTitleInView(title: "", message:"No Books Available!", buttonCancelTitle:"", buttonOkTitle: "OK"){ (index) in}
                         return
                        
                 }
+                SProgress.hide()
                 if let response = response.result.value as? [String:Any] {
-                    SProgress.hide()
                     
                     let booksObj = response["book"] as? [[String:Any]]
                     
@@ -230,13 +230,11 @@ class BooksListViewController: UIViewController , UITableViewDataSource , UITabl
         self.floatingImageView.addSubview(imageView)
         //Imageview on Top of View
         self.floatingImageView.bringSubviewToFront(imageView)
-        SProgress.hide()
         
     }
     
     func didPressButton(_ tag: Int) {
         self.floatingImageView.isHidden = false
-        SProgress.show()
         print("I have pressed a button with a tag: \(tag)")
         let bookData = self.downloadBookArray[tag]
         let thumbnailURl = bookData.thumbnail!
@@ -259,11 +257,10 @@ class BooksListViewController: UIViewController , UITableViewDataSource , UITabl
             
             if index == 1{
                 
-                SProgress.show()
                 let isSuccess = self.appDelegate!.downloadBookToCoreData(withbookData: self.jsonObjectArray[tag] as! String , kid_id : self.kid_id ,parent_id : self.parent_id , book_id: self.bookIdArray[tag] as! String)
                 
                 if isSuccess == true {
-                    SProgress.hide()
+
                     self.showAlertWithTitleInView(title: "Success!", message:"Do you want to open the downloaded Book?", buttonCancelTitle:"No", buttonOkTitle: "Yes"){ (index) in
                         if index == 1 {
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "DownloadedBooksViewController") as! DownloadedBooksViewController
@@ -275,7 +272,6 @@ class BooksListViewController: UIViewController , UITableViewDataSource , UITabl
 
                     
                 }else{
-                    SProgress.hide()
                     self.showAlertWithTitleInView(title: "Failed!", message:"Failed to Download Book!", buttonCancelTitle:"No", buttonOkTitle: "Yes"){ (index) in}
                 }
             }else{

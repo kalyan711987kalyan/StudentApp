@@ -48,7 +48,7 @@ class RegisterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.parentNameTF.text = "lucky"
+      /*  self.parentNameTF.text = "lucky"
         self.contactNumberTF.text = "1234567890"
         self.emailTF.text = "lucky.gopimahesh@gmail.com"
         self.passwordTF.text = "123456"
@@ -58,7 +58,7 @@ class RegisterViewController: UIViewController {
       //  self.classNameTF.text = "class"
         self.stateTF.text = "telanagana"
         self.cityTF.text = "hyd"
-        //self.pinTF.text = "123456"
+        //self.pinTF.text = "123456"*/
         
         //add corner radiuso
         self.addcornerRadious(textfiled: parentNameTF)

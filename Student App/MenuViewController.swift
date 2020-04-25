@@ -142,7 +142,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.sendEmail()
         }else if indexPath.row == 3 {
             
-            let items = [URL(string: "https://play.google.com/store/apps/details?id=com.mindiotics.arsmartkids&hl=en_IN")!]
+            let items = [URL(string: "https://apps.apple.com/app/id1487588598")!]
             let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
             present(ac, animated: true)
         }

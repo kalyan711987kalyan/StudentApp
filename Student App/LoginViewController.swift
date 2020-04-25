@@ -8,7 +8,7 @@
 
 import UIKit
 
-@available(iOS 10.0, *)
+
 class LoginViewController: UIViewController {
 
     @IBOutlet var userNameField: UITextField!
@@ -30,8 +30,8 @@ class LoginViewController: UIViewController {
         }
         
         self.slideMenuController()?.removeLeftGestures()
-        self.userNameField.text = "ande.gopimahesh@gmail.com"
-        self.passwordField.text = "123456"
+        //self.userNameField.text = "ande.gopimahesh@gmail.com"
+        //self.passwordField.text = "123456"
         
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
 

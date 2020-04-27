@@ -104,7 +104,8 @@ class MyBooksViewController: UIViewController, UITableViewDelegate, UITableViewD
         let series = currentLastItem.series
         vc.seriesName = series!
         vc.seriesId = currentLastItem.id
-        self.present(vc, animated: true, completion: nil)
+        self.navigationController?.pushViewController(vc, animated: true)
+       // self.present(vc, animated: true, completion: nil)
 
         
         //self.performSegue(withIdentifier: SSegueKeys.bookseriesToClasslist, sender: self.bookseriesList[indexPath.row])

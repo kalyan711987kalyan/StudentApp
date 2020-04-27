@@ -90,18 +90,20 @@ class ClassViewController: UIViewController   {
         print((sender as AnyObject).tag)
         
         let index = (sender as AnyObject).tag - 1
-        
-        let currentLastItem = self.classesList[index]
-        let className = currentLastItem.className
-        
-        if #available(iOS 10.0, *) {
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "BooksListViewController") as! BooksListViewController
-            vc.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
-                  vc.className = className!
-                  vc.seriesNameText = seriesName
-                  vc.classNameLB?.text = className
-                  self.present(vc, animated: true, completion: nil)
+        if index < self.classesList.count {
+            let currentLastItem = self.classesList[index]
+                 let className = currentLastItem.className
+                 
+                 if #available(iOS 10.0, *) {
+                     let vc = self.storyboard?.instantiateViewController(withIdentifier: "BooksListViewController") as! BooksListViewController
+                     vc.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
+                           vc.className = className!
+                           vc.seriesNameText = seriesName
+                           vc.classNameLB?.text = className
+                           self.navigationController?.pushViewController(vc, animated: true)
+                 }
         }
+     
 
         //self.performSegue(withIdentifier: SSegueKeys.classToBooksList, sender: self.bookseriesList[indexPath.row])
 

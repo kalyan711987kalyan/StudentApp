@@ -266,15 +266,17 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
         }else{
             print("subject are" , subjects)
         }
-        var buttonY: CGFloat = 100  // our Starting Offset, could be 0
+        var buttonsize = self.popupView.frame.height
+        var totalHeight =  ((subjects?.count ?? 0)/2) * 75
+        var buttonY: CGFloat = 50  // our Starting Offset, could be 0
         var buttonX: CGFloat = 20  // our Starting Offset, could be 0
         let colorsArray = [UIColor.orange, UIColor.brown, UIColor.blue, UIColor(red: 234.0/255.0, green: 85.0/255.0, blue: 80.0/255.0, alpha: 1.0), UIColor(red: 193.0/255.0, green: 16.0/255.0, blue: 29.0/255.0, alpha: 1.0)]
         for (index, villain) in (subjects as! [NSArray]).enumerated() {
             
             let villainButton = UIButton(frame: CGRect(x: buttonX, y: buttonY, width: 75, height: 75))
-            buttonX = buttonX + villainButton.frame.size.width + 30  // we are going to space these UIButtons 50px apart
+            buttonX = buttonX + villainButton.frame.size.width + 20  // we are going to space these UIButtons 50px apart
             //buttonX = buttonX + 50  // we are going to space these UIButtons 50px apart
-            if index+1/3 == 1  ||  buttonX + 75 > self.popupView.frame.width{
+            if index+1/3 == 1  ||  buttonX > self.popupView.frame.width{
                 buttonY = buttonY + villainButton.frame.size.height + 30
                 buttonX = 20
             }
@@ -294,6 +296,9 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
             self.popupView.addSubview(villainButton)  // myView in this case is the view you want these buttons added
             
             }
+        if (Int(buttonY + 75) > totalHeight) {
+            print("increase the height")
+        }
     }
     
     @objc func buttonAction(sender: UIButton!) {

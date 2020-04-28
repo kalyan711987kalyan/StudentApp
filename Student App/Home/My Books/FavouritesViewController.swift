@@ -83,7 +83,7 @@ class FavouritesViewController: UIViewController , UITableViewDataSource , UITab
             cell.favBTNOutlet?.tag = indexPath.row
 
             let favBook = self.favoriteBooks[indexPath.row]
-
+            cell.favBTNOutlet?.setImage(UIImage(named: "favicon.png")! as UIImage, for: .normal)
             cell.lessonName?.text = favBook.lessionTitle
             cell.learningsLB?.text = "Learning : \(favBook.lstudentvideo.count)"
             let activities = favBook.lstudentQuestions

@@ -270,7 +270,7 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if self.BookTypeidArray[indexPath.row] as! String == "1" {
+        if self.BookTypeidArray[indexPath.row] as? String == "1" {
             self.showFloatingView.isHidden = true
 
                     //print("You have chosen Villain: \(sender.titleLabel?.text)")

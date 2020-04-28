@@ -47,12 +47,17 @@ class LessionsViewController: UIViewController , UITableViewDataSource , UITable
                 //vc.learningbookData = bookData
                 let lessionTitle = lessonData.lessonName!
                 let lstudentsubject = lessonData.studentsubject
-                let lstudentvideo = lessonData.studentvideo
-                let lstudentQuestions = lessonData.studentQuestions
+               // let lstudentvideo = lessonData.studentvideo
+               // let lstudentQuestions = lessonData.studentQuestions
+                let activites = Int(lessonData.activities) ?? 0
+                 let learning = Int(lessonData.learnings) ?? 0
+                let activitesArray = Array(0...activites-1)
+                let learningArray = Array(0...learning-1)
+
                 var isSuccess : Bool = true
                 if flag == 1 {
                     
-                    isSuccess = self.appDelegate!.addFavouriteToCoreData(withlessonData: self.bookData as NSArray, kid_id: kidId, parent_id: parentID, lessonId: self.lessonIdArray[tag] as! String, lessionTitle: lessionTitle, lstudentQuestions: lstudentQuestions, lstudentsubject: self.subjectData[tag] as! String , lstudentvideo: lstudentvideo)
+                    isSuccess = self.appDelegate!.addFavouriteToCoreData(withlessonData: self.bookData as NSArray, kid_id: kidId, parent_id: parentID, lessonId: self.lessonIdArray[tag] as! String, lessionTitle: lessionTitle, lstudentQuestions: activitesArray as NSArray, lstudentsubject: self.subjectData[tag] as! String , lstudentvideo: learningArray as NSArray)
                     
                 }else{
                     
@@ -141,6 +146,7 @@ class LessionsViewController: UIViewController , UITableViewDataSource , UITable
             //completion(nil)
             return
         }
+        print(url)
         Alamofire.request(url,
                           method: .get,
                           parameters: ["include_docs": "true"])
@@ -171,7 +177,11 @@ class LessionsViewController: UIViewController , UITableViewDataSource , UITable
                         let lessonId = obj["lessonId"] as! String
                         self.lessonIdArray.add(lessonId)
                         
-                        let activitse = obj["studentQuestions"] as? NSArray ?? []
+                       // let activitse = obj["studentQuestions"] as? NSArray ?? []
+                        let activitse = obj["actitvitiesCount"] as? String ?? "0"
+                        let learning = obj["learningsCount"] as? String ?? "0"
+
+                        
                         var stydentArray : NSMutableArray = []
                         
                         
@@ -192,13 +202,12 @@ class LessionsViewController: UIViewController , UITableViewDataSource , UITable
                         let dictAsString = self.asString(jsonDictionary: dict)
                         print("dictAsString",dictAsString)
                         self.subjectData.add(dictAsString)
-                        self.lessonDataArray.append(lessonData(lessonName: lessonName, learnings: stydentArray.count, studentQuestionsAct: activitse.count, studentsubject: studentsubject, studentvideo: stydentArray, studentQuestions: activities , lessonId: lessonId))
+                        self.lessonDataArray.append(lessonData(lessonName: lessonName,learnings: learning, studentsubject: studentsubject, lessonId: lessonId, activites: activitse))
                         
                     }
                     self.lessonsTableView.reloadData()
                     
                     SProgress.hide()
-                    print("hi hello ther")
                     
                 }
         }
@@ -231,7 +240,7 @@ class LessionsViewController: UIViewController , UITableViewDataSource , UITable
             cell.lessaonNameLb?.text = lessonData.lessonName!
             let learning = lessonData.learnings!
             cell.learnings?.text = "Learning: \(learning)"
-            let activities = lessonData.studentQuestionsAct!
+            let activities = lessonData.activities
             cell.activitiesLb?.text = "Activities: \(activities)"
             
             let lessonId = lessonData.lessonId
@@ -266,8 +275,8 @@ class LessionsViewController: UIViewController , UITableViewDataSource , UITable
         vc.learningbookData = bookData
         vc.lessionTitle = lessonData.lessonName!
         vc.lstudentsubject = lessonData.studentsubject
-        vc.lstudentvideo = lessonData.studentvideo
-        vc.lstudentQuestions = lessonData.studentQuestions
+       // vc.lstudentvideo = lessonData.studentvideo
+        //vc.lstudentQuestions = lessonData.studentQuestions
         vc.lessionId = self.lessonIdArray[indexPath.row] as! String
         //send status of favourite
         let leesnId = self.lessonIdArray[indexPath.row] as! String

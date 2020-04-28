@@ -8,6 +8,7 @@
 
 import UIKit
 import AVKit
+import Alamofire
 @available(iOS 10.0, *)
 class ActivitesViewController: UIViewController  , UITableViewDataSource , UITableViewDelegate , videoCellDelegate{
     
@@ -103,7 +104,7 @@ class ActivitesViewController: UIViewController  , UITableViewDataSource , UITab
             self.favouriteBtnOutlet.setImage(UIImage(named: "love.png")! as UIImage, for: .normal)
 
         }
-        
+        self.getContentDetails(lessionid: lessionId)
         self.getAlreadyDownloadVideo()
     }
     
@@ -123,6 +124,51 @@ class ActivitesViewController: UIViewController  , UITableViewDataSource , UITab
     @IBAction func backBtnAction(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
+    
+    // With Alamofire
+       func getContentDetails( lessionid : String ) {
+          
+           SProgress.show()
+           let baseURLString = APIEndPoints.base.urlString
+           
+           guard let url = URL(string: baseURLString+"/API/content/getContentByLessonId/"+lessionid) else {
+               //completion(nil)
+               return
+           }
+           print(url)
+           Alamofire.request(url,
+                             method: .get,
+                             parameters: ["include_docs": "true"])
+               .validate()
+               .responseJSON { response in
+                SProgress.hide()
+                print(response.result.value)
+                   guard response.result.isSuccess else {
+                       //print("Error while fetching remote rooms: \(String(describing: response.result.error)")
+                       //completion(nil)
+                       return
+                   }
+                   
+                   if let response = response.result.value as? [String:Any] {
+                       //let question = obj["studentQuestions"] as? NSArray ?? []
+
+                    self.lstudentQuestions = response["studentQuestions"] as? NSArray ?? []
+                    self.lstudentvideo = response["studentVideo"] as? NSArray ?? []
+                    
+                    if let imagesArray = response["studentVideo"] as? NSDictionary{
+                        self.lstudentvideo = NSArray(object: imagesArray)
+                    }else{
+                                               
+                        let nsArray = response["studentVideo"] as? NSArray ?? []
+                        self.lstudentvideo = nsArray
+                    }
+
+                    self.viddeosTableView.reloadData()
+                       
+                       
+                   }
+           }
+       }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.lstudentvideo.count

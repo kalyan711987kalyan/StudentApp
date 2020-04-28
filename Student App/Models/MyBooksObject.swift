@@ -188,22 +188,24 @@ struct downloadedBook {
 
 struct lessonData {
   var lessonName : String!
-  var learnings :Int!
-  var studentQuestionsAct : Int!
+  var learnings :String!
+  //var studentQuestionsAct : Int!
     var studentsubject : NSDictionary
-  var studentvideo : NSArray
-    var studentQuestions : NSArray
+ // var studentvideo : NSArray
+   // var studentQuestions : NSArray
     var lessonId : String
+    var activities :String
 
     
-    init(lessonName:String, learnings:Int, studentQuestionsAct:Int, studentsubject:NSDictionary , studentvideo: NSArray , studentQuestions : NSArray , lessonId : String) {
+    init(lessonName:String, learnings:String, studentsubject:NSDictionary  , lessonId : String, activites: String) {
         self.lessonName = lessonName
         self.learnings = learnings
-        self.studentQuestionsAct = studentQuestionsAct
+       // self.studentQuestionsAct = studentQuestionsAct
         self.studentsubject = studentsubject
-        self.studentvideo = studentvideo
-        self.studentQuestions = studentQuestions
+        //self.studentvideo = studentvideo
+        //self.studentQuestions = studentQuestions
         self.lessonId = lessonId
+        self.activities = activites
 
     }
 }

@@ -145,8 +145,8 @@ class FavouritesViewController: UIViewController , UITableViewDataSource , UITab
         vc.learningbookData = lessonData.learningbookData as! [String]
         vc.lessionTitle = lessonData.lessionTitle
         vc.lstudentsubject = lessonData.lstudentsubject
-        vc.lstudentvideo = lessonData.lstudentvideo
-        vc.lstudentQuestions = lessonData.lstudentQuestions
+        vc.lstudentvideo = []
+        vc.lstudentQuestions = []
         vc.lessionId = self.mylessonIdArray[indexPath.row] as! String
         //send status of favourite
         vc.isFavorite = true

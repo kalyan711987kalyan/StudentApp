@@ -11,10 +11,9 @@ import SlideMenuControllerSwift
 
 
 
-
 @available(iOS 10.0, *)
 class DashboardViewController: UIViewController,  SlideMenuControllerDelegate, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    
+
     let appDelegate = UIApplication.shared.delegate as? AppDelegate
 
     @IBOutlet weak var imageScrollView: UIScrollView!
@@ -87,9 +86,10 @@ class DashboardViewController: UIViewController,  SlideMenuControllerDelegate, U
     
     @IBAction func myBooksButton_Action() {
         
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "DownloadedBooksViewController") as! DownloadedBooksViewController
-        vc.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
-        self.present(vc, animated: true, completion: nil)
+//        let vc = self.storyboard?.instantiateViewController(withIdentifier: "DownloadedBooksViewController") as! DownloadedBooksViewController
+//        vc.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
+//        self.present(vc, animated: true, completion: nil)
+        self.tabBarController?.selectedIndex = 3
 
         //self.performSegue(withIdentifier: SSegueKeys.dashboardtobookseriesKey, sender: nil)
         //self.performSegue(withIdentifier: SSegueKeys.home2mybooksKey, sender: nil)
@@ -97,7 +97,7 @@ class DashboardViewController: UIViewController,  SlideMenuControllerDelegate, U
     
     
     @IBAction func switchKidButton_Action() {
-        
+              
         if let modalViewController = self.storyboard!.instantiateViewController(withIdentifier: "SwitchKidsViewController") as? SwitchKidsViewController {
             modalViewController.kidsList = self.kidsList
             modalViewController.view.backgroundColor = UIColor(white: 1.0, alpha: 0.5)

@@ -96,7 +96,7 @@ class ClassViewController: UIViewController   {
                  
                  if #available(iOS 10.0, *) {
                      let vc = self.storyboard?.instantiateViewController(withIdentifier: "BooksListViewController") as! BooksListViewController
-                     vc.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
+                    // vc.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
                            vc.className = className!
                            vc.seriesNameText = seriesName
                            vc.classNameLB?.text = className

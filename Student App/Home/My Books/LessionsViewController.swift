@@ -235,7 +235,7 @@ class LessionsViewController: UIViewController , UITableViewDataSource , UITable
             
             if self.FavouriteslessonId.contains(lessonId) {
                 //do something
-                let checkedImage = UIImage(named: "lovefill.png")! as UIImage
+                let checkedImage = UIImage(named: "favicon.png")! as UIImage
                 
                 cell.favBtn!.setImage(checkedImage, for: .normal)
                 

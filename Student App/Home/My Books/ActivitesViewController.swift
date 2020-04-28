@@ -98,7 +98,7 @@ class ActivitesViewController: UIViewController  , UITableViewDataSource , UITab
         self.mainTitleLb?.text = "Lession: \(lessionTitle)"
         
         if isFavorite == true {
-            self.favouriteBtnOutlet.setImage(UIImage(named: "lovefill.png")! as UIImage, for: .normal)
+            self.favouriteBtnOutlet.setImage(UIImage(named: "favicon.png")! as UIImage, for: .normal)
         }else{
             self.favouriteBtnOutlet.setImage(UIImage(named: "love.png")! as UIImage, for: .normal)
 
@@ -230,7 +230,7 @@ class ActivitesViewController: UIViewController  , UITableViewDataSource , UITab
                 
                 if flag == 1 {
                     isSuccess = self.appDelegate!.addFavouriteToCoreData(withlessonData: self.learningbookData as NSArray, kid_id: kidId, parent_id: parentID, lessonId: self.lessionId, lessionTitle: self.lessionTitle, lstudentQuestions: self.lstudentQuestions, lstudentsubject: self.studentSubject , lstudentvideo: self.lstudentvideo)
-                    self.favouriteBtnOutlet.setImage(UIImage(named: "lovefill.png")! as UIImage, for: .normal)
+                    self.favouriteBtnOutlet.setImage(UIImage(named: "favicon.png")! as UIImage, for: .normal)
 
                 }else{
                     

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04ED0AB92457EFD300B25195 /* YesSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 04ED0AB62457EFD100B25195 /* YesSound.mp3 */; };
+		04ED0ABA2457EFD300B25195 /* deleted.wav in Resources */ = {isa = PBXBuildFile; fileRef = 04ED0AB72457EFD200B25195 /* deleted.wav */; };
+		04ED0ABB2457EFD300B25195 /* NoSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 04ED0AB82457EFD200B25195 /* NoSound.mp3 */; };
+		04ED0ABD2457F11D00B25195 /* favicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 04ED0ABC2457F11D00B25195 /* favicon.png */; };
 		2B8B7A687B53A04D0926EA85 /* Pods_Student_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94A66F069D13C1ED9D4A4689 /* Pods_Student_App.framework */; };
 		302E53ED24138E5500E32331 /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 302E53EC24138E5500E32331 /* plus.png */; };
 		302E53EF2413909400E32331 /* AddKidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302E53EE2413909400E32331 /* AddKidViewController.swift */; };
@@ -113,6 +117,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		04ED0AB62457EFD100B25195 /* YesSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = YesSound.mp3; sourceTree = "<group>"; };
+		04ED0AB72457EFD200B25195 /* deleted.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = deleted.wav; sourceTree = "<group>"; };
+		04ED0AB82457EFD200B25195 /* NoSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = NoSound.mp3; sourceTree = "<group>"; };
+		04ED0ABC2457F11D00B25195 /* favicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favicon.png; sourceTree = "<group>"; };
 		1459B0F99D64939F5CF2B0B4 /* Pods-Student App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Student App.release.xcconfig"; path = "Target Support Files/Pods-Student App/Pods-Student App.release.xcconfig"; sourceTree = "<group>"; };
 		302E53EC24138E5500E32331 /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
 		302E53EE2413909400E32331 /* AddKidViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddKidViewController.swift; sourceTree = "<group>"; };
@@ -335,6 +343,10 @@
 		3067E43C23B0F96E0009A6FF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				04ED0ABC2457F11D00B25195 /* favicon.png */,
+				04ED0AB72457EFD200B25195 /* deleted.wav */,
+				04ED0AB82457EFD200B25195 /* NoSound.mp3 */,
+				04ED0AB62457EFD100B25195 /* YesSound.mp3 */,
 				3039988123FD0F45007F3B72 /* bookseriesBg.png */,
 				3039980A23FBF4A7007F3B72 /* close_whiteIcon.png */,
 				3067E43E23B0F9AF0009A6FF /* bg.png */,
@@ -563,17 +575,20 @@
 				30A8EC7E244236C3000036F2 /* 4.png in Resources */,
 				3067E44023B0F9B00009A6FF /* bg.png in Resources */,
 				3067E59F23B222640009A6FF /* mybook.png in Resources */,
+				04ED0ABD2457F11D00B25195 /* favicon.png in Resources */,
 				3039980923FBF208007F3B72 /* SwitchKidTableViewCell.xib in Resources */,
 				306BD2D4243C189700B9F867 /* cancel.png in Resources */,
 				30FE910923CA047100352F40 /* shareicon.png in Resources */,
 				30A8EC7F244236C3000036F2 /* 6.png in Resources */,
 				30FE910123CA029A00352F40 /* menuBg.png in Resources */,
+				04ED0ABA2457EFD300B25195 /* deleted.wav in Resources */,
 				3067E59E23B222640009A6FF /* library.png in Resources */,
 				30C9759D244DD3C400921064 /* WhatsApp.jpeg in Resources */,
 				30A8EC82244236C3000036F2 /* 2.png in Resources */,
 				30A8EC83244236C3000036F2 /* bg.jpg in Resources */,
 				3067E66923C0C1400009A6FF /* classbg.jpg in Resources */,
 				30FE910D23CA12A300352F40 /* MenuTableViewCell.xib in Resources */,
+				04ED0ABB2457EFD300B25195 /* NoSound.mp3 in Resources */,
 				3067E5A123B226270009A6FF /* yellowbg.png in Resources */,
 				3067E43523B0F83D0009A6FF /* LaunchScreen.storyboard in Resources */,
 				30C975B1244EA3F700921064 /* down.png in Resources */,
@@ -596,6 +611,7 @@
 				30FE910723CA046300352F40 /* passwordicon.png in Resources */,
 				3067E43023B0F83A0009A6FF /* Main.storyboard in Resources */,
 				3067E61523B70CDA0009A6FF /* learningHeader_bg.png in Resources */,
+				04ED0AB92457EFD300B25195 /* YesSound.mp3 in Resources */,
 				30774CE92447833400D07A3F /* lovefill.png in Resources */,
 				30FE910323CA040B00352F40 /* callicon.png in Resources */,
 				3067E66D23C0C55D0009A6FF /* classbuttonBg.png in Resources */,

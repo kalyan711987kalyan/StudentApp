@@ -8,10 +8,11 @@
 
 import UIKit
 import Alamofire
+import AVFoundation
 
 @available(iOS 10.0, *)
 class BooksListViewController: UIViewController , UITableViewDataSource , UITableViewDelegate , YourCellDelegate{
-    
+    var bombSoundEffect: AVAudioPlayer?
     var seriesNameText :String = ""
     var className : String = ""
     var image = UIImage()
@@ -93,6 +94,8 @@ class BooksListViewController: UIViewController , UITableViewDataSource , UITabl
             SProgress.hide()
             return
         }
+        print("url",url)
+
         Alamofire.request(url,
                           method: .get,
                           parameters: ["include_docs": "true"])
@@ -103,20 +106,13 @@ class BooksListViewController: UIViewController , UITableViewDataSource , UITabl
                     SProgress.hide()
                     return
                 }
+                print("Response",response.result)
+
                 
-                guard let value = response.result.value as? [String: Any],
-                    let _ = value["book"] as? [[String: Any]] else {
-                        SProgress.hide()
-                        self.showAlertWithTitleInView(title: "", message:"No Books Available!", buttonCancelTitle:"", buttonOkTitle: "OK"){ (index) in}
-                        return
-                       
-                }
                 SProgress.hide()
-                if let response = response.result.value as? [String:Any] {
+                if let response = response.result.value as? [String:Any],  let booksObj = response["book"] as? [[String:Any]] {
                     
-                    let booksObj = response["book"] as? [[String:Any]]
-                    
-                    for (index, obj) in booksObj!.enumerated() {
+                    for (index, obj) in booksObj.enumerated() {
                         print("index",index)
                         let dict: JSONDictionary = obj
                         let dictAsString = self.asString(jsonDictionary: dict)
@@ -143,7 +139,41 @@ class BooksListViewController: UIViewController , UITableViewDataSource , UITabl
                     }
                     self.bookslistTableview.reloadData()
                     
+                }else {
+                    
+                    guard let value = response.result.value as? [String: Any],
+                        let obj = value["book"] as? [String: Any] else {
+                            SProgress.hide()
+                            self.showAlertWithTitleInView(title: "", message:"No Books Available!", buttonCancelTitle:"", buttonOkTitle: "OK"){ (index) in}
+                            return
+                           
+                    }
+                    
+                    let dict: JSONDictionary = obj
+                                        let dictAsString = self.asString(jsonDictionary: dict)
+                                        print("dictAsString",dictAsString)
+                                        self.jsonObjectArray.add(dictAsString)
+                                        
+                                        let bookName = obj["bookName"] as! String
+                                        let description = obj["description"] as! String
+                                        let thumbnail = obj["thumbnail"] as! String
+                                        let studentseries = obj["studentseries"] as! [String : Any]
+                                        let series = studentseries["series"] as! String
+                                        let studentbooktype = obj["studentbooktype"] as! [String : Any]
+                                        let bookType = studentbooktype["bookType"] as! String
+                                        let bookId = obj["bookId"] as! String
+
+                                        
+                                        self.bookIdArray.add(bookId)
+                                        
+                                        
+                    if series == self.seriesNameText {
+                                            self.downloadBookArray.append(downloadBook(bookName: bookName, bookType: bookType, description: description, thumbnail: thumbnail, bookseries: series))
+                                        }
+                    self.bookslistTableview.reloadData()
+
                 }
+                
         }
     }
     
@@ -173,7 +203,9 @@ class BooksListViewController: UIViewController , UITableViewDataSource , UITabl
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BooksListTableViewCell", for: indexPath) as! BooksListTableViewCell
-        
+        cell.selectionStyle = .none
+        cell.thumbnailImageView?.image = nil
+
         if self.downloadBookArray.count > 0 {
             cell.cellDelegate = self
             cell.imageBTN?.tag = indexPath.row
@@ -199,12 +231,13 @@ class BooksListViewController: UIViewController , UITableViewDataSource , UITabl
             let url : NSString = thumbnailURl as NSString
             let urlStr : NSString = url.addingPercentEscapes(using: String.Encoding.utf8.rawValue)! as NSString
             let searchURL : NSURL = NSURL(string: urlStr as String)!
-            let data = try? Data(contentsOf: searchURL as URL)
+           // let data = try? Data(contentsOf: searchURL as URL)
             
-            cell.thumbnailImageView?.image = UIImage(data: data!)// Error here
+           // cell.thumbnailImageView?.image = UIImage(data: data!)// Error here
+            
+            cell.thumbnailImageView?.load(url: searchURL as URL)
             
         }
-        
         
         
         return cell
@@ -261,6 +294,15 @@ class BooksListViewController: UIViewController , UITableViewDataSource , UITabl
                 
                 if isSuccess == true {
 
+                    let path = Bundle.main.path(forResource: "deleted.wav", ofType:nil)!
+                                  let url = URL(fileURLWithPath: path)
+
+                                  do {
+                                    self.bombSoundEffect = try AVAudioPlayer(contentsOf: url)
+                                    self.bombSoundEffect?.play()
+                                  } catch {
+                                      // couldn't load file :(
+                                  }
                     self.showAlertWithTitleInView(title: "Success!", message:"Do you want to open the downloaded Book?", buttonCancelTitle:"No", buttonOkTitle: "Yes"){ (index) in
                         if index == 1 {
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "DownloadedBooksViewController") as! DownloadedBooksViewController

@@ -185,8 +185,8 @@ class FavouritesViewController: UIViewController , UITableViewDataSource , UITab
         
     }
     
-    @IBAction func backBtn(_ sender: Any) {
-        
+    @IBAction func backButton_Action(_ sender: Any) {
+        self.tabBarController?.selectedIndex = 3
     }
     
     @IBAction func videosBTN(_ sender: Any) {

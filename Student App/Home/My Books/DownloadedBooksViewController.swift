@@ -225,7 +225,8 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DownloadedBookTableViewCell", for: indexPath) as! DownloadedBookTableViewCell
-        
+       
+        cell.thumbnailImageView?.image = nil
         if self.downloadedBooks.count > 0 {
                   cell.cellDelegate = self
                   cell.deleteBookbtn?.tag = indexPath.row
@@ -243,10 +244,11 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
                   let url : NSString = thumbnailURl as NSString
                   let urlStr : NSString = url.addingPercentEscapes(using: String.Encoding.utf8.rawValue)! as NSString
                   let searchURL : NSURL = NSURL(string: urlStr as String)!
-            DispatchQueue.main.async {
-                  let data = try? Data(contentsOf: searchURL as URL)
-                  cell.thumbnailImageView?.image = UIImage(data: data!)// Error here
-            }
+            cell.thumbnailImageView?.load(url: searchURL as URL)
+//            DispatchQueue.main.async {
+//                  let data = try? Data(contentsOf: searchURL as URL)
+//                  cell.thumbnailImageView?.image = UIImage(data: data!)// Error here
+//            }
                   
               }
         return cell

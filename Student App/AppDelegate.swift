@@ -435,6 +435,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     
                 }
             }
+            
+            try managedObjectContext!.save()
             // objectUpdate = results[0]
             
         }catch let error {
@@ -459,6 +461,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                        
                    }
                }
+            try managedObjectContext!.save()
+
                // objectUpdate = results[0]
                
            }catch let error {
@@ -488,7 +492,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     
                 }
             }
-            // objectUpdate = results[0]
+            try managedObjectContext!.save()
         }catch let error {
             print(error.localizedDescription)
             results = false

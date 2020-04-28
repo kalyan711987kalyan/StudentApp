@@ -107,6 +107,11 @@ class LessionsViewController: UIViewController , UITableViewDataSource , UITable
         
         book_id = bookData[5]
         subject_id = bookData[4]
+        
+        if subject_id == "" {
+            subject_id = "1"
+        }
+        
         loadLessonDetails( classToPass:  book_id!+"/"+subject_id!)
         guard let kidId = UserDefaults.standard.string(forKey: "selectedKid")
             else { return print("No data") }

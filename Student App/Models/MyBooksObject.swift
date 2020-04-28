@@ -153,13 +153,15 @@ struct downloadBook {
   var description : String!
   var thumbnail : String!
   var bookseries : String!
-    
-    init(bookName:String, bookType:String, description:String, thumbnail:String, bookseries:String) {
+    var bookTypeId : String!
+
+    init(bookName:String, bookType:String, description:String, thumbnail:String, bookseries:String , bookTypeId : String) {
         self.bookName = bookName
         self.bookType = bookType
         self.description = description
         self.thumbnail = thumbnail
         self.bookseries = bookseries
+        self.bookTypeId = bookTypeId
 
     }
 }

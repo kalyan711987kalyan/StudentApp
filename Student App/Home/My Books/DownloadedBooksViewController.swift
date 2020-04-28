@@ -75,6 +75,8 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
     let appDelegate = UIApplication.shared.delegate as? AppDelegate
     var jsonBooksArray = NSMutableArray()
     var BookidArray = NSMutableArray()
+    var BookTypeidArray = NSMutableArray()
+
     var responseObject = [[String : Any]]()
     var downloadedBooks = [downloadedBook]()
     var kid_id = String()
@@ -119,6 +121,7 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
         self.jsonBooksArray.removeAllObjects()
         self.responseObject.removeAll()
         self.BookidArray.removeAllObjects()
+        self.BookTypeidArray.removeAllObjects()
 
         let  results = self.appDelegate!.getAllRecordsforValue(valueof: kid_id, forattribute: "kid_Id", forEntity: "DownloadedBooks")
         
@@ -141,7 +144,11 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
                    let kid_id = result.value(forKey: "kid_Id") as? String
                    let parent_id = result.value(forKey: "parent_Id") as? String
                    let booksData = result.value(forKey: "bookData") as? String
+            
             let bookId = result.value(forKey: "book_id") as? String
+            let bookTypeId = result.value(forKey: "bookTypeId") as? String
+
+            self.BookTypeidArray.add(bookTypeId)
                  self.BookidArray.add(bookId)
                 self.jsonBooksArray.add(booksData)
                   let data = self.asString(dataString: booksData!)
@@ -154,6 +161,7 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
             
             for  obj in self.responseObject {
                 let bookName = obj["bookName"] as! String
+
                 let description = obj["description"] as! String
                 let thumbnail = obj["thumbnail"] as! String
                 let studentseries = obj["studentseries"] as! [String : Any]
@@ -232,6 +240,11 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
                   cell.deleteBookbtn?.tag = indexPath.row
             cell.showImageBtn?.tag = indexPath.row
                   let bookData = self.downloadedBooks[indexPath.row]
+            
+            if indexPath.row == self.downloadedBooks.count - 1 {
+            cell.cellView?.backgroundColor = .lightGray
+               }
+
                   let thumbnailURl = bookData.thumbnail!
                   let bookname = bookData.bookName!
                   let booktype = bookData.bookType!
@@ -257,6 +270,29 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        if self.BookTypeidArray[indexPath.row] as! String == "1" {
+            self.showFloatingView.isHidden = true
+
+                    //print("You have chosen Villain: \(sender.titleLabel?.text)")
+            let bookData = self.downloadedBooks[indexPath.row]
+            let bookId = BookidArray[indexPath.row]
+            
+            let subjects = bookData.subjects
+            
+            //let subjectsname = bookData.subjects[indexPath.row] as! NSArray
+            print("You have chosen subjectsname: \(bookData)")
+            
+            let datatobepassed = [bookData.bookName!,bookData.bookseries!,bookData.className!,"","" , bookId]
+            
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "LessionsViewController") as! LessionsViewController
+                          vc.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
+            vc.bookData = datatobepassed as! [String]
+
+                      self.present(vc, animated: true, completion: nil)
+            
+            
+              
+        }else{
         self.popupView.isHidden = false
         didTappedAtBook = indexPath.row
         let bookData = self.downloadedBooks[indexPath.row]
@@ -298,6 +334,7 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
             }
         if (Int(buttonY + 75) > totalHeight) {
             print("increase the height")
+        }
         }
     }
     

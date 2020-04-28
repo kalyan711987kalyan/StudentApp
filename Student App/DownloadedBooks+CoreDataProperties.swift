@@ -21,5 +21,6 @@ extension DownloadedBooks {
     @NSManaged public var parent_Id: String?
     @NSManaged public var bookData: String?
     @NSManaged public var book_id: String?
+    @NSManaged public var bookTypeId: String?
 
 }

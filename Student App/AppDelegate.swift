@@ -251,7 +251,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     
-    func downloadBookToCoreData(withbookData : String  , kid_id : String , parent_id : String , book_id : String) -> Bool{
+    func downloadBookToCoreData(withbookData : String  , kid_id : String , parent_id : String , book_id : String , booktypeId : String) -> Bool{
         print ("yes you are here");
         
         guard let userEntity = NSEntityDescription.entity(forEntityName: "DownloadedBooks", in: managedObjectContext!) else {
@@ -264,7 +264,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         user.setValue(kid_id, forKey: "kid_Id")
         user.setValue(parent_id, forKey: "parent_Id")
         user.setValue(book_id, forKey: "book_id")
-        
+        user.setValue(booktypeId, forKey: "bookTypeId")
         
         do{
             try managedObjectContext!.save()

@@ -18,6 +18,7 @@ class DownloadedBookTableViewCell: UITableViewCell {
     @IBOutlet weak var bookTypeLB: UILabel!
     @IBOutlet weak var seriesLB: UILabel!
     @IBOutlet weak var deleteBookbtn: UIButton!
+    @IBOutlet weak var cellView: UIView!
     @IBOutlet weak var classLB: UILabel!
     @IBOutlet weak var thumbnailImageView: UIImageView!
     @IBOutlet weak var desLB: UILabel!

@@ -127,12 +127,13 @@ class BooksListViewController: UIViewController , UITableViewDataSource , UITabl
                         let studentbooktype = obj["studentbooktype"] as! [String : Any]
                         let bookType = studentbooktype["bookType"] as! String
                         let bookId = obj["bookId"] as! String
+                        let bookTypeIdId = obj["booktypeId"] as! String
 
                         
                         self.bookIdArray.add(bookId)
                         
                         if series == self.seriesNameText {
-                            self.downloadBookArray.append(downloadBook(bookName: bookName, bookType: bookType, description: description, thumbnail: thumbnail, bookseries: series))
+                            self.downloadBookArray.append(downloadBook(bookName: bookName, bookType: bookType, description: description, thumbnail: thumbnail, bookseries: series , bookTypeId : bookTypeIdId  ))
                         }
                         print("downloadBookArray",self.downloadBookArray)
                         print("downloadBookArray",self.downloadBookArray[0].bookName as Any)
@@ -162,13 +163,14 @@ class BooksListViewController: UIViewController , UITableViewDataSource , UITabl
                                         let studentbooktype = obj["studentbooktype"] as! [String : Any]
                                         let bookType = studentbooktype["bookType"] as! String
                                         let bookId = obj["bookId"] as! String
+                    let booktypeId = obj["booktypeId"] as! String
 
                                         
                                         self.bookIdArray.add(bookId)
                                         
                                         
                     if series == self.seriesNameText {
-                                            self.downloadBookArray.append(downloadBook(bookName: bookName, bookType: bookType, description: description, thumbnail: thumbnail, bookseries: series))
+                        self.downloadBookArray.append(downloadBook(bookName: bookName, bookType: bookType, description: description, thumbnail: thumbnail, bookseries: series, bookTypeId: booktypeId))
                                         }
                     self.bookslistTableview.reloadData()
 
@@ -290,7 +292,11 @@ class BooksListViewController: UIViewController , UITableViewDataSource , UITabl
             
             if index == 1{
                 
-                let isSuccess = self.appDelegate!.downloadBookToCoreData(withbookData: self.jsonObjectArray[tag] as! String , kid_id : self.kid_id ,parent_id : self.parent_id , book_id: self.bookIdArray[tag] as! String)
+                let bookData = self.downloadBookArray[tag]
+                let bookTypeId = bookData.bookTypeId
+
+                
+                let isSuccess = self.appDelegate!.downloadBookToCoreData(withbookData: self.jsonObjectArray[tag] as! String , kid_id : self.kid_id ,parent_id : self.parent_id , book_id: self.bookIdArray[tag] as! String, booktypeId: bookTypeId!)
                 
                 if isSuccess == true {
 

@@ -8,7 +8,7 @@
 
 import UIKit
 protocol YourCellDelegate : class {
-    func didPressButton(_ tag: Int)
+    func didPressButton(_ tag: Int, image: UIImage?)
     func didPressDownloadButton(_ tag: Int)
 
 }
@@ -33,7 +33,7 @@ class BooksListTableViewCell: UITableViewCell {
     }
 
     @IBAction func thumbnailBtnAction(_ sender: Any) {
-        cellDelegate?.didPressButton((sender as AnyObject).tag)
+        cellDelegate?.didPressButton((sender as AnyObject).tag, image: thumbnailImageView.image)
     }
     
     @IBAction func downloadBtnAction(_ sender: Any) {

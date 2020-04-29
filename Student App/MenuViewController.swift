@@ -105,7 +105,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
             cell.titleLabel.text = "Share"
             break
         case 4:
-            cell.menuImageView.image = UIImage(named: "shareicon")
+            cell.menuImageView.image = UIImage(named: "addkids")
             cell.titleLabel.text = "Manage Kids"
             break
         default:

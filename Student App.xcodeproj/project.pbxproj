@@ -11,6 +11,7 @@
 		04ED0ABA2457EFD300B25195 /* deleted.wav in Resources */ = {isa = PBXBuildFile; fileRef = 04ED0AB72457EFD200B25195 /* deleted.wav */; };
 		04ED0ABB2457EFD300B25195 /* NoSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 04ED0AB82457EFD200B25195 /* NoSound.mp3 */; };
 		04ED0ABD2457F11D00B25195 /* favicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 04ED0ABC2457F11D00B25195 /* favicon.png */; };
+		04ED0ABF2459C88000B25195 /* addkids.png in Resources */ = {isa = PBXBuildFile; fileRef = 04ED0ABE2459C87D00B25195 /* addkids.png */; };
 		2B8B7A687B53A04D0926EA85 /* Pods_Student_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94A66F069D13C1ED9D4A4689 /* Pods_Student_App.framework */; };
 		302E53ED24138E5500E32331 /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 302E53EC24138E5500E32331 /* plus.png */; };
 		302E53EF2413909400E32331 /* AddKidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302E53EE2413909400E32331 /* AddKidViewController.swift */; };
@@ -121,6 +122,7 @@
 		04ED0AB72457EFD200B25195 /* deleted.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = deleted.wav; sourceTree = "<group>"; };
 		04ED0AB82457EFD200B25195 /* NoSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = NoSound.mp3; sourceTree = "<group>"; };
 		04ED0ABC2457F11D00B25195 /* favicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favicon.png; sourceTree = "<group>"; };
+		04ED0ABE2459C87D00B25195 /* addkids.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addkids.png; sourceTree = "<group>"; };
 		1459B0F99D64939F5CF2B0B4 /* Pods-Student App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Student App.release.xcconfig"; path = "Target Support Files/Pods-Student App/Pods-Student App.release.xcconfig"; sourceTree = "<group>"; };
 		302E53EC24138E5500E32331 /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
 		302E53EE2413909400E32331 /* AddKidViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddKidViewController.swift; sourceTree = "<group>"; };
@@ -380,6 +382,7 @@
 				302E53EC24138E5500E32331 /* plus.png */,
 				306BD2D3243C189600B9F867 /* cancel.png */,
 				3067E66C23C0C55C0009A6FF /* classbuttonBg.png */,
+				04ED0ABE2459C87D00B25195 /* addkids.png */,
 				30FE910423CA045500352F40 /* mailicon.png */,
 				30FE910623CA046300352F40 /* passwordicon.png */,
 				30FE910823CA047100352F40 /* shareicon.png */,
@@ -594,6 +597,7 @@
 				30C975B1244EA3F700921064 /* down.png in Resources */,
 				3067E43223B0F83D0009A6FF /* Assets.xcassets in Resources */,
 				302E53ED24138E5500E32331 /* plus.png in Resources */,
+				04ED0ABF2459C88000B25195 /* addkids.png in Resources */,
 				3067E5AF23B233D10009A6FF /* MyBooksTableViewCell.xib in Resources */,
 				30C975A1244E172700921064 /* Learning_Yard_Logo.png in Resources */,
 				30FE910523CA045500352F40 /* mailicon.png in Resources */,

@@ -81,7 +81,7 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
     var downloadedBooks = [downloadedBook]()
     var kid_id = String()
     var didTappedAtBook = NSInteger()
-
+    var highlightBookId:String?
     @IBOutlet weak var allBooksBTNOutlet: UIButton!
     @IBOutlet weak var showFloatingView: UIView!
     @IBOutlet var popupView: UIView!
@@ -170,6 +170,8 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
                 let series = studentseries["series"] as! String
                 let studentbooktype = obj["studentbooktype"] as! [String : Any]
                 let bookType = studentbooktype["bookType"] as! String
+                let bookid = obj["bookId"] as! String
+
                 //let subjectsObjs = obj["subjects"] subjectId
                 let subjectArray : NSMutableArray = []
                 
@@ -186,8 +188,9 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
                     }
                 }
                 print("subjects", subjectArray)
-                
-                self.downloadedBooks.append(downloadedBook(bookName: bookName, bookType: bookType, description: description, thumbnail: thumbnail, bookseries: series, className: className, subjects: subjectArray))
+                print("book Data", obj["bookId"])
+
+                self.downloadedBooks.append(downloadedBook(bookName: bookName, bookType: bookType, description: description, thumbnail: thumbnail, bookseries: series, className: className, subjects: subjectArray, bookid: bookid ))
                        }
             SProgress.hide()
         }
@@ -240,10 +243,13 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
                   cell.deleteBookbtn?.tag = indexPath.row
             cell.showImageBtn?.tag = indexPath.row
                   let bookData = self.downloadedBooks[indexPath.row]
-            
-            if indexPath.row == self.downloadedBooks.count - 1 {
-            cell.cellView?.backgroundColor = .lightGray
-               }
+            print(self.highlightBookId)
+            if let bookid = self.highlightBookId, bookid == bookData.bookId {
+                cell.cellView?.backgroundColor = .lightGray
+            }else{
+                cell.cellView?.backgroundColor = .white
+
+            }
 
                   let thumbnailURl = bookData.thumbnail!
                   let bookname = bookData.bookName!

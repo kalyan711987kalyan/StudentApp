@@ -250,30 +250,42 @@ class BooksListViewController: UIViewController , UITableViewDataSource , UITabl
         
     }
     
-    func showImageOnselection(thumbnailURlIS : String){
+    func showImageOnselection(thumbnailURlIS : String, image: UIImage?){
         
-        let url : NSString = thumbnailURlIS as NSString
-        let urlStr : NSString = url.addingPercentEscapes(using: String.Encoding.utf8.rawValue)! as NSString
-        let searchURL : NSURL = NSURL(string: urlStr as String)!
-        let data = try? Data(contentsOf: searchURL as URL)
+    
+        if let image = image {
+            let imageView = UIImageView(image: image)
+            imageView.frame = CGRect(x: 0, y: 0, width: 300, height: 350)
+            imageView.center = self.floatingImageView.center
+            self.floatingImageView.addSubview(imageView)
+            self.floatingImageView.bringSubviewToFront(imageView)
+        }else{
+            
+                    let url : NSString = thumbnailURlIS as NSString
+                    let urlStr : NSString = url.addingPercentEscapes(using: String.Encoding.utf8.rawValue)! as NSString
+                    let searchURL : NSURL = NSURL(string: urlStr as String)!
+                    let data = try? Data(contentsOf: searchURL as URL)
+            let imageView = UIImageView(image: UIImage(data: data!))
+            imageView.frame = CGRect(x: 0, y: 0, width: 300, height: 350)
+            imageView.center = self.floatingImageView.center
+            self.floatingImageView.addSubview(imageView)
+            //Imageview on Top of View
+            self.floatingImageView.bringSubviewToFront(imageView)
+        }
+
         
         //self.floatingImageView.image = // Error here
         
-        let imageView = UIImageView(image: UIImage(data: data!))
-        imageView.frame = CGRect(x: 0, y: 0, width: 300, height: 350)
-        imageView.center = self.floatingImageView.center
-        self.floatingImageView.addSubview(imageView)
-        //Imageview on Top of View
-        self.floatingImageView.bringSubviewToFront(imageView)
+        
         
     }
     
-    func didPressButton(_ tag: Int) {
+    func didPressButton(_ tag: Int, image: UIImage?) {
         self.floatingImageView.isHidden = false
         print("I have pressed a button with a tag: \(tag)")
         let bookData = self.downloadBookArray[tag]
         let thumbnailURl = bookData.thumbnail!
-        self.showImageOnselection(thumbnailURlIS: thumbnailURl)
+        self.showImageOnselection(thumbnailURlIS: thumbnailURl, image: image)
     }
     
     func asString(jsonDictionary: JSONDictionary) -> String {
@@ -294,34 +306,43 @@ class BooksListViewController: UIViewController , UITableViewDataSource , UITabl
                 
                 let bookData = self.downloadBookArray[tag]
                 let bookTypeId = bookData.bookTypeId
+                SProgress.show(in: self.view, message: "Downloading...")
 
-                
-                let isSuccess = self.appDelegate!.downloadBookToCoreData(withbookData: self.jsonObjectArray[tag] as! String , kid_id : self.kid_id ,parent_id : self.parent_id , book_id: self.bookIdArray[tag] as! String, booktypeId: bookTypeId!)
-                
-                if isSuccess == true {
-
-                    let path = Bundle.main.path(forResource: "deleted.wav", ofType:nil)!
-                                  let url = URL(fileURLWithPath: path)
-
-                                  do {
-                                    self.bombSoundEffect = try AVAudioPlayer(contentsOf: url)
-                                    self.bombSoundEffect?.play()
-                                  } catch {
-                                      // couldn't load file :(
-                                  }
-                    self.showAlertWithTitleInView(title: "Success!", message:"Do you want to open the downloaded Book?", buttonCancelTitle:"No", buttonOkTitle: "Yes"){ (index) in
-                        if index == 1 {
-                let vc = self.storyboard?.instantiateViewController(withIdentifier: "DownloadedBooksViewController") as! DownloadedBooksViewController
-                vc.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
-            self.present(vc, animated: true, completion: nil)
-                        }
-                    }
-                    self.getListOfBooksDownloaded()
-
+                print(self.jsonObjectArray[tag])
+                //self.appDelegate!.downloadBookToCoreData(withbookData: self.jsonObjectArray[tag] as! String , kid_id : self.kid_id ,parent_id : self.parent_id , book_id: self.bookIdArray[tag] as! String, booktypeId: bookTypeId!, completion: (Bool) -> Void)
+                self.appDelegate!.downloadBookToCoreData(withbookData: self.jsonObjectArray[tag] as! String, kid_id: self.kid_id, parent_id: self.parent_id, book_id: self.bookIdArray[tag] as! String, booktypeId: bookTypeId!) { (isSuccess) in
                     
-                }else{
-                    self.showAlertWithTitleInView(title: "Failed!", message:"Failed to Download Book!", buttonCancelTitle:"No", buttonOkTitle: "Yes"){ (index) in}
+                    DispatchQueue.main.async {
+                        SProgress.hide(in: self.view)
+                    }
+                                   
+                    if isSuccess == true {
+
+                                       let path = Bundle.main.path(forResource: "deleted.wav", ofType:nil)!
+                                                     let url = URL(fileURLWithPath: path)
+
+                                                     do {
+                                                       self.bombSoundEffect = try AVAudioPlayer(contentsOf: url)
+                                                       self.bombSoundEffect?.play()
+                                                     } catch {
+                                                         // couldn't load file :(
+                                                     }
+                                       self.showAlertWithTitleInView(title: "Success!", message:"Do you want to open the downloaded Book?", buttonCancelTitle:"No", buttonOkTitle: "Yes"){ (index) in
+                                           if index == 1 {
+                                   let vc = self.storyboard?.instantiateViewController(withIdentifier: "DownloadedBooksViewController") as! DownloadedBooksViewController
+                                   vc.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
+                                vc.highlightBookId = self.bookIdArray[tag] as! String
+                               self.present(vc, animated: true, completion: nil)
+                                           }
+                                       }
+                                       self.getListOfBooksDownloaded()
+
+                                       
+                                   }else{
+                                       self.showAlertWithTitleInView(title: "Failed!", message:"Failed to Download Book!", buttonCancelTitle:"No", buttonOkTitle: "Yes"){ (index) in}
+                                   }
                 }
+               
             }else{
                 
             }

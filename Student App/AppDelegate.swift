@@ -251,12 +251,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     
-    func downloadBookToCoreData(withbookData : String  , kid_id : String , parent_id : String , book_id : String , booktypeId : String) -> Bool{
+    func downloadBookToCoreData(withbookData : String  , kid_id : String , parent_id : String , book_id : String , booktypeId : String,  completion: @escaping (_ success: Bool) -> Void ){
         print ("yes you are here");
         
         guard let userEntity = NSEntityDescription.entity(forEntityName: "DownloadedBooks", in: managedObjectContext!) else {
-            return false
-            
+
+            completion(false)
+            return
         }
         let user = NSManagedObject(entity: userEntity, insertInto: managedObjectContext)
         // save new appointmnet
@@ -268,11 +269,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         do{
             try managedObjectContext!.save()
-            return true
+            completion(true)
         } catch let error as NSError{
-            
             print("COULD NOT SAVE , \(error) , \(error.userInfo)")
-            return false
+            completion(false)
         }
     }
     

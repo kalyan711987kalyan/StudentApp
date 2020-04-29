@@ -174,8 +174,9 @@ struct downloadedBook {
   var bookseries : String!
     var className : String!
     var subjects : NSArray!
+    var bookId: String!
     
-    init(bookName:String, bookType:String, description:String, thumbnail:String, bookseries:String , className : String , subjects : NSArray) {
+    init(bookName:String, bookType:String, description:String, thumbnail:String, bookseries:String , className : String , subjects : NSArray, bookid:String) {
         self.bookName = bookName
         self.bookType = bookType
         self.description = description
@@ -183,6 +184,7 @@ struct downloadedBook {
         self.bookseries = bookseries
         self.className = className
         self.subjects = subjects
+        self.bookId = bookid
     }
 }
 

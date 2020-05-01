@@ -368,11 +368,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     
-    func addVideoFavoriteToCoreData(withFilePath : String  , id : String , lessonId : String , videoName : String ,videoSize : String , videoUrl : String ,videoNameFormated  : String) -> Bool{
+    func addVideoFavoriteToCoreData(withFilePath: String, id: String , lessonId: String , videoName : String ,videoSize: String , videoUrl: String ,videoNameFormated: String,  completion: @escaping (_ success: Bool) -> Void){
     
-        
+
         guard let userEntity = NSEntityDescription.entity(forEntityName: "DownloadedVideos", in: managedObjectContext!) else {
-            return false
+           
+            completion(false)
+            return
             
         }
         let user = NSManagedObject(entity: userEntity, insertInto: managedObjectContext)
@@ -386,11 +388,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         user.setValue(videoUrl, forKey: "videoUrl")
         do{
             try managedObjectContext!.save()
-            return true
+            completion(true)
         } catch let error as NSError{
             
             print("COULD NOT SAVE , \(error) , \(error.userInfo)")
-            return false
+            completion(false)
         }
     }
     

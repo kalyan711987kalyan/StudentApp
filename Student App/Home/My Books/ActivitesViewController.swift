@@ -14,12 +14,17 @@ class ActivitesViewController: UIViewController  , UITableViewDataSource , UITab
     
     let appDelegate = UIApplication.shared.delegate as? AppDelegate
 
+    func randomString(length: Int) -> String {
+      let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+      return String((0..<length).map{ _ in letters.randomElement()! })
+    }
+    
     func didDownloadPressButton(_ tag: Int) {
          self.showAlertWithTitleInView(title: "Download This Video?", message:"Download video shall be available in My Favs", buttonCancelTitle:"No", buttonOkTitle: "Yes"){ (index) in
                           if index == 1{
                         
-                            SProgress.show()
-                            
+                            SProgress.show(in: self.view, message: "Downloading...")
+
                             print("lstudentvideo",self.lstudentvideo[tag])
                             let object = self.lstudentvideo[tag] as! [String : String]
                             let videoImageUrl = object["videoUrl"]!
@@ -29,30 +34,40 @@ class ActivitesViewController: UIViewController  , UITableViewDataSource , UITab
                             let videoSize = object["videoSize"]!
                             let videoUrl = object["videoUrl"]!
 
-                            let filePath = self.appDelegate!.documentsPathForFileName(name: "\(videoName).mp4")
+                            let filePath = self.appDelegate!.documentsPathForFileName(name: "\(self.randomString(length: 10)).mp4")
 
                                    if let url = URL(string: videoImageUrl),
                                    let urlData = NSData(contentsOf: url) {
                                        urlData.write(toFile: filePath, atomically: true)
                                      //Save in core data with any extra parameter
-                                  let isSuccess = self.appDelegate!.addVideoFavoriteToCoreData(withFilePath: filePath, id: id, lessonId: lessonId, videoName: videoName, videoSize: videoSize, videoUrl: videoUrl, videoNameFormated: "\(videoName).mp4")
+                                 // let isSuccess = self.appDelegate!.addVideoFavoriteToCoreData(withFilePath: filePath, id: id, lessonId: lessonId, videoName: videoName, videoSize: videoSize, videoUrl: videoUrl, videoNameFormated: "\(videoName).mp4")
                                      //  self.appDelegate!.addVideoFavoriteToCoreData(withbookData: "12", videoData: filePath)
-                                    
-                                    if isSuccess == true {
-                                        SProgress.hide()
-
-                                        self.showAlertWithTitleInView(title: "Success!", message:"Video downloaded successfully.", buttonCancelTitle:"", buttonOkTitle: "OK"){ (index) in
+                                    self.appDelegate!.addVideoFavoriteToCoreData(withFilePath: filePath, id: id, lessonId: lessonId, videoName: videoName, videoSize: videoSize, videoUrl: videoUrl, videoNameFormated: "\(videoName).mp4") { (isSuccess) in
+                                        DispatchQueue.main.async {
+                                            SProgress.hide(in: self.view)
                                         }
-                                    }else{
-                                        SProgress.hide()
+                                        if isSuccess == true {
 
-                                        self.showAlertWithTitleInView(title: "Failed", message:"Failed to download.", buttonCancelTitle:"", buttonOkTitle: "OK"){ (index) in
+                                                                             self.showAlertWithTitleInView(title: "Success!", message:"Video downloaded successfully.", buttonCancelTitle:"", buttonOkTitle: "OK"){ (index) in
+                                                                             }
+                                                                         }else{
+
+                                                                             self.showAlertWithTitleInView(title: "Failed", message:"Failed to download.", buttonCancelTitle:"", buttonOkTitle: "OK"){ (index) in
+
+                                                                         }
+                                            
+                                            self.getAlreadyDownloadVideo()
 
                                     }
-                                        self.getAlreadyDownloadVideo()
+                                    
+                                 
                                    }
                             
-                          }
+                                   }else{
+                                    DispatchQueue.main.async {
+                                        SProgress.hide(in: self.view)
+                                    }
+                            }
                       }
     }
     }

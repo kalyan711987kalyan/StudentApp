@@ -299,7 +299,55 @@ class BooksListViewController: UIViewController , UITableViewDataSource , UITabl
     
     func didPressDownloadButton(_ tag: Int) {
         print("I have pressed a download button with a tag: \(tag)")
-        self.showAlertWithTitleInView(title: "Download Book?", message:"Let's download the Book to My Books!", buttonCancelTitle:"No", buttonOkTitle: "Yes"){ (index) in
+        
+        if let modalViewController = self.storyboard!.instantiateViewController(withIdentifier: "SubjectViewController") as? SubjectViewController {
+
+            modalViewController.view.backgroundColor = UIColor(red: 0.0/255, green: 0.0/255.0, blue: 0.0/255.0, alpha: 0.5)
+                   modalViewController.modalPresentationStyle = .overCurrentContext
+                   present(modalViewController, animated: true, completion: nil)
+                         
+            modalViewController.completion = {
+                
+                DispatchQueue.global(qos: .background).async {
+
+                let bookData = self.downloadBookArray[tag]
+                let bookTypeId = bookData.bookTypeId
+                
+                self.appDelegate!.downloadBookToCoreData(withbookData: self.jsonObjectArray[tag] as! String, kid_id: self.kid_id, parent_id: self.parent_id, book_id: self.bookIdArray[tag] as! String, booktypeId: bookTypeId!) { (isSuccess) in
+                    
+                    
+                    if isSuccess == true {
+                        let path = Bundle.main.path(forResource: "deleted.wav", ofType:nil)!
+                        let url = URL(fileURLWithPath: path)
+                        
+                        do {
+                            self.bombSoundEffect = try AVAudioPlayer(contentsOf: url)
+                            self.bombSoundEffect?.play()
+                        } catch {
+                            // couldn't load file :(
+                        }
+                        DispatchQueue.main.async {
+                            modalViewController.indicator.stopAnimating()
+                            modalViewController.titleLabel.text = "Success!"
+                            modalViewController.descriptionLabel.text = "Do you want to open the downloaded Book?"
+                        }
+                        
+                    }
+                }
+            }
+        }
+            
+            modalViewController.downloadCompletion = {
+                self.dismiss(animated: false, completion: nil)
+
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "DownloadedBooksViewController") as! DownloadedBooksViewController
+                    vc.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
+                 vc.highlightBookId = self.bookIdArray[tag] as! String
+                self.present(vc, animated: true, completion: nil)
+                self.getListOfBooksDownloaded()
+            }
+        }
+       /* self.showAlertWithTitleInView(title: "Download Book?", message:"Let's download the Book to My Books!", buttonCancelTitle:"No", buttonOkTitle: "Yes"){ (index) in
             print (index);
             
             if index == 1{
@@ -346,7 +394,7 @@ class BooksListViewController: UIViewController , UITableViewDataSource , UITabl
             }else{
                 
             }
-        }
+        }*/
     }
         
         

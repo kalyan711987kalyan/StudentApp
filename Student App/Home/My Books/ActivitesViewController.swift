@@ -9,6 +9,7 @@
 import UIKit
 import AVKit
 import Alamofire
+import AVFoundation
 @available(iOS 10.0, *)
 class ActivitesViewController: UIViewController  , UITableViewDataSource , UITableViewDelegate , videoCellDelegate{
     
@@ -20,56 +21,119 @@ class ActivitesViewController: UIViewController  , UITableViewDataSource , UITab
     }
     
     func didDownloadPressButton(_ tag: Int) {
-         self.showAlertWithTitleInView(title: "Download This Video?", message:"Download video shall be available in My Favs", buttonCancelTitle:"No", buttonOkTitle: "Yes"){ (index) in
-                          if index == 1{
+        
+        if let modalViewController = self.storyboard!.instantiateViewController(withIdentifier: "SubjectViewController") as? SubjectViewController {
+            
+            modalViewController.view.backgroundColor = UIColor(red: 0.0/255, green: 0.0/255.0, blue: 0.0/255.0, alpha: 0.5)
+            modalViewController.modalPresentationStyle = .overCurrentContext
+            present(modalViewController, animated: true, completion: nil)
+            
+            modalViewController.titleLabel.text = "Download This Video?"
+            
+            modalViewController.descriptionLabel.text = "Download video shall be available in My Favs"
+            modalViewController.completion = {
+                
+                DispatchQueue.global(qos: .background).async {
+
+                let object = self.lstudentvideo[tag] as! [String : String]
+                let videoImageUrl = object["videoUrl"]!
+                let videoName = object["videoName"]!
+                let id = object["id"]!
+                let lessonId = object["lessonId"]!
+                let videoSize = object["videoSize"]!
+                let videoUrl = object["videoUrl"]!
+                
+                let filePath = self.appDelegate!.documentsPathForFileName(name: "\(self.randomString(length: 10)).mp4")
+                print(filePath)
+                if let url = URL(string: videoImageUrl),
+                    let urlData = NSData(contentsOf: url) {
+                        urlData.write(toFile: filePath, atomically: true)
                         
-                            SProgress.show(in: self.view, message: "Downloading...")
-
-                            print("lstudentvideo",self.lstudentvideo[tag])
-                            let object = self.lstudentvideo[tag] as! [String : String]
-                            let videoImageUrl = object["videoUrl"]!
-                            let videoName = object["videoName"]!
-                            let id = object["id"]!
-                            let lessonId = object["lessonId"]!
-                            let videoSize = object["videoSize"]!
-                            let videoUrl = object["videoUrl"]!
-
-                            let filePath = self.appDelegate!.documentsPathForFileName(name: "\(self.randomString(length: 10)).mp4")
-
-                                   if let url = URL(string: videoImageUrl),
-                                   let urlData = NSData(contentsOf: url) {
-                                       urlData.write(toFile: filePath, atomically: true)
-                                     //Save in core data with any extra parameter
-                                 // let isSuccess = self.appDelegate!.addVideoFavoriteToCoreData(withFilePath: filePath, id: id, lessonId: lessonId, videoName: videoName, videoSize: videoSize, videoUrl: videoUrl, videoNameFormated: "\(videoName).mp4")
-                                     //  self.appDelegate!.addVideoFavoriteToCoreData(withbookData: "12", videoData: filePath)
-                                    self.appDelegate!.addVideoFavoriteToCoreData(withFilePath: filePath, id: id, lessonId: lessonId, videoName: videoName, videoSize: videoSize, videoUrl: videoUrl, videoNameFormated: "\(videoName).mp4") { (isSuccess) in
-                                        DispatchQueue.main.async {
-                                            SProgress.hide(in: self.view)
-                                        }
-                                        if isSuccess == true {
-
-                                                                             self.showAlertWithTitleInView(title: "Success!", message:"Video downloaded successfully.", buttonCancelTitle:"", buttonOkTitle: "OK"){ (index) in
-                                                                             }
-                                                                         }else{
-
-                                                                             self.showAlertWithTitleInView(title: "Failed", message:"Failed to download.", buttonCancelTitle:"", buttonOkTitle: "OK"){ (index) in
-
-                                                                         }
-                                            
-                                            self.getAlreadyDownloadVideo()
-
-                                    }
-                                    
-                                 
-                                   }
+                        
+                        self.appDelegate!.addVideoFavoriteToCoreData(withFilePath: filePath, id: id, lessonId: lessonId, videoName: videoName, videoSize: videoSize, videoUrl: videoUrl, videoNameFormated: "\(videoName).mp4") { (isSuccess) in
                             
-                                   }else{
-                                    DispatchQueue.main.async {
-                                        SProgress.hide(in: self.view)
-                                    }
+                            if isSuccess == true {
+                                let path = Bundle.main.path(forResource: "deleted.wav", ofType:nil)!
+                                let url = URL(fileURLWithPath: path)
+                                
+                                do {
+                                    self.bombSoundEffect = try AVAudioPlayer(contentsOf: url)
+                                    self.bombSoundEffect?.play()
+                                } catch {
+                                    // couldn't load file :(
+                                }
+                                DispatchQueue.main.async {
+                                    modalViewController.indicator.stopAnimating()
+                                    modalViewController.titleLabel.text = "Success!"
+                                    modalViewController.descriptionLabel.text = "Video downloaded successfully."
+                                }
+                               
+                                
                             }
-                      }
-    }
+                            
+                        }
+                        
+                    }
+                }
+            }
+            
+            modalViewController.downloadCompletion = {
+                self.getAlreadyDownloadVideo()
+                self.dismiss(animated: false, completion: nil)
+            }
+            
+        }
+        
+        /* self.showAlertWithTitleInView(title: "Download This Video?", message:"Download video shall be available in My Favs", buttonCancelTitle:"No", buttonOkTitle: "Yes"){ (index) in
+         if index == 1{
+         
+         SProgress.show(in: self.view, message: "Downloading...")
+         
+         print("lstudentvideo",self.lstudentvideo[tag])
+         let object = self.lstudentvideo[tag] as! [String : String]
+         let videoImageUrl = object["videoUrl"]!
+         let videoName = object["videoName"]!
+         let id = object["id"]!
+         let lessonId = object["lessonId"]!
+         let videoSize = object["videoSize"]!
+         let videoUrl = object["videoUrl"]!
+         
+         let filePath = self.appDelegate!.documentsPathForFileName(name: "\(self.randomString(length: 10)).mp4")
+         
+         if let url = URL(string: videoImageUrl),
+         let urlData = NSData(contentsOf: url) {
+         urlData.write(toFile: filePath, atomically: true)
+         //Save in core data with any extra parameter
+         // let isSuccess = self.appDelegate!.addVideoFavoriteToCoreData(withFilePath: filePath, id: id, lessonId: lessonId, videoName: videoName, videoSize: videoSize, videoUrl: videoUrl, videoNameFormated: "\(videoName).mp4")
+         //  self.appDelegate!.addVideoFavoriteToCoreData(withbookData: "12", videoData: filePath)
+         self.appDelegate!.addVideoFavoriteToCoreData(withFilePath: filePath, id: id, lessonId: lessonId, videoName: videoName, videoSize: videoSize, videoUrl: videoUrl, videoNameFormated: "\(videoName).mp4") { (isSuccess) in
+         DispatchQueue.main.async {
+         SProgress.hide(in: self.view)
+         }
+         if isSuccess == true {
+         
+         self.showAlertWithTitleInView(title: "Success!", message:"Video downloaded successfully.", buttonCancelTitle:"", buttonOkTitle: "OK"){ (index) in
+         }
+         }else{
+         
+         self.showAlertWithTitleInView(title: "Failed", message:"Failed to download.", buttonCancelTitle:"", buttonOkTitle: "OK"){ (index) in
+         
+         }
+         
+         self.getAlreadyDownloadVideo()
+         
+         }
+         
+         
+         }
+         
+         }else{
+         DispatchQueue.main.async {
+         SProgress.hide(in: self.view)
+         }
+         }
+         }
+         }*/
     }
     
     @IBOutlet weak var favouriteBtnOutlet: UIButton!
@@ -84,7 +148,8 @@ class ActivitesViewController: UIViewController  , UITableViewDataSource , UITab
     @IBOutlet weak var viddeosTableView: UITableView!
     @IBOutlet weak var learningNameBtn: UIButton!
     @IBOutlet weak var downloadBtn: UIButton!
-    
+    var bombSoundEffect: AVAudioPlayer?
+
     var learningbookData : [String] = []
     var lstudentsubject : NSDictionary = [:]
     var lstudentvideo : NSArray = []

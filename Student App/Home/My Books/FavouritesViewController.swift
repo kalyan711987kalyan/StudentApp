@@ -235,11 +235,14 @@ class FavouritesViewController: UIViewController , UITableViewDataSource , UITab
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+       
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         getFavouritesFromCoreData()
         getAlreadyDownloadVideo()
     }
-    
-    
     func getAlreadyDownloadVideo(){
         self.downloadedVideos.removeAll()
         

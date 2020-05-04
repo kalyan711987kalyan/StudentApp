@@ -15,6 +15,8 @@ class SubjectViewController: UIViewController {
     @IBOutlet var descriptionLabel: UILabel!
 
     var completion:(()->())?
+    var downloadCompletion:(()->())?
+
     var isDownloading: Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,9 +32,20 @@ class SubjectViewController: UIViewController {
     }
     
     @IBAction func YesButtonAction() {
-        completion?()
-        indicator.startAnimating()
-       isDownloading = true
+        
+        if isDownloading {
+            downloadCompletion?()
+        }else{
+            DispatchQueue.main.async {
+                       self.indicator.startAnimating()
+                       self.titleLabel.text = "Downloading..."
+
+                   }
+                  isDownloading = true
+                   completion?()
+        }
+       
+
     }
 
     /*

@@ -153,6 +153,7 @@ class LessionsViewController: UIViewController , UITableViewDataSource , UITable
             .validate()
             .responseJSON { response in
                 guard response.result.isSuccess else {
+                    SProgress.hide()
                     //print("Error while fetching remote rooms: \(String(describing: response.result.error)")
                     //completion(nil)
                     return

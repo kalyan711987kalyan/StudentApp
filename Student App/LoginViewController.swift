@@ -105,6 +105,19 @@ class LoginViewController: UIViewController {
                 self.performSegue(withIdentifier: SSegueKeys.login2dashboardKey, sender: result)
             }
         }
+        
+       /* if let modalViewController = self.storyboard!.instantiateViewController(withIdentifier: "SubjectViewController") as? SubjectViewController {
+
+            modalViewController.view.backgroundColor = UIColor(red: 0.0/255, green: 0.0/255.0, blue: 0.0/255.0, alpha: 0.5)
+                   modalViewController.modalPresentationStyle = .overCurrentContext
+                   present(modalViewController, animated: true, completion: nil)
+                         
+            modalViewController.completion = {
+                
+                modalViewController.titleLabel.text = "Downloading..."
+            }
+               
+        }*/
        }
     
     

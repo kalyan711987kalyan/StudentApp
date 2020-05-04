@@ -9,15 +9,31 @@
 import UIKit
 
 class SubjectViewController: UIViewController {
+    
+    @IBOutlet var indicator: UIActivityIndicatorView!
+    @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var descriptionLabel: UILabel!
 
+    var completion:(()->())?
+    var isDownloading: Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         view.backgroundColor = UIColor.clear
         view.isOpaque = false
+        
     }
     
+    @IBAction func noButtonAction() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func YesButtonAction() {
+        completion?()
+        indicator.startAnimating()
+       isDownloading = true
+    }
 
     /*
     // MARK: - Navigation

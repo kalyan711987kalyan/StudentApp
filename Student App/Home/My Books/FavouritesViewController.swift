@@ -158,17 +158,17 @@ class FavouritesViewController: UIViewController , UITableViewDataSource , UITab
             let results = self.downloadedVideos[indexPath.row]
             print(results.filePath)
 
-            if let urlData = results.filePath {
+            if let urlData = results.filePath, let url = URL(string: urlData) {
 
-                let file = urlData.components(separatedBy: ".")
                     
 //                   guard let path = Bundle.main.path(forResource: file[0], ofType:file[1]) else {
 //                       debugPrint( "\(file.joined(separator: ".")) not found")
 //                       return
 //                   }
                 
-                
-                 let player = AVPlayer(url: URL(fileURLWithPath:urlData))
+                print(url)
+
+                 let player = AVPlayer(url: url)
                 let playerViewController = AVPlayerViewController()
                 playerViewController.player = player
                 self.present(playerViewController, animated: true) {

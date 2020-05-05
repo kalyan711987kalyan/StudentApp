@@ -47,10 +47,10 @@ class ActivitesViewController: UIViewController  , UITableViewDataSource , UITab
                 print(filePath)
                 if let url = URL(string: videoImageUrl),
                     let urlData = NSData(contentsOf: url) {
-                        urlData.write(toFile: filePath, atomically: true)
+                        urlData.write(to: filePath, atomically: true)
                         
                         
-                        self.appDelegate!.addVideoFavoriteToCoreData(withFilePath: filePath, id: id, lessonId: lessonId, videoName: videoName, videoSize: videoSize, videoUrl: videoUrl, videoNameFormated: "\(videoName).mp4") { (isSuccess) in
+                        self.appDelegate!.addVideoFavoriteToCoreData(withFilePath: "\(filePath)", id: id, lessonId: lessonId, videoName: videoName, videoSize: videoSize, videoUrl: videoUrl, videoNameFormated: "\(videoName).mp4") { (isSuccess) in
                             
                             if isSuccess == true {
                                 let path = Bundle.main.path(forResource: "deleted.wav", ofType:nil)!

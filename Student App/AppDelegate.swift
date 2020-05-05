@@ -415,9 +415,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     
-    func documentsPathForFileName(name: String) -> String {
+    func documentsPathForFileName(name: String) -> URL {
         let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-        return documentsPath.appending(name)
+        let dirPath = "file://\(documentsPath)"
+        print(documentsPath,dirPath, name)
+        let filePaths = [dirPath,name]
+        let path = URL(string: filePaths.joined(separator: "/"))
+        return path!
     }
     
     func deleteRecordforValue(valueof: String ,forattribute: String , forEntity : String) -> Bool {

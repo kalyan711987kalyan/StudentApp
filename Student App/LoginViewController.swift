@@ -52,7 +52,7 @@ class LoginViewController: UIViewController {
     
     @IBAction func loginButtonAction() {
            
-           guard let username = userNameField.text, username.trimWhiteSpaces().count > 0 else {
+        guard let username = userNameField.text, username.trimWhiteSpaces().count > 0 else {
                self.showAlertWithTitleInView(title: "", message:"Please enter username", buttonCancelTitle:"", buttonOkTitle: "OK"){ (index) in}
                
                return

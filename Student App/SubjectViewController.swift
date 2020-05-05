@@ -8,11 +8,12 @@
 
 import UIKit
 
-class SubjectViewController: UIViewController {
+class SubjectViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet var indicator: UIActivityIndicatorView!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var descriptionLabel: UILabel!
+    @IBOutlet var popupView:UIView!
 
     var completion:(()->())?
     var downloadCompletion:(()->())?
@@ -25,6 +26,24 @@ class SubjectViewController: UIViewController {
         view.backgroundColor = UIColor.clear
         view.isOpaque = false
         
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
+        tap.delegate = self
+        self.view.addGestureRecognizer(tap)
+        
+    }
+    
+    @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
+        // handling code
+        self.dismiss(animated: true, completion: nil)
+        
+    }
+    
+    // MARK: UIGestureRecognizerDelegate methods, You need to set the delegate of the recognizer
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+         if touch.view?.isDescendant(of: popupView) == true {
+            return false
+         }
+         return true
     }
     
     @IBAction func noButtonAction() {

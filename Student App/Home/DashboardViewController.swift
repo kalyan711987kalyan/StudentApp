@@ -121,7 +121,9 @@ class DashboardViewController: UIViewController,  SlideMenuControllerDelegate, U
 //        present(modalViewController, animated: true, completion: nil)
         
         //self.performSegue(withIdentifier: "dash2segue", sender: nil)
-        self.performSegue(withIdentifier: SSegueKeys.home2mybooksKey, sender: nil)
+       // self.performSegue(withIdentifier: SSegueKeys.home2mybooksKey, sender: nil)
+        self.tabBarController?.selectedIndex = 1
+
 
     }
     

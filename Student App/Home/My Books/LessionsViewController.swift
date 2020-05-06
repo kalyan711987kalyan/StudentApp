@@ -100,7 +100,8 @@ class LessionsViewController: UIViewController , UITableViewDataSource , UITable
     var FavouriteslessonId = NSMutableArray()
     typealias JSONDictionary = [String : Any]
     var rowsWhichAreChecked = [NSIndexPath]()
-    
+    var shouldSaveLession:Bool = true
+    var lessionIds:[String] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -117,6 +118,13 @@ class LessionsViewController: UIViewController , UITableViewDataSource , UITable
             subject_id = "1"
         }
         
+        let lessionresults = self.appDelegate!.getAllRecordsforValue(valueof: "", forattribute: "", forEntity: "LessionDB")
+
+        for result in lessionresults {
+            let id = result.value(forKey: "id") as! String
+            lessionIds.append(id)
+            
+        }
         loadLessonDetails( classToPass:  book_id!+"/"+subject_id!)
         guard let kidId = UserDefaults.standard.string(forKey: "selectedKid")
             else { return print("No data") }
@@ -169,46 +177,37 @@ class LessionsViewController: UIViewController , UITableViewDataSource , UITable
                         }
                         return
                 }
+                SProgress.hide()
                 if let response = response.result.value as? [String:Any] {
-                    
                     let booksObj = response["lessons"] as? [[String:Any]]
-                    
                     for (index, obj) in booksObj!.enumerated() {
                         let lessonName = obj["lessonName"] as! String
                         let lessonId = obj["lessonId"] as! String
                         self.lessonIdArray.add(lessonId)
-                        
-                       // let activitse = obj["studentQuestions"] as? NSArray ?? []
                         let activitse = obj["actitvitiesCount"] as? String ?? "0"
                         let learning = obj["learningsCount"] as? String ?? "0"
-
-                        
-                        var stydentArray : NSMutableArray = []
-                        
-                        
+                        let stydentArray : NSMutableArray = []
                         if let imagesArray = obj["studentvideo"] as? NSDictionary{
                             stydentArray.add(imagesArray)
                         }else{
-                            
                             let nsArray = obj["studentvideo"] as? NSArray ?? []
                             stydentArray.addObjects(from: nsArray as! [Any])
-                            
                         }
-                        
-                        let activities = obj["studentQuestions"] as? NSArray ?? []
-                        
                         let studentsubject = obj["studentsubject"] as? NSDictionary ?? [:]
-                        
                         let dict: JSONDictionary = obj["studentsubject"] as! LessionsViewController.JSONDictionary
                         let dictAsString = self.asString(jsonDictionary: dict)
-                        print("dictAsString",dictAsString)
                         self.subjectData.add(dictAsString)
                         self.lessonDataArray.append(lessonData(lessonName: lessonName,learnings: learning, studentsubject: studentsubject, lessonId: lessonId, activites: activitse))
+                       
+                      let id  = "\(self.bookData[5])\(lessonId)"
+                        if !self.lessionIds.contains(id) {
+                            self.appDelegate!.saveLessioninDB(param: ["leassionname":lessonName,"bookName": self.bookData[2], "classname":self.bookData[1], "subjectid": self.bookData[4], "bookid": self.bookData[5], "bookseries":self.bookData[0], "subjectname": self.bookData[3],"id":id, "lessionid":lessonId])
+
+                        }
                         
                     }
                     self.lessonsTableView.reloadData()
                     
-                    SProgress.hide()
                     
                 }
         }
@@ -270,7 +269,7 @@ class LessionsViewController: UIViewController , UITableViewDataSource , UITable
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "ActivitesViewController") as! ActivitesViewController
-        vc.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
+       // vc.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
         
         let lessonData = self.lessonDataArray[indexPath.row]
         vc.learningbookData = bookData
@@ -290,13 +289,14 @@ class LessionsViewController: UIViewController , UITableViewDataSource , UITable
               }
         vc.isFavorite = isFavourite
         vc.studentSubject = self.subjectData[indexPath.row] as! String
-        self.present(vc, animated: true, completion: nil)
+        self.navigationController?.pushViewController(vc, animated: false)
+        //self.present(vc, animated: true, completion: nil)
         
         
         
     }
     @IBAction func backBtn(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: false)
     }
     /*
      // MARK: - Navigation

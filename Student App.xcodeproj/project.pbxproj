@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0466CC232461A6E60033C45D /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0466CC222461A6E60033C45D /* PreviewViewController.swift */; };
+		0466CC252461C38C0033C45D /* LandscapeAVPlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0466CC242461C38B0033C45D /* LandscapeAVPlayerController.swift */; };
 		04ED0AB92457EFD300B25195 /* YesSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 04ED0AB62457EFD100B25195 /* YesSound.mp3 */; };
 		04ED0ABA2457EFD300B25195 /* deleted.wav in Resources */ = {isa = PBXBuildFile; fileRef = 04ED0AB72457EFD200B25195 /* deleted.wav */; };
 		04ED0ABB2457EFD300B25195 /* NoSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 04ED0AB82457EFD200B25195 /* NoSound.mp3 */; };
@@ -118,6 +120,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0466CC222461A6E60033C45D /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
+		0466CC242461C38B0033C45D /* LandscapeAVPlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandscapeAVPlayerController.swift; sourceTree = "<group>"; };
 		04ED0AB62457EFD100B25195 /* YesSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = YesSound.mp3; sourceTree = "<group>"; };
 		04ED0AB72457EFD200B25195 /* deleted.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = deleted.wav; sourceTree = "<group>"; };
 		04ED0AB82457EFD200B25195 /* NoSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = NoSound.mp3; sourceTree = "<group>"; };
@@ -325,6 +329,8 @@
 				3067E5B023B2436C0009A6FF /* Tabbar */,
 				3067E5A423B230800009A6FF /* Home */,
 				3067E4BA23B1179D0009A6FF /* MenuViewController.swift */,
+				0466CC222461A6E60033C45D /* PreviewViewController.swift */,
+				0466CC242461C38B0033C45D /* LandscapeAVPlayerController.swift */,
 				AD636E87244F5A5D005A774D /* ChangePasswordViewController.swift */,
 				30FE910A23CA12A300352F40 /* MenuTableViewCell.swift */,
 				30FE910B23CA12A300352F40 /* MenuTableViewCell.xib */,
@@ -712,11 +718,13 @@
 				302E53F72413EDDD00E32331 /* KidsData+CoreDataProperties.swift in Sources */,
 				AD636E88244F5A5D005A774D /* ChangePasswordViewController.swift in Sources */,
 				30774C8A2446E04000D07A3F /* Favourites+CoreDataProperties.swift in Sources */,
+				0466CC232461A6E60033C45D /* PreviewViewController.swift in Sources */,
 				30ABFD3C244DC30E00C2C327 /* ForgetPasswordViewController.swift in Sources */,
 				308D63D1244F0DEA000B54FD /* SearchViewController.swift in Sources */,
 				3039980523FBF158007F3B72 /* SwitchKidsViewController.swift in Sources */,
 				304DF8A5243EF3EE00C9C0D4 /* LessionsTableViewCell.swift in Sources */,
 				3067E60D23B6FF850009A6FF /* LearningActivitySectionView.swift in Sources */,
+				0466CC252461C38C0033C45D /* LandscapeAVPlayerController.swift in Sources */,
 				30F6699524305E1800FDBF85 /* MyBooksViewController.swift in Sources */,
 				30A8EC9024423D99000036F2 /* ActivitesViewController.swift in Sources */,
 				30FE910C23CA12A300352F40 /* MenuTableViewCell.swift in Sources */,

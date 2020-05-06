@@ -28,7 +28,6 @@ class SearchViewController: UIViewController  , UITableViewDelegate , UITableVie
 
       
         
-        self.getLessonsFromCoreData()
         
     }
     
@@ -39,6 +38,9 @@ class SearchViewController: UIViewController  , UITableViewDelegate , UITableVie
                  bookseriesTableView.tableHeaderView = searchController.searchBar
                  searchController.searchBar.tintColor = UIColor.blue
                  searchController.searchBar.barTintColor = UIColor.white
+        
+        self.getLessonsFromCoreData()
+
        }
     
     
@@ -47,40 +49,53 @@ class SearchViewController: UIViewController  , UITableViewDelegate , UITableVie
         self.mylessonIdArray.removeAllObjects()
         self.mysubjectData.removeAllObjects()
         self.allLessions.removeAll()
-
+        
         guard let kidId = UserDefaults.standard.string(forKey: "selectedKid")
             else { return print("No data") }
-
         
-        let  results = self.appDelegate!.getAllRecordsforValue(valueof: kidId, forattribute: "kid_Id", forEntity: "Favourites")
+        let results = self.appDelegate!.getAllRecordsforValue(valueof: "", forattribute: "", forEntity: "LessionDB")
+        
         
         if results.count == 0 {
             self.favoriteBooks.removeAll()
         }else{
-                         for result in results {
-                             
-                             let learningbookData = result.value(forKey: "learningbookData") as? NSArray
-                            let kid_Id = result.value(forKey: "kid_Id") as? String
-                            let lessionTitle = result.value(forKey: "lessionTitle") as? String
-                            let lessonId = result.value(forKey: "lessonId") as? String
-                            self.allLessions.append(LessionName(name: lessionTitle!, id: lessonId!))
-                            let lstudentQuestions = result.value(forKey: "lstudentQuestions") as? NSArray
-                            let lstudentsubject = result.value(forKey: "lstudentsubject") as? String
-                            let lstudentvideo = result.value(forKey: "lstudentvideo") as? NSArray
-                            
-                            self.mylessonIdArray.add(lessonId as Any)
-                            
-                            self.mysubjectData.add(lstudentsubject as! String)
+            for result in results {
+                print(result.value(forKey: "id") as! String)
+                let leaasionName = result.value(forKey: "lessionName") as! String
+                let id = result.value(forKey: "id") as! String
+                let bookid = result.value(forKey: "bookid") as! String
+                let classname = result.value(forKey: "classname") as! String
 
-                            let datalstudentsubject = self.asString(dataString: lstudentsubject!)
-                            
-                            print("datalstudentsubject ," , datalstudentsubject)
-                            print("datalstudentsubject ," , learningbookData)
-                        
+                let bookname = result.value(forKey: "bookName") as! String
+                let bookseries = result.value(forKey: "bookseries") as! String
+                let subjectid = result.value(forKey: "subjectid") as! String
+                let subjectname = result.value(forKey: "subjectname") as! String
+                let lessionid = result.value(forKey: "lessionid") as? String ?? ""
 
-                            self.favoriteBooks.append(MyFavoritesData(kid_Id: kid_Id!, learningbookData: learningbookData!, lessionTitle: lessionTitle!, lessonId: lessonId!, lstudentQuestions: lstudentQuestions!, lstudentsubject: datalstudentsubject as NSDictionary, lstudentvideo: lstudentvideo!))
+                self.allLessions.append(LessionName(lessionname: leaasionName, id: id, bookid: bookid, bookseries: bookseries, subjectid: subjectid, subjectname: subjectname, classname: classname, bookname: bookname, lessionid: lessionid))
 
-                         }
+               /* let learningbookData = result.value(forKey: "learningbookData") as? NSArray
+                let kid_Id = result.value(forKey: "kid_Id") as? String
+                let lessionTitle = result.value(forKey: "lessionTitle") as? String
+                let lessonId = result.value(forKey: "lessonId") as? String
+                self.allLessions.append(LessionName(name: lessionTitle!, id: lessonId!))
+                let lstudentQuestions = result.value(forKey: "lstudentQuestions") as? NSArray
+                let lstudentsubject = result.value(forKey: "lstudentsubject") as? String
+                let lstudentvideo = result.value(forKey: "lstudentvideo") as? NSArray
+                
+                self.mylessonIdArray.add(lessonId as Any)
+                
+                self.mysubjectData.add(lstudentsubject as! String)
+                
+                let datalstudentsubject = self.asString(dataString: lstudentsubject!)
+                
+                print("datalstudentsubject ," , datalstudentsubject)
+                print("datalstudentsubject ," , learningbookData)
+                
+                
+                self.favoriteBooks.append(MyFavoritesData(kid_Id: kid_Id!, learningbookData: learningbookData!, lessionTitle: lessionTitle!, lessonId: lessonId!, lstudentQuestions: lstudentQuestions!, lstudentsubject: datalstudentsubject as NSDictionary, lstudentvideo: lstudentvideo!))*/
+                
+            }
         }
         self.bookseriesTableView.reloadData()
     }
@@ -132,7 +147,7 @@ class SearchViewController: UIViewController  , UITableViewDelegate , UITableVie
               } else {
                 footballer = allLessions[indexPath.row]
               }
-              cell.textLabel?.text = footballer.name
+              cell.textLabel?.text = footballer.lessionname
            
             return cell
           }
@@ -140,21 +155,48 @@ class SearchViewController: UIViewController  , UITableViewDelegate , UITableVie
           
           func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
             
+            let lessionData = allLessions[indexPath.row]
+
              let vc = self.storyboard?.instantiateViewController(withIdentifier: "ActivitesViewController") as! ActivitesViewController
-             vc.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
-             
-             let lessonData = self.favoriteBooks[indexPath.row]
-             vc.learningbookData = lessonData.learningbookData as! [String]
-             vc.lessionTitle = lessonData.lessionTitle
-             vc.lstudentsubject = lessonData.lstudentsubject
-             vc.lstudentvideo = lessonData.lstudentvideo
-             vc.lstudentQuestions = lessonData.lstudentQuestions
-             vc.lessionId = self.mylessonIdArray[indexPath.row] as! String
+            // let lessonData = self.favoriteBooks[indexPath.row]
+            var bookdata:[String] = ["","","","","","","","",""]
+            let mirror = Mirror(reflecting: lessionData)
+
+            for child in mirror.children  {
+                if child.label == "lessionname" {
+
+                }else if child.label! == "bookseries" {
+                    bookdata.insert(child.value as! String, at: 0)
+
+                }else if child.label! == "subjectid" {
+                    bookdata.insert(child.value as! String, at: 4)
+
+                }else if child.label! == "subjectname" {
+                    bookdata.insert(child.value as! String, at: 3)
+
+                }else if child.label! == "classname" {
+                    bookdata.insert(child.value as! String, at: 1)
+
+                }else if child.label! == "bookname" {
+                    bookdata.insert(child.value as! String, at: 2)
+
+                }else if child.label! == "bookid" {
+                    bookdata.insert(child.value as! String, at: 5)
+                }
+                print("key: \(child.label), value: \(child.value)")
+            }
+            
+             vc.learningbookData = bookdata
+            vc.lessionTitle = lessionData.lessionname
+            vc.lstudentsubject = [:]
+             //vc.lstudentvideo = lessonData.lstudentvideo
+             //vc.lstudentQuestions = lessonData.lstudentQuestions
+            vc.lessionId = lessionData.lessionid
              //send status of favourite
              vc.isFavorite = true
-             vc.studentSubject = self.mysubjectData[indexPath.row] as! String
-             self.present(vc, animated: true, completion: nil)
-
+            vc.studentSubject = lessionData.subjectname
+            self.navigationController?.pushViewController(vc, animated: true)
+            
 
        }
     /*
@@ -170,7 +212,7 @@ class SearchViewController: UIViewController  , UITableViewDelegate , UITableVie
     public func filterLessions(for searchText: String) {
       filteredLessions = allLessions.filter { footballer in
         return
-          footballer.name.lowercased().contains(searchText.lowercased())
+          footballer.lessionname.lowercased().contains(searchText.lowercased())
       }
       bookseriesTableView.reloadData()
     }
@@ -186,6 +228,13 @@ extension SearchViewController: UISearchResultsUpdating {
 
 
 struct LessionName {
-  var name: String
+  var lessionname: String
   var id: String
+    var bookid: String
+    var bookseries: String
+    var subjectid: String
+    var subjectname: String
+    var classname: String
+    var bookname: String
+    var lessionid: String
 }

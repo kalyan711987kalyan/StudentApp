@@ -22,8 +22,14 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
                        if result == true {
                            self.getDataFromeCoreData(kid_id: self.kid_id)
                        }
+                    
+                    _ = self.appDelegate!.deleteAllDataOfEntity(forEntity: "LessionDB")
+
                        
                    }
+            
+           
+
                }
         
     }
@@ -35,6 +41,8 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
                 
                 let result = self.appDelegate!.deleteRecordforValue(valueof: self.BookidArray[tag] as! String, forattribute: "book_id", forEntity: "DownloadedBooks")
                 if result == true {
+                    _ = self.appDelegate!.deleteAllRecordsOfKid(valueof: self.BookidArray[tag] as! String, forattribute: "bookid", forEntity: "LessionDB")
+
                     self.getDataFromeCoreData(kid_id: self.kid_id)
                 }
                 
@@ -44,18 +52,27 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
 
     }
     
-    func didshowImagePressButton(_ tag: Int) {
-        self.showFloatingView.isHidden = false
-        SProgress.show()
+    func didshowImagePressButton(_ tag: Int, image: UIImage?) {
+       // self.showFloatingView.isHidden = false
+        //SProgress.show()
         print("I have pressed a button with a tag: \(tag)")
         let bookData = self.downloadedBooks[tag]
         let thumbnailURl = bookData.thumbnail!
-        self.showdownloadedOnselection(thumbnailURlIS: thumbnailURl)
+        self.showdownloadedOnselection(thumbnailURlIS: thumbnailURl, image: image)
 
     }
-    func showdownloadedOnselection(thumbnailURlIS : String){
+    func showdownloadedOnselection(thumbnailURlIS : String, image: UIImage?){
            
-           let url : NSString = thumbnailURlIS as NSString
+        if let modalViewController = self.storyboard!.instantiateViewController(withIdentifier: "PreviewViewController") as? PreviewViewController {
+
+                   modalViewController.view.backgroundColor = UIColor(red: 0.0/255, green: 0.0/255.0, blue: 0.0/255.0, alpha: 0.5)
+                          modalViewController.modalPresentationStyle = .overCurrentContext
+                   modalViewController.imageview.image = image
+                          present(modalViewController, animated: true, completion: nil)
+                                
+
+               }
+          /* let url : NSString = thumbnailURlIS as NSString
            let urlStr : NSString = url.addingPercentEscapes(using: String.Encoding.utf8.rawValue)! as NSString
            let searchURL : NSURL = NSURL(string: urlStr as String)!
            let data = try? Data(contentsOf: searchURL as URL)
@@ -68,7 +85,7 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
            self.showFloatingView.addSubview(imageView)
            //Imageview on Top of View
            self.showFloatingView.bringSubviewToFront(imageView)
-           SProgress.hide()
+           SProgress.hide()*/
        }
 
     @IBOutlet weak var downloadedBooksTableview: UITableView!
@@ -87,8 +104,6 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
     @IBOutlet var popupView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
-
 
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -113,7 +128,17 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
 
     }
 
+    @IBAction func backButton_Action() {
+        
+        self.tabBarController?.selectedIndex = 0
+    }
     
+    func reloadViews() {
+        guard let kidId = UserDefaults.standard.string(forKey: "selectedKid")
+                                                 else { return print("No data") }
+                                             kid_id = kidId
+                                  getDataFromeCoreData(kid_id: kidId)
+    }
     
     func getDataFromeCoreData(kid_id : String){
 
@@ -294,8 +319,8 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
                           vc.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
             vc.bookData = datatobepassed as! [String]
 
-                      self.present(vc, animated: true, completion: nil)
-            
+            self.navigationController?.pushViewController(vc, animated: false)
+
             
               
         }else{
@@ -357,10 +382,12 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
         let datatobepassed = [bookData.bookName!,bookData.bookseries!,bookData.className!,subjectsname[0],subjectsname[1] , bookId]
         
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "LessionsViewController") as! LessionsViewController
-                      vc.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
+                     
+        //vc.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
         vc.bookData = datatobepassed as! [String]
-
-                  self.present(vc, animated: true, completion: nil)
+        self.navigationController?.pushViewController(vc, animated: false)
+        
+                  //self.present(vc, animated: true, completion: nil)
         
         
             } else {

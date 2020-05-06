@@ -11,7 +11,12 @@ import AVFoundation
 import AVKit
 
 @available(iOS 10.0, *)
-class FavouritesViewController: UIViewController , UITableViewDataSource , UITableViewDelegate  , delFavCellDelegate , delVideoCellDelegate{
+class FavouritesViewController: UIViewController , UITableViewDataSource , UITableViewDelegate  , delFavCellDelegate , delVideoCellDelegate, AVPlayerViewControllerDelegate{
+    
+    let playerViewController = AVPlayerViewController()
+    @IBOutlet weak var videosTableview: UITableView!
+
+    
     func diddeleteVideoButton(_ tag: Int) {
         
         
@@ -52,7 +57,6 @@ class FavouritesViewController: UIViewController , UITableViewDataSource , UITab
 
     }
     
-    @IBOutlet weak var videosTableview: UITableView!
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == self.favouritesTableView {
                     return self.favoriteBooks.count
@@ -158,7 +162,7 @@ class FavouritesViewController: UIViewController , UITableViewDataSource , UITab
             let results = self.downloadedVideos[indexPath.row]
             print(results.filePath)
 
-            if let urlData = results.filePath, let url = URL(string: urlData) {
+            if let urlData = results.filePath, let url = URL(string: "https://drive.google.com/uc?id=1U-RCUEiYySNW5g3g5BbXSb6IB6z8aKU9&export=download") {
 
                     
 //                   guard let path = Bundle.main.path(forResource: file[0], ofType:file[1]) else {
@@ -169,11 +173,16 @@ class FavouritesViewController: UIViewController , UITableViewDataSource , UITab
                 print(url)
 
                  let player = AVPlayer(url: url)
-                let playerViewController = AVPlayerViewController()
+
                 playerViewController.player = player
+
+                self.appDelegate!.orientation = .landscape
+                UIDevice.current.setValue(UIInterfaceOrientation.landscapeLeft.rawValue, forKey: "orientation")
+                
                 self.present(playerViewController, animated: true) {
-                    playerViewController.player!.play()
+                    self.playerViewController.player!.play()
                 }
+                
 //                let playerLayer = AVPlayerLayer(player: player)
 //                    playerLayer.frame = self.allVideosView.bounds
 //                    self.allVideosView.layer.addSublayer(playerLayer)
@@ -236,6 +245,13 @@ class FavouritesViewController: UIViewController , UITableViewDataSource , UITab
 
         // Do any additional setup after loading the view.
        
+ //       NotificationCenter.default.addObserver(self, selector: #selector(playerEndedPlaying), name: Notification.Name("AVPlayerItemDidPlayToEndTimeNotification"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(playerDidFinishPlaying), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: playerViewController.player?.currentItem)
+
+    }
+    
+    @objc func playerDidFinishPlaying(note: NSNotification) {
+     self.playerViewController.dismiss(animated: true)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -243,6 +259,16 @@ class FavouritesViewController: UIViewController , UITableViewDataSource , UITab
         getFavouritesFromCoreData()
         getAlreadyDownloadVideo()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        appDelegate!.orientation = .portrait
+        UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
+    }
+    
+    deinit {
+       NotificationCenter.default.removeObserver(self)
+    }
+    
     func getAlreadyDownloadVideo(){
         self.downloadedVideos.removeAll()
         
@@ -307,6 +333,8 @@ class FavouritesViewController: UIViewController , UITableViewDataSource , UITab
         self.favouritesTableView.reloadData()
     }
     
+   
+    
     func asString(dataString : String) -> [String : Any] {
          let data = dataString.data(using: .utf8)!
           do {
@@ -327,6 +355,8 @@ class FavouritesViewController: UIViewController , UITableViewDataSource , UITab
           }
           
       }
+    
+   
     
     @IBOutlet weak var deleteFavoritesBtn: UIButton!
     

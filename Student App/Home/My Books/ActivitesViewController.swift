@@ -159,6 +159,7 @@ class ActivitesViewController: UIViewController  , UITableViewDataSource , UITab
     var isFavorite = Bool()
     var studentSubject = String()
     var downloadedVideosId = NSMutableArray()
+    let playerViewController = AVPlayerViewController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -186,8 +187,22 @@ class ActivitesViewController: UIViewController  , UITableViewDataSource , UITab
         }
         self.getContentDetails(lessionid: lessionId)
         self.getAlreadyDownloadVideo()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(playerDidFinishPlaying), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: playerViewController.player?.currentItem)
     }
     
+    @objc func playerDidFinishPlaying(note: NSNotification) {
+        self.playerViewController.dismiss(animated: true)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        appDelegate!.orientation = .portrait
+        UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
+    }
+       
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
     
     func getAlreadyDownloadVideo(){
         
@@ -202,7 +217,7 @@ class ActivitesViewController: UIViewController  , UITableViewDataSource , UITab
     }
     
     @IBAction func backBtnAction(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: false)
     }
     
     // With Alamofire
@@ -293,10 +308,11 @@ class ActivitesViewController: UIViewController  , UITableViewDataSource , UITab
        // playInYoutube(youtubeId: fullNameArr[3])
         if let url = URL(string: videoData["videoUrl"] as? String ?? "") {
             let player = AVPlayer(url: url)
-            let playerViewController = AVPlayerViewController()
             playerViewController.player = player
+            self.appDelegate!.orientation = .landscape
+            UIDevice.current.setValue(UIInterfaceOrientation.landscapeLeft.rawValue, forKey: "orientation")
             self.present(playerViewController, animated: true) {
-                playerViewController.player!.play()
+                self.playerViewController.player!.play()
             }
         }
         

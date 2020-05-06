@@ -118,6 +118,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         completionHandler()
     }
     
+    var orientation: UIInterfaceOrientationMask = .portrait
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        return orientation
+    }
+    
     
     // MARK: - Core Data stack
     
@@ -507,6 +512,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     
+    
+    func saveLessioninDB(param: [String: String]) {
+        
+        print(param)
+        
+        guard let userEntity = NSEntityDescription.entity(forEntityName: "LessionDB", in: managedObjectContext!) else {
+            return
+            
+        }
+        let user = NSManagedObject(entity: userEntity, insertInto: managedObjectContext)
+        // save new appointmnet
+        user.setValue(param["leassionname"], forKey: "lessionName")
+        user.setValue(param["bookName"], forKey: "bookName")
+        user.setValue(param["bookseries"], forKey: "bookseries")
+        user.setValue(param["subjectname"], forKey: "subjectname")
+        user.setValue(param["subjectid"], forKey: "subjectid")
+        user.setValue(param["bookid"], forKey: "bookid")
+        user.setValue(param["classname"], forKey: "classname")
+        user.setValue(param["id"], forKey: "id")
+        user.setValue(param["lessionid"], forKey: "lessionid")
+
+        do{
+            try managedObjectContext!.save()
+            
+            
+            
+            
+        } catch let error as NSError{
+            
+            print("COULD NOT SAVE , \(error) , \(error.userInfo)")
+            
+        }
+    }
     
     
     /*

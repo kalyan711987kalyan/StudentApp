@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19B88" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19D76" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="DownloadedBooks" representedClassName="DownloadedBooks" syncable="YES">
         <attribute name="book_id" optional="YES" attributeType="String"/>
         <attribute name="bookData" optional="YES" attributeType="String"/>
@@ -33,6 +33,17 @@
         <attribute name="kidSchool" optional="YES" attributeType="String"/>
         <attribute name="parent_Id" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="LessionDB" representedClassName="LessionDB" syncable="YES" codeGenerationType="class">
+        <attribute name="bookid" optional="YES" attributeType="String"/>
+        <attribute name="bookName" optional="YES" attributeType="String"/>
+        <attribute name="bookseries" optional="YES" attributeType="String"/>
+        <attribute name="classname" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="lessionid" optional="YES" attributeType="String"/>
+        <attribute name="lessionName" optional="YES" attributeType="String"/>
+        <attribute name="subjectid" optional="YES" attributeType="String"/>
+        <attribute name="subjectname" optional="YES" attributeType="String"/>
+    </entity>
     <entity name="StudentTable" representedClassName="StudentTable" syncable="YES" codeGenerationType="class">
         <attribute name="class_Name" optional="YES" attributeType="String"/>
         <attribute name="kid_Name" optional="YES" attributeType="String"/>
@@ -49,5 +60,6 @@
         <element name="Favourites" positionX="-54" positionY="63" width="128" height="163"/>
         <element name="KidsData" positionX="-54" positionY="54" width="128" height="118"/>
         <element name="StudentTable" positionX="-54" positionY="-9" width="128" height="163"/>
+        <element name="LessionDB" positionX="-54" positionY="90" width="128" height="178"/>
     </elements>
 </model>

@@ -9,7 +9,7 @@
 import UIKit
 protocol downloadedCellDelegate : class {
     func didDeletePressButton(_ tag: Int)
-    func didshowImagePressButton(_ tag: Int)
+    func didshowImagePressButton(_ tag: Int, image: UIImage?)
 }
 class DownloadedBookTableViewCell: UITableViewCell {
     var cellDelegate: downloadedCellDelegate?
@@ -39,7 +39,7 @@ class DownloadedBookTableViewCell: UITableViewCell {
         cellDelegate?.didDeletePressButton((sender as AnyObject).tag)
     }
     @IBAction func showFullImageBtnAction(_ sender: Any) {
-        cellDelegate?.didshowImagePressButton((sender as AnyObject).tag)
+        cellDelegate?.didshowImagePressButton((sender as AnyObject).tag , image: thumbnailImageView.image)
 
     }
 }

@@ -251,11 +251,21 @@ class BooksListViewController: UIViewController , UITableViewDataSource , UITabl
     }
     
     func showImageOnselection(thumbnailURlIS : String, image: UIImage?){
-        
+       // 619321936
     
-        if let image = image {
+        if let modalViewController = self.storyboard!.instantiateViewController(withIdentifier: "PreviewViewController") as? PreviewViewController {
+
+            modalViewController.view.backgroundColor = UIColor(red: 0.0/255, green: 0.0/255.0, blue: 0.0/255.0, alpha: 0.5)
+                   modalViewController.modalPresentationStyle = .overCurrentContext
+            modalViewController.imageview.image = image
+                   present(modalViewController, animated: true, completion: nil)
+                         
+
+        }
+        
+      /*  if let image = image {
             let imageView = UIImageView(image: image)
-            imageView.frame = CGRect(x: 0, y: 0, width: 300, height: 350)
+            imageView.frame = CGRect(x: 0, y: 0, width: self.floatingImageView.frame.size.width - 40.0, height: self.floatingImageView.frame.size.width)
             imageView.center = self.floatingImageView.center
             self.floatingImageView.addSubview(imageView)
             self.floatingImageView.bringSubviewToFront(imageView)
@@ -266,12 +276,12 @@ class BooksListViewController: UIViewController , UITableViewDataSource , UITabl
                     let searchURL : NSURL = NSURL(string: urlStr as String)!
                     let data = try? Data(contentsOf: searchURL as URL)
             let imageView = UIImageView(image: UIImage(data: data!))
-            imageView.frame = CGRect(x: 0, y: 0, width: 300, height: 350)
+            imageView.frame = CGRect(x: 0, y: 0, width: self.floatingImageView.frame.size.width - 40.0, height: self.floatingImageView.frame.size.width)
             imageView.center = self.floatingImageView.center
             self.floatingImageView.addSubview(imageView)
             //Imageview on Top of View
             self.floatingImageView.bringSubviewToFront(imageView)
-        }
+        }*/
 
         
         //self.floatingImageView.image = // Error here
@@ -281,7 +291,7 @@ class BooksListViewController: UIViewController , UITableViewDataSource , UITabl
     }
     
     func didPressButton(_ tag: Int, image: UIImage?) {
-        self.floatingImageView.isHidden = false
+       // self.floatingImageView.isHidden = false
         print("I have pressed a button with a tag: \(tag)")
         let bookData = self.downloadBookArray[tag]
         let thumbnailURl = bookData.thumbnail!
@@ -340,10 +350,19 @@ class BooksListViewController: UIViewController , UITableViewDataSource , UITabl
             modalViewController.downloadCompletion = {
                 self.dismiss(animated: false, completion: nil)
 
-                let vc = self.storyboard?.instantiateViewController(withIdentifier: "DownloadedBooksViewController") as! DownloadedBooksViewController
-                    vc.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
-                 vc.highlightBookId = self.bookIdArray[tag] as! String
-                self.present(vc, animated: true, completion: nil)
+                self.tabBarController?.selectedIndex = 3
+                if let nav = self.tabBarController?.viewControllers?[3] as? UINavigationController,  let vc = nav.viewControllers.first as? DownloadedBooksViewController {
+                   DispatchQueue.main.async {
+                    vc.highlightBookId = self.bookIdArray[tag] as? String
+                     vc.reloadViews()
+                    }
+                    
+                }
+
+               // let vc = self.storyboard?.instantiateViewController(withIdentifier: "DownloadedBooksViewController") as! DownloadedBooksViewController
+                //    vc.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
+                // vc.highlightBookId = self.bookIdArray[tag] as! String
+               // self.present(vc, animated: true, completion: nil)
                 self.getListOfBooksDownloaded()
             }
         }

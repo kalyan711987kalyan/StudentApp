@@ -111,12 +111,12 @@ class BooksListViewController: UIViewController , UITableViewDataSource , UITabl
                 
                 SProgress.hide()
                 if let response = response.result.value as? [String:Any],  let booksObj = response["book"] as? [[String:Any]] {
-                    
+                  
+                   /* var bookArray:[[String:Any]] = []
                     for (index, obj) in booksObj.enumerated() {
-                        print("index",index)
                         let dict: JSONDictionary = obj
                         let dictAsString = self.asString(jsonDictionary: dict)
-                        print("dictAsString",dictAsString)
+                       // print("dictAsString",dictAsString)
                         self.jsonObjectArray.add(dictAsString)
                         
                         let bookName = obj["bookName"] as! String
@@ -133,10 +133,22 @@ class BooksListViewController: UIViewController , UITableViewDataSource , UITabl
                         self.bookIdArray.add(bookId)
                         
                         if series == self.seriesNameText {
-                            self.downloadBookArray.append(downloadBook(bookName: bookName, bookType: bookType, description: description, thumbnail: thumbnail, bookseries: series , bookTypeId : bookTypeIdId  ))
+                            bookArray.append(obj)
                         }
-                        print("downloadBookArray",self.downloadBookArray)
-                        print("downloadBookArray",self.downloadBookArray[0].bookName as Any)
+                    }*/
+                    var arrayDict = booksObj.filter{($0["booktypeId"] as! String) == "3"}
+                    if arrayDict.count > 0 {
+                        self.parseResponse(response: arrayDict)
+                    }
+                                                         
+                    arrayDict = booksObj.filter{($0["booktypeId"] as! String) == "2"}
+                    if arrayDict.count > 0 {
+                        self.parseResponse(response: arrayDict)
+                    }
+                    
+                    arrayDict = booksObj.filter{($0["booktypeId"] as! String) == "1"}
+                    if arrayDict.count > 0 {
+                        self.parseResponse(response: arrayDict)
                     }
                     self.bookslistTableview.reloadData()
                     
@@ -415,6 +427,32 @@ class BooksListViewController: UIViewController , UITableViewDataSource , UITabl
             }
         }*/
     }
+    
+    func parseResponse(response: [[String:Any]]) {
+        
+        for (index, obj) in response.enumerated() {
+            
+            let dict: JSONDictionary = obj
+            let dictAsString = self.asString(jsonDictionary: dict)
+            self.jsonObjectArray.add(dictAsString)
+            
+            let bookName = obj["bookName"] as! String
+            let description = obj["description"] as! String
+            let thumbnail = obj["thumbnail"] as! String
+            let studentseries = obj["studentseries"] as! [String : Any]
+            let series = studentseries["series"] as! String
+            let studentbooktype = obj["studentbooktype"] as! [String : Any]
+            let bookType = studentbooktype["bookType"] as! String
+            let bookId = obj["bookId"] as! String
+            let bookTypeIdId = obj["booktypeId"] as! String
+            
+            self.bookIdArray.add(bookId)
+            
+            self.downloadBookArray.append(downloadBook(bookName: bookName, bookType: bookType, description: description, thumbnail: thumbnail, bookseries: series , bookTypeId : bookTypeIdId  ))
+        }
+        
+    }
+    
         
         
         

@@ -155,7 +155,9 @@ class FavouritesViewController: UIViewController , UITableViewDataSource , UITab
         //send status of favourite
         vc.isFavorite = true
         vc.studentSubject = self.mysubjectData[indexPath.row] as! String
-        self.present(vc, animated: true, completion: nil)
+            
+            self.navigationController?.pushViewController(vc, animated: true)
+        //self.present(vc, animated: true, completion: nil)
         }
         if tableView == self.videosTableview {
             
@@ -248,6 +250,8 @@ class FavouritesViewController: UIViewController , UITableViewDataSource , UITab
  //       NotificationCenter.default.addObserver(self, selector: #selector(playerEndedPlaying), name: Notification.Name("AVPlayerItemDidPlayToEndTimeNotification"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(playerDidFinishPlaying), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: playerViewController.player?.currentItem)
 
+        self.indexChanged(segmentedControl)
+        
     }
     
     @objc func playerDidFinishPlaying(note: NSNotification) {
@@ -267,6 +271,23 @@ class FavouritesViewController: UIViewController , UITableViewDataSource , UITab
     
     deinit {
        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @IBOutlet var segmentedControl: UISegmentedControl!
+    @IBAction func indexChanged(_ sender: Any) {
+        switch segmentedControl.selectedSegmentIndex
+        {
+        case 0:
+            self.allFavouritesView.isHidden = false
+                   self.allVideosView.isHidden = true
+            break;
+        case 1:
+            self.allFavouritesView.isHidden = true
+            self.allVideosView.isHidden = false
+            break;
+        default:
+            break
+        }
     }
     
     func getAlreadyDownloadVideo(){

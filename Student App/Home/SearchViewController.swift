@@ -22,13 +22,10 @@ class SearchViewController: UIViewController  , UITableViewDelegate , UITableVie
 
     //Fetch all lession from coredata
     var allLessions = [LessionName]()
-
+    var FavouriteslessonId = NSMutableArray()
     override func viewDidLoad() {
         super.viewDidLoad()
 
-      
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,6 +37,13 @@ class SearchViewController: UIViewController  , UITableViewDelegate , UITableVie
                  searchController.searchBar.barTintColor = UIColor.white
         
         self.getLessonsFromCoreData()
+         let kidId = UserDefaults.standard.string(forKey: "selectedKid") ?? ""
+                                                     
+        let  results = self.appDelegate!.getAllRecordsforValue(valueof: kidId, forattribute: "kid_Id", forEntity: "Favourites")
+        for result in results {
+            let lessonId = result.value(forKey: "lessonId") as? String
+            self.FavouriteslessonId.add(lessonId!)
+        }
 
        }
     
@@ -70,6 +74,7 @@ class SearchViewController: UIViewController  , UITableViewDelegate , UITableVie
                 let bookseries = result.value(forKey: "bookseries") as! String
                 let subjectid = result.value(forKey: "subjectid") as! String
                 let subjectname = result.value(forKey: "subjectname") as! String
+                print(subjectname)
                 let lessionid = result.value(forKey: "lessionid") as? String ?? ""
 
                 self.allLessions.append(LessionName(lessionname: leaasionName, id: id, bookid: bookid, bookseries: bookseries, subjectid: subjectid, subjectname: subjectname, classname: classname, bookname: bookname, lessionid: lessionid))
@@ -159,15 +164,28 @@ class SearchViewController: UIViewController  , UITableViewDelegate , UITableVie
 
              let vc = self.storyboard?.instantiateViewController(withIdentifier: "ActivitesViewController") as! ActivitesViewController
             // let lessonData = self.favoriteBooks[indexPath.row]
-            var bookdata:[String] = ["","","","","","","","",""]
+            var bookdata:[String] = []
             let mirror = Mirror(reflecting: lessionData)
 
-            for child in mirror.children  {
-                if child.label == "lessionname" {
+            for var i in (0..<6){
+                
+                if i == 0 {
+                    bookdata.append(lessionData.bookseries)
+                }else if i == 1{
+                    bookdata.append(lessionData.classname)
+                }else if i == 2 {
+                    bookdata.append(lessionData.bookname)
+                }else if i == 3{
+                    bookdata.append(lessionData.subjectname)
+                }else if i == 4 {
+                    bookdata.append(lessionData.subjectid)
+                }else if i == 5{
+                    bookdata.append(lessionData.bookid)
+                }
+               /* if child.label == "lessionname" {
 
                 }else if child.label! == "bookseries" {
                     bookdata.insert(child.value as! String, at: 0)
-
                 }else if child.label! == "subjectid" {
                     bookdata.insert(child.value as! String, at: 4)
 
@@ -183,9 +201,10 @@ class SearchViewController: UIViewController  , UITableViewDelegate , UITableVie
                 }else if child.label! == "bookid" {
                     bookdata.insert(child.value as! String, at: 5)
                 }
-                print("key: \(child.label), value: \(child.value)")
+                print("key: \(child.label), value: \(child.value)")*/
             }
             
+            print(bookdata)
              vc.learningbookData = bookdata
             vc.lessionTitle = lessionData.lessionname
             vc.lstudentsubject = [:]
@@ -193,7 +212,13 @@ class SearchViewController: UIViewController  , UITableViewDelegate , UITableVie
              //vc.lstudentQuestions = lessonData.lstudentQuestions
             vc.lessionId = lessionData.lessionid
              //send status of favourite
-             vc.isFavorite = true
+            var isFavourite : Bool = true
+            if self.FavouriteslessonId.contains(lessionData.lessionid) {
+               isFavourite = true
+            }else{
+                isFavourite = false
+            }
+             vc.isFavorite = isFavourite
             vc.studentSubject = lessionData.subjectname
             self.navigationController?.pushViewController(vc, animated: true)
             

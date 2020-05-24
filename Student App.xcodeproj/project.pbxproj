@@ -113,6 +113,7 @@
 		30FE910C23CA12A300352F40 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FE910A23CA12A300352F40 /* MenuTableViewCell.swift */; };
 		30FE910D23CA12A300352F40 /* MenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30FE910B23CA12A300352F40 /* MenuTableViewCell.xib */; };
 		30FE910F23CA1A8F00352F40 /* SubjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FE910E23CA1A8F00352F40 /* SubjectViewController.swift */; };
+		AD44CB11247AD1F0009E89A4 /* YoutubePlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD44CB10247AD1F0009E89A4 /* YoutubePlayerViewController.swift */; };
 		AD636E86244F5A3C005A774D /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD636E85244F5A3C005A774D /* WelcomeViewController.swift */; };
 		AD636E88244F5A5D005A774D /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD636E87244F5A5D005A774D /* ChangePasswordViewController.swift */; };
 		AD636E8E244FF70A005A774D /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD636E8C244FF70A005A774D /* TPKeyboardAvoidingScrollView.m */; };
@@ -230,6 +231,7 @@
 		30FE910B23CA12A300352F40 /* MenuTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuTableViewCell.xib; sourceTree = "<group>"; };
 		30FE910E23CA1A8F00352F40 /* SubjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectViewController.swift; sourceTree = "<group>"; };
 		94A66F069D13C1ED9D4A4689 /* Pods_Student_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Student_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD44CB10247AD1F0009E89A4 /* YoutubePlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubePlayerViewController.swift; sourceTree = "<group>"; };
 		AD636E85244F5A3C005A774D /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		AD636E87244F5A5D005A774D /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		AD636E89244FF709005A774D /* Student App-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Student App-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -329,6 +331,7 @@
 				3067E5B023B2436C0009A6FF /* Tabbar */,
 				3067E5A423B230800009A6FF /* Home */,
 				3067E4BA23B1179D0009A6FF /* MenuViewController.swift */,
+				AD44CB10247AD1F0009E89A4 /* YoutubePlayerViewController.swift */,
 				0466CC222461A6E60033C45D /* PreviewViewController.swift */,
 				0466CC242461C38B0033C45D /* LandscapeAVPlayerController.swift */,
 				AD636E87244F5A5D005A774D /* ChangePasswordViewController.swift */,
@@ -718,6 +721,7 @@
 				302E53F72413EDDD00E32331 /* KidsData+CoreDataProperties.swift in Sources */,
 				AD636E88244F5A5D005A774D /* ChangePasswordViewController.swift in Sources */,
 				30774C8A2446E04000D07A3F /* Favourites+CoreDataProperties.swift in Sources */,
+				AD44CB11247AD1F0009E89A4 /* YoutubePlayerViewController.swift in Sources */,
 				0466CC232461A6E60033C45D /* PreviewViewController.swift in Sources */,
 				30ABFD3C244DC30E00C2C327 /* ForgetPasswordViewController.swift in Sources */,
 				308D63D1244F0DEA000B54FD /* SearchViewController.swift in Sources */,
@@ -890,10 +894,10 @@
 				CODE_SIGN_ENTITLEMENTS = "Student App/Student App.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.3;
+				CURRENT_PROJECT_VERSION = 1.0.6;
 				DEVELOPMENT_TEAM = AX37B2LU22;
 				INFOPLIST_FILE = "Student App/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -919,10 +923,10 @@
 				CODE_SIGN_ENTITLEMENTS = "Student App/Student App.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.3;
+				CURRENT_PROJECT_VERSION = 1.0.6;
 				DEVELOPMENT_TEAM = AX37B2LU22;
 				INFOPLIST_FILE = "Student App/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

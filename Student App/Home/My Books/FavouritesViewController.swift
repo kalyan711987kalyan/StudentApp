@@ -162,7 +162,7 @@ class FavouritesViewController: UIViewController , UITableViewDataSource , UITab
             let results = self.downloadedVideos[indexPath.row]
             print(results.filePath)
 
-            if let urlData = results.filePath, let url = URL(string: "https://drive.google.com/uc?id=1U-RCUEiYySNW5g3g5BbXSb6IB6z8aKU9&export=download") {
+            if let urlData = results.filePath, let url = URL(string: urlData) {
 
                     
 //                   guard let path = Bundle.main.path(forResource: file[0], ofType:file[1]) else {

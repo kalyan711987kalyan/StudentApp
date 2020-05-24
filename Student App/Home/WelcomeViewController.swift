@@ -14,6 +14,8 @@ class WelcomeViewController: UIViewController {
     var websiteLink : String = ""
     var howtouseLink: String = ""
     var completion:(()->())?
+    @IBOutlet var viewButton: UIButton!
+    @IBOutlet var skipButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +23,8 @@ class WelcomeViewController: UIViewController {
         // Do any additional setup after loading the view.
         view.backgroundColor = UIColor.clear
         view.isOpaque = false
+        viewButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        skipButton.titleLabel?.adjustsFontSizeToFitWidth = true
     }
     
     @IBAction func redirectToWebsite() {

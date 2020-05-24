@@ -30,7 +30,7 @@ class ActivitesViewController: UIViewController  , UITableViewDataSource , UITab
             
             modalViewController.titleLabel.text = "Download This Video?"
             
-            modalViewController.descriptionLabel.text = "Download video shall be available in My Favs"
+            modalViewController.descriptionLabel.text = "Downloaded video shall be available in My Favourite"
             modalViewController.completion = {
                 
                 DispatchQueue.global(qos: .background).async {

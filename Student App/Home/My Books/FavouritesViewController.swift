@@ -143,8 +143,6 @@ class FavouritesViewController: UIViewController , UITableViewDataSource , UITab
         
         if tableView == self.favouritesTableView {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "ActivitesViewController") as! ActivitesViewController
-        vc.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
-        
         let lessonData = self.favoriteBooks[indexPath.row]
         vc.learningbookData = lessonData.learningbookData as! [String]
         vc.lessionTitle = lessonData.lessionTitle

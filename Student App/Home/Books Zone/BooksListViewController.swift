@@ -260,6 +260,34 @@ class BooksListViewController: UIViewController , UITableViewDataSource , UITabl
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        let downloadeBookId = self.bookIdArray[indexPath.row]
+        if self.downloadedBookidArray.contains(downloadeBookId) {
+            if let modalViewController = self.storyboard!.instantiateViewController(withIdentifier: "SubjectViewController") as? SubjectViewController {
+                modalViewController.view.backgroundColor = UIColor(red: 0.0/255, green: 0.0/255.0, blue: 0.0/255.0, alpha: 0.5)
+                present(modalViewController, animated: true, completion: nil)
+                modalViewController.isDownloading = true
+                DispatchQueue.main.async {
+                    modalViewController.indicator.stopAnimating()
+                    modalViewController.titleLabel.text = "Success!"
+                    modalViewController.descriptionLabel.text = "Do you want to open the downloaded Book?"
+                }
+                modalViewController.downloadCompletion = {
+                    self.dismiss(animated: false, completion: nil)
+
+                    self.tabBarController?.selectedIndex = 3
+                    if let nav = self.tabBarController?.viewControllers?[3] as? UINavigationController,  let vc = nav.viewControllers.first as? DownloadedBooksViewController {
+                        DispatchQueue.main.async {
+                            vc.highlightBookId = self.bookIdArray[indexPath.row] as? String
+                            vc.reloadViews()
+                        }
+                        
+                    }
+                    
+                    self.getListOfBooksDownloaded()
+                }
+            }
+        }
+        
     }
     
     func showImageOnselection(thumbnailURlIS : String, image: UIImage?){
@@ -271,6 +299,7 @@ class BooksListViewController: UIViewController , UITableViewDataSource , UITabl
                    modalViewController.modalPresentationStyle = .overCurrentContext
             modalViewController.imageview.image = image
                    present(modalViewController, animated: true, completion: nil)
+            
                          
 
         }

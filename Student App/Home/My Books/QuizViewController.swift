@@ -45,10 +45,13 @@ class QuizViewController: UIViewController {
         
         pageData = allQuizQuestions[questionPageIndex] as! [String : Any]
         self.qestionNumber.text = "\(questionPageIndex+1)"
-        self.question?.text = pageData["question"]! as? String
+        
+        self.updateQuestionAnswers(dict: pageData)
+
+      /*  self.question?.text = pageData["question"]! as? String
         self.questionTextA.setTitle(pageData["option1"]! as? String, for: UIControl.State.normal)
         self.questionTextB.setTitle(pageData["option2"]! as? String, for: UIControl.State.normal)
-        self.questionTextC.setTitle(pageData["option3"]! as? String, for: UIControl.State.normal)
+        self.questionTextC.setTitle(pageData["option3"]! as? String, for: UIControl.State.normal)*/
         
     }
     @IBAction func backBtn(_ sender: Any) {
@@ -140,10 +143,34 @@ class QuizViewController: UIViewController {
         ButtonCollection.forEach({$0.backgroundColor = #colorLiteral(red: 0.883149147, green: 0.6980459094, blue: 0.2709751725, alpha: 1)})
         pageData = allQuizQuestions[questionPageIndex] as! [String : Any]
         self.qestionNumber.text = "\(questionPageIndex)"
-        self.question?.text = pageData["question"]! as? String
+        self.updateQuestionAnswers(dict: pageData)
+        /*self.question?.text = pageData["question"]! as? String
         self.questionTextA.setTitle(pageData["option1"]! as? String, for: UIControl.State.normal)
         self.questionTextB.setTitle(pageData["option2"]! as? String, for: UIControl.State.normal)
-        self.questionTextC.setTitle(pageData["option3"]! as? String, for: UIControl.State.normal)
+        self.questionTextC.setTitle(pageData["option3"]! as? String, for: UIControl.State.normal)*/
+    }
+    
+    func updateQuestionAnswers(dict: [String:Any]) {
+        
+        let q = pageData["question"]! as? String
+        self.question?.text = q
+
+        let q1 = pageData["option1"]! as? String ?? ""
+        let q2 = pageData["option2"]! as? String ?? ""
+        let q3 = pageData["option3"]! as? String ?? ""
+
+        let arrayString = q1.components(separatedBy:".")
+        if arrayString.last == "png" || arrayString.last == "jpeg"{
+            
+        }else{
+            self.questionTextA.setTitle(q1, for: UIControl.State.normal)
+                          
+            self.questionTextB.setTitle(q2, for: UIControl.State.normal)
+                          
+            self.questionTextC.setTitle(q3, for: UIControl.State.normal)
+        }
+              
+
     }
     /*
      // MARK: - Navigation

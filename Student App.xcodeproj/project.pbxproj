@@ -893,11 +893,12 @@
 				CURRENT_PROJECT_VERSION = 1.0.3;
 				DEVELOPMENT_TEAM = AX37B2LU22;
 				INFOPLIST_FILE = "Student App/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.smartkidsstudents;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -921,11 +922,12 @@
 				CURRENT_PROJECT_VERSION = 1.0.3;
 				DEVELOPMENT_TEAM = AX37B2LU22;
 				INFOPLIST_FILE = "Student App/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.smartkidsstudents;
 				PRODUCT_NAME = "$(TARGET_NAME)";

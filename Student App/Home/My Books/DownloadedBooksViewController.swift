@@ -8,6 +8,7 @@
 
 
 import UIKit
+import Alamofire
 
 @available(iOS 10.0, *)
 
@@ -88,7 +89,7 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
            SProgress.hide()*/
        }
 
-    @IBOutlet weak var downloadedBooksTableview: UITableView!
+    @IBOutlet weak var downloadedBooksTableview: UITableView?
     let appDelegate = UIApplication.shared.delegate as? AppDelegate
     var jsonBooksArray = NSMutableArray()
     var BookidArray = NSMutableArray()
@@ -99,16 +100,17 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
     var kid_id = String()
     var didTappedAtBook = NSInteger()
     var highlightBookId:String?
-    @IBOutlet weak var allBooksBTNOutlet: UIButton!
-    @IBOutlet weak var showFloatingView: UIView!
-    @IBOutlet var popupView: UIView!
+    @IBOutlet weak var allBooksBTNOutlet: UIButton?
+    @IBOutlet weak var showFloatingView: UIView?
+    @IBOutlet var popupView: UIView?
+    @IBOutlet var popViewHeightConstraints: NSLayoutConstraint?
     override func viewDidLoad() {
         super.viewDidLoad()
 
     }
     override func viewDidAppear(_ animated: Bool) {
-       self.showFloatingView.isHidden = true
-        self.popupView.isHidden = true
+        self.showFloatingView?.isHidden = true
+        self.popupView?.isHidden = true
 
         SProgress.show()
 
@@ -123,8 +125,8 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
 
     }
     override func viewWillDisappear(_ animated: Bool) {
-       self.showFloatingView.isHidden = true
-        self.popupView.isHidden = true
+        self.showFloatingView?.isHidden = true
+        self.popupView?.isHidden = true
 
     }
 
@@ -151,7 +153,7 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
         let  results = self.appDelegate!.getAllRecordsforValue(valueof: kid_id, forattribute: "kid_Id", forEntity: "DownloadedBooks")
         
         if results.count == 0{
-            allBooksBTNOutlet.isHidden = true
+            allBooksBTNOutlet?.isHidden = true
             SProgress.hide()
 
              self.showAlertWithTitleInView(title: "", message:"No My Books!. Please download from BookZone  ", buttonCancelTitle:"", buttonOkTitle: "OK"){ (index)
@@ -162,7 +164,7 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
             
             
         }else{
-        allBooksBTNOutlet.isHidden = false
+            allBooksBTNOutlet?.isHidden = false
 
         for result in results {
             
@@ -219,16 +221,16 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
                        }
             SProgress.hide()
         }
-        self.downloadedBooksTableview.reloadData()
+        self.downloadedBooksTableview?.reloadData()
 
     }
     
     @IBAction func hideImageView(_ sender: Any) {
-        self.showFloatingView.isHidden = true
+        self.showFloatingView?.isHidden = true
 
     }
     @IBAction func hidepopView(_ sender: Any) {
-        self.popupView.isHidden = true
+        self.popupView?.isHidden = true
 
     }
     func asString(dataString : String) -> [String : Any] {
@@ -302,7 +304,7 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if self.BookTypeidArray[indexPath.row] as? String == "1" {
-            self.showFloatingView.isHidden = true
+            self.showFloatingView?.isHidden = true
 
                     //print("You have chosen Villain: \(sender.titleLabel?.text)")
             let bookData = self.downloadedBooks[indexPath.row]
@@ -324,29 +326,28 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
             
               
         }else{
-        self.popupView.isHidden = false
+            self.popupView?.isHidden = false
         didTappedAtBook = indexPath.row
         let bookData = self.downloadedBooks[indexPath.row]
         let subjects = bookData.subjects
-        if (subjects as AnyObject).count == 0 {
-            print("no subject")
-        }else{
-            print("subject are" , subjects)
-        }
-        var buttonsize = self.popupView.frame.height
+        let bookId = BookidArray[indexPath.row]
+        self.getSubjectsDetails(bookid: bookId as! String)
+            
+     /*       var buttonsize = self.popupView?.frame.height
         var totalHeight =  ((subjects?.count ?? 0)/2) * 75
         var buttonY: CGFloat = 50  // our Starting Offset, could be 0
         var buttonX: CGFloat = 20  // our Starting Offset, could be 0
         let colorsArray = [UIColor.orange, UIColor.brown, UIColor.blue, UIColor(red: 234.0/255.0, green: 85.0/255.0, blue: 80.0/255.0, alpha: 1.0), UIColor(red: 193.0/255.0, green: 16.0/255.0, blue: 29.0/255.0, alpha: 1.0)]
         for (index, villain) in (subjects as! [NSArray]).enumerated() {
             
-            let villainButton = UIButton(frame: CGRect(x: buttonX, y: buttonY, width: 75, height: 75))
-            buttonX = buttonX + villainButton.frame.size.width + 20  // we are going to space these UIButtons 50px apart
-            //buttonX = buttonX + 50  // we are going to space these UIButtons 50px apart
-            if index+1/3 == 1  ||  buttonX > self.popupView.frame.width{
+            let villainButton = UIButton(frame: CGRect(x: buttonX, y: buttonY, width: 80, height: 80))
+            buttonX = buttonX + villainButton.frame.size.width + 20
+
+            if ((index+1)%3 == 0  ||  buttonX > self.popupView?.frame.width ?? 300.0 ){
                 buttonY = buttonY + villainButton.frame.size.height + 30
                 buttonX = 20
             }
+            print(buttonX, buttonY, (index+1)%3)
              
             villainButton.layer.cornerRadius = 5  // get some fancy pantsy rounding
             if let winner = colorsArray.randomElement() {
@@ -354,32 +355,111 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
             }
            let subject = villain[0]
             villainButton.setTitle("\(subject)", for: UIControl.State.normal) // We are going to use the item name as the Button Title here.
-            villainButton.titleLabel?.lineBreakMode = .byWordWrapping
             villainButton.titleLabel?.textAlignment = .center
             villainButton.titleLabel?.text = "\(villain)"
-           // villainButton.addTarget(self, action: "villainButtonPressed:", for: UIControle  )
             villainButton.addTarget(self, action: #selector(buttonAction) , for: .touchUpInside)
+            villainButton.titleLabel?.lineBreakMode = .byWordWrapping
+            villainButton.titleLabel?.numberOfLines = 2
+            villainButton.titleLabel?.adjustsFontSizeToFitWidth = true
             villainButton.tag = index
-            self.popupView.addSubview(villainButton)  // myView in this case is the view you want these buttons added
-            
+            self.popupView?.addSubview(villainButton)
             }
         if (Int(buttonY + 75) > totalHeight) {
-            print("increase the height")
-        }
+            popViewHeightConstraints?.constant = buttonY + 80 + 30
+        }else{
+            popViewHeightConstraints?.constant = buttonY
+            }*/
+
         }
     }
     
+    func showPopupView(data: [[String:Any]]) {
+        
+        var buttonsize = self.popupView?.frame.height
+        var totalHeight =  ((data.count ?? 0)/2) * 75
+               var buttonY: CGFloat = 50  // our Starting Offset, could be 0
+               var buttonX: CGFloat = 20  // our Starting Offset, could be 0
+               let colorsArray = [UIColor.orange, UIColor.brown, UIColor.blue, UIColor(red: 234.0/255.0, green: 85.0/255.0, blue: 80.0/255.0, alpha: 1.0), UIColor(red: 193.0/255.0, green: 16.0/255.0, blue: 29.0/255.0, alpha: 1.0)]
+        for (index, villain) in (data ).enumerated() {
+                   
+                   let villainButton = UIButton(frame: CGRect(x: buttonX, y: buttonY, width: 80, height: 80))
+                   buttonX = buttonX + villainButton.frame.size.width + 20
+
+                   if ((index+1)%3 == 0  ||  buttonX > self.popupView?.frame.width ?? 300.0 ){
+                       buttonY = buttonY + villainButton.frame.size.height + 30
+                       buttonX = 20
+                   }
+                   print(buttonX, buttonY, (index+1)%3)
+                    
+                   villainButton.layer.cornerRadius = 5  // get some fancy pantsy rounding
+                   if let winner = colorsArray.randomElement() {
+                       villainButton.backgroundColor = winner
+                   }
+                   //let subjectObj = villain[index] as? [String:Any]
+            let studentsubject = villain["studentsubject"] as? [String:Any]
+
+            let subject = studentsubject?["subjectName"] as! String
+                   villainButton.setTitle("\(subject)", for: UIControl.State.normal) // We are going to use the item name as the Button Title here.
+                   villainButton.titleLabel?.textAlignment = .center
+                   villainButton.titleLabel?.text = "\(villain)"
+                   villainButton.addTarget(self, action: #selector(buttonAction) , for: .touchUpInside)
+                   villainButton.titleLabel?.lineBreakMode = .byWordWrapping
+                   villainButton.titleLabel?.numberOfLines = 2
+                   villainButton.titleLabel?.adjustsFontSizeToFitWidth = true
+                   villainButton.tag = index
+                   self.popupView?.addSubview(villainButton)
+                   }
+               if (Int(buttonY + 75) > totalHeight) {
+                   popViewHeightConstraints?.constant = buttonY + 80 + 30
+               }else{
+                   popViewHeightConstraints?.constant = buttonY
+                   }
+    }
+    var subjectArray:[[String:Any]] = []
+    func getSubjectsDetails(bookid: String) {
+       
+        SProgress.show()
+        let baseURLString = APIEndPoints.base.urlString
+        
+        guard let url = URL(string: baseURLString+"/API/subject/getSubjectDetails/"+bookid) else {
+            //completion(nil)
+            return
+        }
+        print(url)
+        Alamofire.request(url,
+                          method: .get,
+                          parameters: ["include_docs": "true"])
+            .validate()
+            .responseJSON { response in
+             SProgress.hide()
+            // print(response.result.value)
+               
+                if let response = response.result.value as? [String:Any], let subjectsarray = response["subjects"] as? [[String:Any]] {
+                    self.subjectArray = subjectsarray
+                    print(self.subjectArray)
+                    self.showPopupView(data: self.subjectArray)
+                }
+        }
+        
+        
+    }
+    
     @objc func buttonAction(sender: UIButton!) {
-        self.showFloatingView.isHidden = true
+        self.showFloatingView?.isHidden = true
 
       if sender.titleLabel?.text != nil {
                 //print("You have chosen Villain: \(sender.titleLabel?.text)")
         let bookData = self.downloadedBooks[didTappedAtBook]
         let bookId = BookidArray[didTappedAtBook]
-        let subjectsname = bookData.subjects[sender!.tag] as! NSArray
-        print("You have chosen subjectsname: \(bookData)")
-        
-        let datatobepassed = [bookData.bookName!,bookData.bookseries!,bookData.className!,subjectsname[0],subjectsname[1] , bookId]
+        let subjectObj = subjectArray[sender!.tag]
+        print("You have chosen subjectsname: \(subjectObj)")
+
+        let studentsubject = subjectObj["studentsubject"] as? [String:Any]
+
+                   
+        let subjectname = studentsubject?["subjectName"] as! String
+        print(subjectname)
+        let datatobepassed = [bookData.bookName!,bookData.bookseries!,bookData.className!,subjectname ,subjectObj["subjectId"] as? String ?? "", bookId]
         
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "LessionsViewController") as! LessionsViewController
                      

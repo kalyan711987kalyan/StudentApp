@@ -9,8 +9,8 @@ target 'Student App' do
     pod 'Alamofire'
     pod 'SVProgressHUD'
     pod 'MBProgressHUD', '~> 1.1.0'
-    #pod "youtube-ios-player-helper"
-    pod "YoutubePlayer-in-WKWebView"
+    pod "youtube-ios-player-helper"
+    #pod "YoutubePlayer-in-WKWebView"
 
   # Pods for Student App
 

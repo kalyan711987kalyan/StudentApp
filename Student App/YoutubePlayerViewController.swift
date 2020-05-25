@@ -7,21 +7,43 @@
 //
 
 import UIKit
-import YoutubePlayer_in_WKWebView
+import youtube_ios_player_helper
 
-class YoutubePlayerViewController: UIViewController {
+class YoutubePlayerViewController: UIViewController, YTPlayerViewDelegate {
 
-    @IBOutlet weak var playerView: WKYTPlayerView!
-
+    @IBOutlet weak var playerView: YTPlayerView!
+    let appDelegate = UIApplication.shared.delegate as? AppDelegate
+    var videoId:String! = ""
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        playerView.delegate = self
         // Do any additional setup after loading the view.
-        playerView.load(withVideoId: "CUXuyfFVQEA")
+        playerView.load(withVideoId: videoId)
 
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.appDelegate!.orientation = .landscape
+        UIDevice.current.setValue(UIInterfaceOrientation.landscapeLeft.rawValue, forKey: "orientation")
+    }
 
+    override func viewWillDisappear(_ animated: Bool) {
+           appDelegate!.orientation = .portrait
+           UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
+    }
+    
+    @IBAction func backAction() {
+        self.dismiss(animated: false, completion: nil)
+    }
+    
+    func playerView(_ playerView: YTPlayerView, didChangeTo state: YTPlayerState) {
+        
+        if state == .ended {
+            self.backAction()
+        }
+    }
+    
     /*
     // MARK: - Navigation
 

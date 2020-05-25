@@ -3,14 +3,14 @@ PODS:
   - MBProgressHUD (1.1.0)
   - SlideMenuControllerSwift (4.0.0)
   - SVProgressHUD (2.2.5)
-  - YoutubePlayer-in-WKWebView (0.3.4)
+  - youtube-ios-player-helper (0.1.6)
 
 DEPENDENCIES:
   - Alamofire
   - MBProgressHUD (~> 1.1.0)
   - SlideMenuControllerSwift
   - SVProgressHUD
-  - YoutubePlayer-in-WKWebView
+  - youtube-ios-player-helper
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -19,15 +19,15 @@ SPEC REPOS:
     - SlideMenuControllerSwift
     - SVProgressHUD
   trunk:
-    - YoutubePlayer-in-WKWebView
+    - youtube-ios-player-helper
 
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   SlideMenuControllerSwift: 021d6318201c53d4d4d3710517d43d6c556c7dd0
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
-  YoutubePlayer-in-WKWebView: af2f5929fc78882d94bfdfeea999b661b78d9717
+  youtube-ios-player-helper: 21ab92db027c7ff86cb17a3843a3f6eafc8158d2
 
-PODFILE CHECKSUM: 893f985c70592e0038c0a8b6687c17dec6a7d835
+PODFILE CHECKSUM: 0ac1a55e55e76bd830b6a1ddda273c109756df0a
 
 COCOAPODS: 1.8.4

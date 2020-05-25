@@ -306,13 +306,23 @@ class ActivitesViewController: UIViewController  , UITableViewDataSource , UITab
         //let dataValue = videoData["youtubeUrl"]! as! String
        // let fullNameArr = dataValue.components(separatedBy: "/")
        // playInYoutube(youtubeId: fullNameArr[3])
-        if let url = URL(string: videoData["videoUrl"] as? String ?? "") {
-            let player = AVPlayer(url: url)
+        if let url = videoData["videoUrl"] as? String {
+           /* let player = AVPlayer(url: url)
             playerViewController.player = player
             self.appDelegate!.orientation = .landscape
             UIDevice.current.setValue(UIInterfaceOrientation.landscapeLeft.rawValue, forKey: "orientation")
             self.present(playerViewController, animated: true) {
                 self.playerViewController.player!.play()
+            }*/
+            
+            if let modalViewController = self.storyboard!.instantiateViewController(withIdentifier: "YoutubePlayerViewController") as? YoutubePlayerViewController {
+                if let range = url.range(of: "=") {
+                  let strIdentifier = url.substring(from: range.upperBound)
+                    modalViewController.videoId = strIdentifier
+                          
+                }
+                present(modalViewController, animated: true, completion: nil)
+                             
             }
         }
         

@@ -52,7 +52,7 @@ class LoginViewController: UIViewController {
     
     @IBAction func loginButtonAction() {
            
-       /* guard let username = userNameField.text, username.trimWhiteSpaces().count > 0 else {
+        guard let username = userNameField.text, username.trimWhiteSpaces().count > 0 else {
                self.showAlertWithTitleInView(title: "", message:"Please enter username", buttonCancelTitle:"", buttonOkTitle: "OK"){ (index) in}
                
                return
@@ -104,16 +104,9 @@ class LoginViewController: UIViewController {
 
                 self.performSegue(withIdentifier: SSegueKeys.login2dashboardKey, sender: result)
             }
-        }*/
-        
-        if let modalViewController = self.storyboard!.instantiateViewController(withIdentifier: "YoutubePlayerViewController") as? YoutubePlayerViewController {
-
-
-            modalViewController.modalPresentationStyle = .overCurrentContext
-                   
-            present(modalViewController, animated: true, completion: nil)
-                         
         }
+        
+    
        }
     
     

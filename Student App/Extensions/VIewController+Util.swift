@@ -99,7 +99,21 @@ extension UITextField {
 //        }
 //    }
 //}
-
+extension UIButton {
+    
+    func load(url: URL) {
+           DispatchQueue.global().async { [weak self] in
+               if let data = try? Data(contentsOf: url) {
+                   if let image = UIImage(data: data) {
+                       DispatchQueue.main.async {
+                        self?.setImage(image, for: .normal)
+                    }
+                   }
+               }
+           }
+       }
+    
+}
 extension UIImageView {
     
     func dowloadFromServer(url: URL, contentMode mode: UIView.ContentMode = .scaleAspectFit) {
@@ -182,6 +196,13 @@ extension UIImageView {
 extension String {
     var floatValue: Float {
         return (self as NSString).floatValue
+    }
+    
+    func utf8DecodedString()-> String {
+
+        let str = self.cString(using: .utf8)!
+         return ""
+         
     }
 }
 

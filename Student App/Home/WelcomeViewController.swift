@@ -49,15 +49,25 @@ class WelcomeViewController: UIViewController {
 //                       player.play()
 //                   }
         
-        guard let url = URL(string: howtouseLink) else {
-                 return //be safe
-               }
-
-               if #available(iOS 10.0, *) {
-                   UIApplication.shared.open(url, options: [:], completionHandler: nil)
-               } else {
-                   UIApplication.shared.openURL(url)
-               }
+//        guard let url = URL(string: howtouseLink) else {
+//                 return //be safe
+//               }
+//
+//               if #available(iOS 10.0, *) {
+//                   UIApplication.shared.open(url, options: [:], completionHandler: nil)
+//               } else {
+//                   UIApplication.shared.openURL(url)
+//               }
+        
+        if let modalViewController = self.storyboard!.instantiateViewController(withIdentifier: "YoutubePlayerViewController") as? YoutubePlayerViewController {
+            if let range = howtouseLink.range(of: "=") {
+              let strIdentifier = howtouseLink.substring(from: range.upperBound)
+                modalViewController.videoId = strIdentifier
+                      
+            }
+            present(modalViewController, animated: true, completion: nil)
+                         
+        }
     }
     
     @IBAction func skipButtonAction() {

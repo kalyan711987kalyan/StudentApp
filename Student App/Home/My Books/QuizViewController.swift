@@ -21,6 +21,7 @@ class QuizViewController: UIViewController {
     @IBOutlet weak var questionTextB: UIButton!
     @IBOutlet weak var questionTextC: UIButton!
     
+    
     @IBOutlet weak var prevBtnOutlet: UIButton!
     @IBOutlet weak var nextBtnOutet: UIButton!
     var selectedIndex : Int = 0
@@ -161,7 +162,18 @@ class QuizViewController: UIViewController {
 
         let arrayString = q1.components(separatedBy:".")
         if arrayString.last == "png" || arrayString.last == "jpeg"{
-            
+            var searchURL : NSURL = NSURL(string: q1 as String)!
+            self.questionTextA.load(url: searchURL as URL)
+            self.questionTextA.imageView?.contentMode = .scaleAspectFit
+
+            searchURL = NSURL(string: q2 as String)!
+            self.questionTextB.load(url: searchURL as URL)
+            self.questionTextB.imageView?.contentMode = .scaleAspectFit
+
+             searchURL = NSURL(string: q3 as String)!
+            self.questionTextC.load(url: searchURL as URL)
+            self.questionTextC.imageView?.contentMode = .scaleAspectFit
+
         }else{
             self.questionTextA.setTitle(q1, for: UIControl.State.normal)
                           

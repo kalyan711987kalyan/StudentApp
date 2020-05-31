@@ -180,9 +180,11 @@ class BooksListViewController: UIViewController , UITableViewDataSource , UITabl
                                         
                                         self.bookIdArray.add(bookId)
                                         
-                                        
+                    let decodeBookName = bookName.utf8DecodedString()
+                    let decodeDes = description.utf8DecodedString()
+
                     if series == self.seriesNameText {
-                        self.downloadBookArray.append(downloadBook(bookName: bookName, bookType: bookType, description: description, thumbnail: thumbnail, bookseries: series, bookTypeId: booktypeId))
+                        self.downloadBookArray.append(downloadBook(bookName: decodeBookName, bookType: bookType, description: decodeDes, thumbnail: thumbnail, bookseries: series, bookTypeId: booktypeId))
                                         }
                     self.bookslistTableview.reloadData()
 
@@ -289,6 +291,8 @@ class BooksListViewController: UIViewController , UITableViewDataSource , UITabl
         }
         
     }
+    
+    
     
     func showImageOnselection(thumbnailURlIS : String, image: UIImage?){
        // 619321936
@@ -476,8 +480,10 @@ class BooksListViewController: UIViewController , UITableViewDataSource , UITabl
             let bookTypeIdId = obj["booktypeId"] as! String
             
             self.bookIdArray.add(bookId)
-            
-            self.downloadBookArray.append(downloadBook(bookName: bookName, bookType: bookType, description: description, thumbnail: thumbnail, bookseries: series , bookTypeId : bookTypeIdId  ))
+            let decodeBookName = bookName.utf8DecodedString()
+                              
+            let decodeDes = description.utf8DecodedString()
+            self.downloadBookArray.append(downloadBook(bookName: decodeBookName, bookType: bookType, description: decodeDes, thumbnail: thumbnail, bookseries: series , bookTypeId : bookTypeIdId  ))
         }
         
     }

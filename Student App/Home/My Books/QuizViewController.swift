@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import AVKit
 
 class QuizViewController: UIViewController {
     var allQuizQuestions : NSArray = []
@@ -53,6 +54,13 @@ class QuizViewController: UIViewController {
         self.questionTextA.setTitle(pageData["option1"]! as? String, for: UIControl.State.normal)
         self.questionTextB.setTitle(pageData["option2"]! as? String, for: UIControl.State.normal)
         self.questionTextC.setTitle(pageData["option3"]! as? String, for: UIControl.State.normal)*/
+        
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback, mode: AVAudioSession.Mode.default, options: [])
+        }
+        catch {
+            print("Setting category to AVAudioSessionCategoryPlayback failed.")
+        }
         
     }
     @IBAction func backBtn(_ sender: Any) {
@@ -135,7 +143,7 @@ class QuizViewController: UIViewController {
     func playTextToSpeech(text: String) {
         
         let utterance = AVSpeechUtterance(string: text)
-               
+        utterance.volume = 1.0
         synthesizer.speak(utterance)
     }
     func showDataByPage(){

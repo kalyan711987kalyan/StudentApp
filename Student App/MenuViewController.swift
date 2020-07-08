@@ -23,7 +23,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         
         UserDefaults.standard.set("", forKey: "parentId") //Bool
-
+        UserDefaults.standard.set(false, forKey: RDataKeys.isInstalled)
         self.appDelegate!.deleteAllDataOfEntity(forEntity: "KidsData")
         UserDefaults.standard.set(false, forKey: "LoginFlag") //Bool
         appDelegate?.showDashboard()

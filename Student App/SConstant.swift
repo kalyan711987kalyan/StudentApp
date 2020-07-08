@@ -11,6 +11,7 @@ import Foundation
 
 struct RDataKeys {
     static let isLoginKey = "isLogin"
+    static let isInstalled = "isInstalled"
 
 }
 

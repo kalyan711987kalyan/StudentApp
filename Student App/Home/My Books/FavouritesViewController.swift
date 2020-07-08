@@ -173,7 +173,7 @@ class FavouritesViewController: UIViewController , UITableViewDataSource , UITab
                 print(url)
 
                  let player = AVPlayer(url: url)
-
+                player.volume = 1.0
                 playerViewController.player = player
 
                 self.appDelegate!.orientation = .landscape
@@ -249,6 +249,13 @@ class FavouritesViewController: UIViewController , UITableViewDataSource , UITab
         NotificationCenter.default.addObserver(self, selector: #selector(playerDidFinishPlaying), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: playerViewController.player?.currentItem)
 
         self.indexChanged(segmentedControl)
+        
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback, mode: AVAudioSession.Mode.default, options: [])
+        }
+        catch {
+            print("Setting category to AVAudioSessionCategoryPlayback failed.")
+        }
         
     }
     

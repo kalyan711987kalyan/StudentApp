@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 
 class LoginViewController: UIViewController {
@@ -14,6 +15,7 @@ class LoginViewController: UIViewController {
     @IBOutlet var userNameField: UITextField!
     @IBOutlet var passwordField: UITextField!
     let appDelegate = UIApplication.shared.delegate as? AppDelegate
+    let synthesizer = AVSpeechSynthesizer()
 
     @IBOutlet weak var versionLB: UILabel!
     override func viewDidLoad() {
@@ -42,16 +44,25 @@ class LoginViewController: UIViewController {
 
     @IBAction func forgetPwdBtn(_ sender: Any) {
         
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ForgetPasswordViewController") as! ForgetPasswordViewController
+        if let modalViewController = self.storyboard!.instantiateViewController(withIdentifier: "YoutubePlayerViewController") as? YoutubePlayerViewController {
+            
+            
+            modalViewController.videoId = "CUXuyfFVQEA"
+
+            present(modalViewController, animated: true, completion: nil)
+                         
+        }
+        
+       /* let vc = self.storyboard?.instantiateViewController(withIdentifier: "ForgetPasswordViewController") as! ForgetPasswordViewController
                       vc.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
 
-                  self.present(vc, animated: true, completion: nil)
+                  self.present(vc, animated: true, completion: nil)*/
 
         
     }
     
     @IBAction func loginButtonAction() {
-           
+        
         guard let username = userNameField.text, username.trimWhiteSpaces().count > 0 else {
                self.showAlertWithTitleInView(title: "", message:"Please enter username", buttonCancelTitle:"", buttonOkTitle: "OK"){ (index) in}
                
@@ -105,9 +116,8 @@ class LoginViewController: UIViewController {
                 self.performSegue(withIdentifier: SSegueKeys.login2dashboardKey, sender: result)
             }
         }
-        
-    
-       }
+       
+    }
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)

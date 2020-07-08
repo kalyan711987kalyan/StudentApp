@@ -8,7 +8,7 @@
 
 import UIKit
 import SlideMenuControllerSwift
-
+import AVFoundation
 
 
 @available(iOS 10.0, *)
@@ -58,17 +58,26 @@ class DashboardViewController: UIViewController,  SlideMenuControllerDelegate, U
         getBannerDetails()
         self.kidNameTitleLB.text = "Hi, \(self.selectedKid?.studentName! ?? "")"
 
-        if let modalViewController = self.storyboard!.instantiateViewController(withIdentifier: "WelcomeViewController") as? WelcomeViewController {
+        
+        if let modalViewController = self.storyboard!.instantiateViewController(withIdentifier: "WelcomeViewController") as? WelcomeViewController, UserDefaults.standard.bool(forKey: RDataKeys.isInstalled) == false {
                    modalViewController.howtouseLink = "https://www.youtube.com/watch?v=CUXuyfFVQEA"
             modalViewController.websiteLink = UserDefaults.standard.value(forKey: "supportwebsite") as? String ?? "http://www.google.com"
                    modalViewController.view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
                    modalViewController.modalPresentationStyle = .overCurrentContext
+                  UserDefaults.standard.set(true, forKey: RDataKeys.isInstalled)
                    present(modalViewController, animated: true, completion: nil)
                    modalViewController.completion = {
                        print("Dailogclosed")
                     self.switchKidButton_Action()
+
             }
-                   
+        }
+        
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback, mode: AVAudioSession.Mode.default, options: [])
+        }
+        catch {
+            print("Setting category to AVAudioSessionCategoryPlayback failed.")
         }
         //SlideMenuOptions.contentViewScale = 0.50
     }

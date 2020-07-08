@@ -184,7 +184,7 @@ class BooksListViewController: UIViewController , UITableViewDataSource , UITabl
                     let decodeDes = description.utf8DecodedString()
 
                     if series == self.seriesNameText {
-                        self.downloadBookArray.append(downloadBook(bookName: decodeBookName, bookType: bookType, description: decodeDes, thumbnail: thumbnail, bookseries: series, bookTypeId: booktypeId))
+                        self.downloadBookArray.append(downloadBook(bookName: bookName, bookType: bookType, description: description, thumbnail: thumbnail, bookseries: series, bookTypeId: booktypeId))
                                         }
                     self.bookslistTableview.reloadData()
 
@@ -483,7 +483,7 @@ class BooksListViewController: UIViewController , UITableViewDataSource , UITabl
             let decodeBookName = bookName.utf8DecodedString()
                               
             let decodeDes = description.utf8DecodedString()
-            self.downloadBookArray.append(downloadBook(bookName: decodeBookName, bookType: bookType, description: decodeDes, thumbnail: thumbnail, bookseries: series , bookTypeId : bookTypeIdId  ))
+            self.downloadBookArray.append(downloadBook(bookName: bookName, bookType: bookType, description: description, thumbnail: thumbnail, bookseries: series , bookTypeId : bookTypeIdId  ))
         }
         
     }

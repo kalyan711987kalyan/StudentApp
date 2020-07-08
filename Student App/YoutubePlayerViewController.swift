@@ -21,6 +21,8 @@ class YoutubePlayerViewController: UIViewController, YTPlayerViewDelegate {
         // Do any additional setup after loading the view.
         playerView.load(withVideoId: videoId)
 
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -39,9 +41,11 @@ class YoutubePlayerViewController: UIViewController, YTPlayerViewDelegate {
     
     func playerView(_ playerView: YTPlayerView, didChangeTo state: YTPlayerState) {
         
+        print(state)
         if state == .ended {
             self.backAction()
         }
+        
     }
     
     /*

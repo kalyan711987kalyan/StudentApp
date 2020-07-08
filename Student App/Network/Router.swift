@@ -34,7 +34,7 @@ enum APIEndPoints{
     var urlString: String{
         switch self {
         case .base:
-            return "http://3.6.74.79:8080/SmartKids"
+            return "http://13.233.95.84:8080/SmartKids"
         
         }
     }

@@ -80,6 +80,16 @@ class ActivitesViewController: UIViewController  , UITableViewDataSource , UITab
             modalViewController.downloadCompletion = {
                 self.getAlreadyDownloadVideo()
                 self.dismiss(animated: false, completion: nil)
+                self.tabBarController?.selectedIndex = 4
+
+                if let nav = self.tabBarController?.viewControllers?[4] as? UINavigationController,  let vc = nav.viewControllers.first as? FavouritesViewController {
+                    DispatchQueue.main.async {
+                        vc.segmentedControl.selectedSegmentIndex = 1
+                        vc.indexChanged(vc.segmentedControl)
+                        
+                    }
+                    
+                }
             }
             
         }

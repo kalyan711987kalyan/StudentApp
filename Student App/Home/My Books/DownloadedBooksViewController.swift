@@ -12,7 +12,7 @@ import Alamofire
 
 @available(iOS 10.0, *)
 
-class DownloadedBooksViewController: UIViewController , UITableViewDataSource , UITableViewDelegate , downloadedCellDelegate{
+class DownloadedBooksViewController: UIViewController , UITableViewDataSource , UITableViewDelegate , downloadedCellDelegate, UITabBarControllerDelegate{
     
     @IBAction func clearAllBoks(_ sender: Any) {
         
@@ -106,6 +106,8 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
     @IBOutlet var popViewHeightConstraints: NSLayoutConstraint?
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.tabBarController?.delegate = self
 
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -474,5 +476,12 @@ class DownloadedBooksViewController: UIViewController , UITableViewDataSource , 
                 print("Nowhere to go :/")
             }
     }
+    
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+           let tabindex = tabBarController.selectedIndex
+           if tabindex == 3 {
+               self.navigationController?.popViewController(animated: false)
+           }
+       }
 
 }

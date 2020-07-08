@@ -30,7 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Gloria Hallelujah", size: 14)!], for: .normal)
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Gloria Hallelujah", size: 14)!], for: .selected)
         
-        UserDefaults.standard.set("null", forKey: "parentId") //Bool
     
        showDashboard()
         

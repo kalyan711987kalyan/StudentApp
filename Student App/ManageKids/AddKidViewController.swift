@@ -134,7 +134,7 @@ class AddKidViewController: UIViewController  , UITextFieldDelegate {
                     print("signup error message---- %@ /n %@", error)
                     
                 }else{
-                    
+                    self.view.endEditing(true)
                     //if self.mode == "new" {
                     self.insertKidToCoredata(kid_id: self.kid_id ,dataDic: kidDataDic)
                     //}
@@ -142,10 +142,8 @@ class AddKidViewController: UIViewController  , UITextFieldDelegate {
 
                     self.showAlertWithTitleInView(title: "Success!", message: "Added New Kid!", buttonCancelTitle: "", buttonOkTitle: "OK"){
                         (index) in
-                        
+                        self.navigationController?.popViewController(animated: true)
                     }
-                    return
-                    
                 }
             }
         }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MyBooksViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MyBooksViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITabBarControllerDelegate {
     //var bookseriesList : [BooksZone] = []
     var bookseriesList : [BooksZone] = [BooksZone]()
 
@@ -30,6 +30,7 @@ class MyBooksViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         getSeriesOfBooks()
     
+        self.tabBarController?.delegate = self
     }
    
 
@@ -115,6 +116,12 @@ class MyBooksViewController: UIViewController, UITableViewDelegate, UITableViewD
         //self.performSegue(withIdentifier: SSegueKeys.bookseriesToClasslist, sender: self.bookseriesList[indexPath.row])
     }
    
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        let tabindex = tabBarController.selectedIndex
+        if tabindex == 1 {
+            self.navigationController?.popViewController(animated: false)
+        }
+    }
     
 }
 
